@@ -32,9 +32,11 @@
   .nv-btn-primary { display:inline-block; background:#1F3D33; color:#F8F4EE; font-family:'Cormorant Garamond'; font-weight:600; font-size:19px; letter-spacing:1.5px; padding:15px 40px; border:1px solid #C8A96B; border-radius:1px; }
   .nv-btn-primary:hover { background:#183129; }
   .nv-hero-title { font-family:'Playfair Display'; font-weight:500; font-size:clamp(40px,6vw,72px); color:#F8F4EE; }
+  .nv-content-split { min-width:0; }
+  .nv-content-split > * { min-width:0; }
   @media (max-width: 760px) {
-    .nv-content-split { grid-template-columns:1fr !important; gap:40px !important; }
-    .nv-content-split > * { padding:0 24px !important; }
+    .nv-content-split { grid-template-columns:1fr !important; gap:40px !important; padding-left:24px !important; padding-right:24px !important; }
+    .nv-content-split > * { padding:0 !important; }
     .nv-values-row { grid-template-columns:1fr !important; }
     footer, .nv-footer { padding:70px 24px 32px !important; }
   }
