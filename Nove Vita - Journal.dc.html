@@ -18,7 +18,7 @@
 <meta property="og:title" content="Nové Vita Journal | Science, Health &amp; Longevity">
 <meta property="og:description" content="Wetenschappelijke inzichten over metabolic health, peptide science, huid, longevity en welzijn.">
 <meta id="nvJournalOgUrl" property="og:url" content="">
-<meta id="nvJournalOgImage" property="og:image" content="uploads/img-glp1-cells.png">
+<meta id="nvJournalOgImage" property="og:image" content="uploads/img-glp1-cells.jpg">
 <meta property="og:site_name" content="Nové Vita">
 <script src="./image-slot.js"></script>
 <style>
@@ -92,7 +92,7 @@
       <sc-for list="{{ visibleArticles }}" as="a" hint-placeholder-count="3">
         <a href="{{ a.url }}" class="nv-journal-card" style="display:block; grid-column:span 6; text-decoration:none; cursor:pointer;">
           <div style="border-radius:10px; overflow:hidden;">
-            <image-slot id="{{ a.slotId }}" shape="rect" fit="{{ a.objectFit }}" src="{{ a.image }}" placeholder="{{ a.imagePlaceholder }}" style="width:100%; height:{{ a.cardImgHeight }}; transition:transform 700ms cubic-bezier(0.22, 1, 0.36, 1);" style-hover="transform:scale(1.025);"></image-slot>
+            <image-slot id="{{ a.slotId }}" shape="rect" fit="{{ a.objectFit }}" src="{{ a.image }}" placeholder="{{ a.imagePlaceholder }}" style="width:100%; height:{{ a.cardImgHeight }}; object-position:{{ a.objectPosition }}; transition:transform 700ms cubic-bezier(0.22, 1, 0.36, 1);" style-hover="transform:scale(1.025);"></image-slot>
           </div>
           <div style="font-family:'Inter'; font-weight:500; font-size:11px; letter-spacing:3px; color:#C8A96B; text-transform:uppercase; margin-top:20px;">{{ a.category }}</div>
           <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:22px; color:#F8F4EE; margin-top:10px; line-height:1.35;">{{ a.title }}</h3>
@@ -173,7 +173,15 @@ class Component extends DCLogic {
       .slice()
       .sort((a, b) => categories.indexOf(a.category) - categories.indexOf(b.category));
     const visibleArticles = (activeCategory === 'Alles' ? rest : rest.filter(a => a.category === activeCategory))
-      .map(a => ({ ...a, slotId: 'journal-grid-' + a.slug, objectFit: 'cover', cardImgHeight: '340px' }));
+      .map(a => ({
+        ...a,
+        slotId: 'journal-grid-' + a.slug,
+        objectFit: 'cover',
+        cardImgHeight: '340px',
+        // Narrow card crops cut the sides, so nudge the focal point to keep
+        // the subject framed on the photos where she sits off-centre.
+        objectPosition: a.slug === 'waarom-spiermassa-belangrijker-is-dan-gewicht' ? '42% 35%' : 'center',
+      }));
     const pillNames = ['Alles', ...categories];
     const categoryPills = pillNames.map(label => ({
       label,

@@ -1138,6 +1138,12 @@
           // (the pick path's credit/credit-href setAttributes) need this
           // flag, not complete, to know a load is in flight.
           this._loadPending = true;
+          // Defer offscreen decodes: a page with many large photos otherwise
+          // decodes them all at once, which exhausts memory on mobile.
+          if (!this.hasAttribute('data-eager')) {
+            this._img.loading = 'lazy';
+            this._img.decoding = 'async';
+          }
           this._img.src = url;
           this._ghost.src = url;
         } else {
