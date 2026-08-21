@@ -28,7 +28,7 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
-  html, body { width:100%; overflow-x:hidden; }
+  html, body { width:100%; overflow-x:clip; height:auto !important; min-height:100%; }
   a { color:#1F3D33; text-decoration:none; }
   a:hover { color:#6B7F6E; }
   .nv-eyebrow { font-family:'Inter'; font-weight:500; font-size:13.5px; letter-spacing:4px; color:#8C8272; text-transform:uppercase; }
@@ -44,7 +44,7 @@
 
 <div style="width:100%; background:#F8F4EE; font-family:'Inter',sans-serif; color:#2D2D2D;">
 
-  <dc-import name="Nove Vita Header" active="journal" bg="rgba(20,41,34,0.94)" dark="true" hint-size="100%,72px" style="position:sticky; top:0; z-index:1000;"></dc-import>
+  <dc-import name="Nove Vita Header" active="journal" bg="rgba(20,41,34,0.94)" dark="true" hint-size="100%,72px"></dc-import>
 
   <div class="nv-news-masthead" style="max-width:760px; margin:0 auto; padding:150px 24px 28px; border-bottom:3px double #1F3D33;">
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">

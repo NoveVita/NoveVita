@@ -23,7 +23,7 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
-  html, body { width:100%; overflow-x:hidden; }
+  html, body { width:100%; overflow-x:clip; height:auto !important; min-height:100%; }
   a { color:#1F3D33; text-decoration:none; }
   .nv-eyebrow { font-family:'Inter'; font-weight:500; font-size:13px; letter-spacing:4px; color:#C8A96B; text-transform:uppercase; }
   .nv-cta-btn { display:inline-block; font-family:'Inter'; font-weight:500; font-size:14px; letter-spacing:0.5px; color:#1F3D33; background:#C8A96B; padding:16px 34px; border-radius:2px; text-decoration:none; transition:background 220ms ease, transform 220ms ease; }
@@ -41,7 +41,7 @@
 
 <div style="width:100%; background:#F8F4EE; font-family:'Inter',sans-serif; color:#2D2D2D;">
 
-  <dc-import name="Nove Vita Header" active="contact" hint-size="100%,72px" style="position:sticky; top:0; z-index:1000;"></dc-import>
+  <dc-import name="Nove Vita Header" active="contact" hint-size="100%,72px"></dc-import>
 
   <!-- HERO -->
   <div class="nv-section-pad" style="padding:150px 64px 70px; text-align:center;">

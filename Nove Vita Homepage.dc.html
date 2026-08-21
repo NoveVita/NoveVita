@@ -30,7 +30,6 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
-  .nv-panel { contain:paint; }
   .nv-journal-grid, .nv-journal-grid > a { min-width:0; }
   /* image-slot never receives a class attribute, so mobile sizing must be
      addressed by id or the photos fall back to their desktop crop. */
@@ -46,12 +45,9 @@
   @media (prefers-reduced-motion:reduce) {
     .calculator-phone-link { animation:none !important; }
   }
-  @media (hover:none) {
-    .nv-panel, .nv-card, .nv-journal-card, .nv-journal-img, .nv-mix-img { transition:none !important; transform:none !important; }
-  }
   html { scroll-behavior:smooth; }
   body { background:#F8F4EE; }
-  html, body { width:100%; overflow-x:hidden; }
+  html, body { width:100%; overflow-x:clip; height:auto !important; min-height:100%; }
   a { color:#1F3D33; text-decoration:none; }
   a:hover { color:#6B7F6E; }
   .nv-nav-link { color:#B7AAA0; font-family:'Inter',sans-serif; font-weight:400; font-size:13px; letter-spacing:2px; text-transform:uppercase; opacity:1; transition:color 0.2s; }
@@ -110,7 +106,6 @@
     .nv-hero { flex-direction:column !important; }
     .nv-hero-col { width:100% !important; }
     .nv-hero-center { height:auto !important; aspect-ratio:4/5; min-height:0; }
-    .nv-hero-center image-slot { object-position:center 15% !important; }
     .nv-values { grid-template-columns:1fr !important; }
     .nv-panel { height:340px !important; }
     .nv-grid-3 { grid-template-columns:1fr !important; gap:32px !important; padding:0 24px !important; }
@@ -182,7 +177,7 @@
 
 <div style="width:100%; background:#F8F4EE; font-family:'Inter',sans-serif; color:#2D2D2D;">
 
-  <dc-import name="Nove Vita Header" active="home" hint-size="100%,72px" style="position:sticky; top:0; z-index:1000;"></dc-import>
+  <dc-import name="Nove Vita Header" active="home" hint-size="100%,72px"></dc-import>
 
   <!-- MAGAZINE SPREAD HERO -->
   <div class="nv-hero" style="display:flex; width:100%; min-height:100vh;">

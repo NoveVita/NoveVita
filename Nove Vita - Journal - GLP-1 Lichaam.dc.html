@@ -28,7 +28,7 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
-  html, body { width:100%; overflow-x:hidden; }
+  html, body { width:100%; overflow-x:clip; height:auto !important; min-height:100%; }
   a { color:#1F3D33; text-decoration:none; }
   a:hover { color:#6B7F6E; }
   .nv-eyebrow { font-family:'Inter'; font-weight:500; font-size:11.5px; letter-spacing:4px; color:#8C8272; text-transform:uppercase; }
@@ -59,7 +59,7 @@
 <div id="nvReadProgress" style="position:fixed; top:0; left:0; height:3px; width:0%; background:#C8A96B; z-index:1100; transition:width 120ms linear;"></div>
 <div style="width:100%; background:#2E2117; font-family:'Inter',sans-serif; color:#2D2D2D;">
 
-  <dc-import name="Nove Vita Header" active="journal" hint-size="100%,72px" style="position:sticky; top:0; z-index:1000;"></dc-import>
+  <dc-import name="Nove Vita Header" active="journal" hint-size="100%,72px"></dc-import>
 
   <!-- HERO -->
   <div style="position:relative; width:100%; height:70vh; min-height:440px;">
