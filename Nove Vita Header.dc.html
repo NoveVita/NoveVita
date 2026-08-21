@@ -30,6 +30,7 @@
   .nvh-tools-item { font-family:'Inter',sans-serif; font-weight:500; font-size:12.5px; letter-spacing:0.6px; text-transform:none; color:#1F3D33; text-decoration:none; padding:10px 14px; border-radius:4px; transition:background 180ms ease; }
   .nvh-tools-item:hover { background:rgba(31,61,51,0.06); color:#9C7A3F; }
   .nvh-tools-item.active { color:#9C7A3F; }
+  .nvh-mobile-group { font-family:'Inter',sans-serif; font-weight:500; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#8C8272; }
   @media (max-width: 760px) {
     .nvh-links { display:none !important; }
     .nvh-hamburger { display:flex !important; }
@@ -63,8 +64,9 @@
   <sc-if value="{{ menuOpen }}">
     <div class="nvh-mobile" style="position:absolute; top:100%; left:0; right:0; background:#F8F4EE; padding:22px 24px; display:flex; flex-direction:column; gap:18px; border-bottom:1px solid rgba(31,61,51,0.08); box-shadow:0 12px 24px rgba(31,61,51,0.08);">
       <a class="{{ homeClass }}" href="./Nove Vita Homepage.dc.html">Home</a>
-      <a class="{{ toolsCalcClass }}" href="./Retatrutide Pen Calculator (Standalone).html">Calculator</a>
-      <a class="{{ toolsMixingClass }}" href="./Vial &amp; Syringe Calculator (Standalone).html">Mixing</a>
+      <div class="nvh-mobile-group">Tools</div>
+      <a class="{{ toolsCalcClass }}" href="./Retatrutide Pen Calculator (Standalone).html" style="padding-left:14px;">Calculator</a>
+      <a class="{{ toolsMixingClass }}" href="./Vial &amp; Syringe Calculator (Standalone).html" style="padding-left:14px;">Mixing</a>
       <a class="{{ journalClass }}" href="./Nove Vita - Journal.dc.html">Journal</a>
       <a class="{{ guidanceClass }}" href="./Nove Vita - Guidance.dc.html">Guidance</a>
       <a class="{{ faqClass }}" href="./Nove Vita - FAQ.dc.html">FAQ</a>
