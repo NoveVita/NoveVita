@@ -32,10 +32,17 @@
   .nv-cat-pill.active { color:#142922; background:#C8A96B; border-color:#C8A96B; }
   .nv-news-row:hover h4 { color:#C8A96B; }
   .nv-news-row h4 { transition:color 220ms ease; }
+  .nv-journal-grid { min-width:0; }
+  .nv-journal-grid > a { min-width:0; }
   @media (max-width: 760px) {
     .nv-journal-grid { grid-template-columns:1fr !important; padding:0 24px !important; }
     .nv-journal-grid > a { grid-column:auto !important; }
     .nv-cat-row { padding:0 24px !important; }
+    .nv-featured-card { padding:0 20px !important; }
+    .nv-featured-inner { height:320px !important; }
+    .nv-featured-overlay { left:24px !important; right:24px !important; bottom:24px !important; }
+    .nv-featured-overlay h3 { font-size:24px !important; }
+    .nv-featured-overlay p { font-size:14px !important; }
   }
   @media (max-width: 640px) {
     .nv-news-row { grid-template-columns:1fr !important; }
@@ -58,11 +65,11 @@
     </div>
 
     <!-- FEATURED -->
-    <a href="{{ featured.url }}" class="nv-journal-card" style="display:block; text-decoration:none; cursor:pointer; max-width:1300px; margin:0 auto 56px; padding:0 64px; transition:transform 0.4s cubic-bezier(.22,1,.36,1);" style-hover="transform:translateY(-6px);">
-      <div style="position:relative; width:100%; height:430px; border-radius:14px; overflow:hidden; box-shadow:0 24px 50px rgba(0,0,0,0.28);">
+<a href="{{ featured.url }}" class="nv-journal-card nv-featured-card" style="display:block; text-decoration:none; cursor:pointer; max-width:1300px; margin:0 auto 56px; padding:0 64px; transition:transform 0.4s cubic-bezier(.22,1,.36,1);" style-hover="transform:translateY(-6px);">
+      <div class="nv-featured-inner" style="position:relative; width:100%; height:430px; border-radius:14px; overflow:hidden; box-shadow:0 24px 50px rgba(0,0,0,0.28);">
         <image-slot id="journal-overview-featured" shape="rect" src="{{ featured.image }}" placeholder="{{ featured.imagePlaceholder }}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.03);"></image-slot>
         <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.68) 0%, rgba(15,30,25,0.05) 55%, rgba(15,30,25,0) 100%); pointer-events:none;"></div>
-        <div style="position:absolute; left:48px; right:48px; bottom:44px; pointer-events:none;">
+        <div class="nv-featured-overlay" style="position:absolute; left:48px; right:48px; bottom:44px; pointer-events:none;">
           <div style="font-family:'Inter'; font-weight:500; font-size:11.5px; letter-spacing:3px; color:#C8A96B; text-transform:uppercase;">{{ featured.category }}</div>
           <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:36px; color:#F8F4EE; margin-top:14px; max-width:640px; line-height:1.3;">{{ featured.title }}</h3>
           <div style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:500; font-size:19px; color:#C8A96B; margin-top:10px;">{{ featured.subtitle }}</div>
