@@ -12,7 +12,7 @@
   @media (prefers-reduced-motion: reduce) {
     .nvw-btn, .nvw-bubble { transition:none !important; animation:none !important; }
   }
-  .nvw-btn { position:fixed; bottom:32px; right:32px; width:60px; height:60px; border-radius:50%; background:#27423A; border:1px solid rgba(255,255,255,0.08); box-shadow:0 12px 35px rgba(0,0,0,0.18); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform 300ms ease, box-shadow 300ms ease; z-index:1200; backdrop-filter:blur(12px); }
+  .nvw-btn { position:fixed; bottom:32px; right:32px; width:60px; height:60px; border-radius:50%; background:#27423A; border:1px solid rgba(255,255,255,0.08); box-shadow:0 12px 35px rgba(0,0,0,0.18); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform 300ms ease, box-shadow 300ms ease; z-index:1200; }
   .nvw-btn:hover, .nvw-btn:focus-visible { transform:translateY(-4px) scale(1.05); box-shadow:0 16px 44px rgba(0,0,0,0.26), 0 0 24px rgba(212,179,127,0.28); }
   .nvw-btn:focus-visible { outline:2px solid #D4B37F; outline-offset:3px; }
   @media (max-width: 900px) { .nvw-btn { bottom:24px; right:24px; } }
@@ -56,10 +56,16 @@ class Component extends DCLogic {
   componentDidMount() {
     if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nvw-dismissed') === '1') return;
     this._timer = setTimeout(() => this.maybeShow(), 8000);
+    this._ticking = false;
     this._onScroll = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollHeight > 0 && scrollTop / scrollHeight >= 0.6) this.maybeShow();
+      if (this._ticking) return;
+      this._ticking = true;
+      requestAnimationFrame(() => {
+        this._ticking = false;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (scrollHeight > 0 && scrollTop / scrollHeight >= 0.6) this.maybeShow();
+      });
     };
     window.addEventListener('scroll', this._onScroll, { passive: true });
   }
