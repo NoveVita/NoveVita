@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Veelgestelde vragen | Nové Vita FAQ</title>
+<meta name="description" content="Antwoorden op veelgestelde vragen over Nové Vita, onze tools, bestellingen en begeleiding.">
+<link rel="canonical" href="https://www.novevita.nl/faq">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Veelgestelde vragen | Nové Vita FAQ">
+<meta property="og:description" content="Antwoorden op veelgestelde vragen over Nové Vita, onze tools, bestellingen en begeleiding.">
+<meta property="og:url" content="https://www.novevita.nl/faq">
+<meta property="og:site_name" content="Nové Vita">
+<script src="./image-slot.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; overflow-x:hidden; }
+  a { color:#1F3D33; text-decoration:none; }
+  .nv-eyebrow { font-family:'Inter'; font-weight:500; font-size:13px; letter-spacing:4px; color:#C8A96B; text-transform:uppercase; }
+  .nv-cta-btn { display:inline-block; font-family:'Inter'; font-weight:500; font-size:14px; letter-spacing:0.5px; color:#F8F4EE; background:#1F3D33; padding:16px 34px; border-radius:2px; text-decoration:none; transition:background 220ms ease, transform 220ms ease; }
+  .nv-cta-btn:hover { background:#2C4E42; transform:translateY(-2px); }
+  .nv-faq-item { border-bottom:1px solid rgba(31,61,51,0.12); }
+  .nv-faq-q { width:100%; text-align:left; background:none; border:none; padding:22px 0; display:flex; justify-content:space-between; align-items:center; gap:20px; cursor:pointer; }
+  .nv-faq-q-text { font-family:'Inter'; font-weight:500; font-size:15.5px; color:#1F3D33; transition:color 220ms ease; }
+  .nv-faq-q:hover .nv-faq-q-text { color:#9C7A3F; }
+  .nv-faq-icon { font-family:'Inter'; font-weight:500; font-size:19px; color:#C8A96B; flex-shrink:0; transition:transform 220ms ease; }
+  .nv-faq-a { font-family:'Inter'; font-weight:300; font-size:15px; line-height:1.9; color:#4A4A42; padding:0 0 24px; max-width:640px; }
+  @media (max-width: 760px) {
+    .nv-section-pad { padding-left:24px !important; padding-right:24px !important; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; background:#F8F4EE; font-family:'Inter',sans-serif; color:#2D2D2D; overflow:hidden;">
+
+  <dc-import name="Nove Vita Header" active="faq" hint-size="100%,72px"></dc-import>
+
+  <!-- HERO -->
+  <div class="nv-section-pad" style="padding:150px 64px 70px; text-align:center;">
+    <div style="max-width:640px; margin:0 auto;">
+      <div class="nv-eyebrow">Nové Vita FAQ</div>
+      <h1 style="font-family:'Playfair Display'; font-weight:500; font-size:clamp(30px,4.2vw,46px); color:#1F3D33; margin-top:18px; line-height:1.3;">Veelgestelde vragen.</h1>
+      <p style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:500; font-size:19px; color:#5C4A38; margin-top:22px; line-height:1.7;">Duidelijke antwoorden over onze tools, bestellingen en begeleiding.</p>
+    </div>
+  </div>
+
+  <!-- FAQ GROUPS -->
+  <div class="nv-section-pad" style="padding:0 64px 120px;">
+    <div style="max-width:760px; margin:0 auto;">
+      <sc-for list="{{ groups }}" as="group" hint-placeholder-count="3">
+        <div style="margin-bottom:56px;">
+          <h2 style="font-family:'Playfair Display'; font-weight:500; font-size:22px; color:#1F3D33; margin-bottom:6px;">{{ group.title }}</h2>
+          <div>
+            <sc-for list="{{ group.items }}" as="item" hint-placeholder-count="3">
+              <div class="nv-faq-item">
+                <button class="nv-faq-q" onclick="{{ item.toggle }}">
+                  <span class="nv-faq-q-text">{{ item.q }}</span>
+                  <span class="nv-faq-icon">{{ item.icon }}</span>
+                </button>
+                <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+                  <div class="nv-faq-a">{{ item.a }}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="background:#142922; padding:110px 64px; text-align:center;">
+    <div style="max-width:560px; margin:0 auto;">
+      <div class="nv-eyebrow">Nog een vraag?</div>
+      <h2 style="font-family:'Playfair Display'; font-weight:500; font-size:clamp(24px,2.8vw,32px); color:#F8F4EE; margin-top:18px; line-height:1.4;">Staat je vraag er niet bij?</h2>
+      <p style="font-family:'Inter'; font-weight:300; font-size:15.5px; line-height:1.9; color:rgba(248,244,238,0.75); margin-top:22px;">Neem gerust contact op. We denken graag met je mee.</p>
+      <a class="nv-cta-btn" href="./Nove Vita - Guidance.dc.html" style="margin-top:32px; background:#C8A96B; color:#1F3D33;">Naar Guidance &#8594;</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#142922; padding:80px 64px 40px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; max-width:1300px; margin:0 auto; flex-wrap:wrap; gap:20px;">
+      <div style="font-family:'Playfair Display'; font-weight:500; font-size:20px; letter-spacing:3px; color:#F8F4EE;">NOVÉ VITA</div>
+      <a href="./Nove Vita Homepage.dc.html" style="font-family:'Inter'; font-weight:300; font-size:13px; color:#8CA593;">&#8592; Terug naar Home</a>
+    </div>
+    <div style="height:1px; background:rgba(248,244,238,0.12); margin:40px 0 24px;"></div>
+    <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+      <a href="./Nove Vita - Disclaimer.dc.html" style="font-family:'Inter'; font-weight:300; font-size:12px; color:#8CA593;">Disclaimer</a>
+      <a href="./Nove Vita - Privacy.dc.html" style="font-family:'Inter'; font-weight:300; font-size:12px; color:#8CA593;">Privacy</a>
+      <a href="./Nove Vita - Algemene Voorwaarden.dc.html" style="font-family:'Inter'; font-weight:300; font-size:12px; color:#8CA593;">Algemene voorwaarden</a>
+    </div>
+    <div style="text-align:center; font-family:'Inter'; font-weight:300; font-size:12px; color:#8CA593;">&copy; 2026 Nové Vita. All rights reserved. Designed with ❤️ by <a href="https://mijnaistudio.com" target="_blank" rel="noopener" style="color:#C8A96B;">MijnAIStudio.com</a></div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const RAW_GROUPS = [
+  { title: 'Over Nové Vita', items: [
+    { q: 'Wat is Nové Vita?', a: 'Nové Vita is gericht op metabole gezondheid, peptides en welzijn. We bieden praktische tools, heldere informatie en persoonlijke begeleiding voor mensen die zich hierin willen verdiepen.' },
+    { q: 'Geeft Nové Vita medisch advies?', a: 'Nee. De informatie op onze website, in onze tools en in onze begeleiding is uitsluitend bedoeld voor algemene en educatieve doeleinden. Het vervangt geen medisch advies. Neem voor vragen over jouw persoonlijke gezondheid altijd contact op met een arts of andere gekwalificeerde zorgverlener.' },
+    { q: 'Voor wie zijn jullie producten en informatie bedoeld?', a: 'Onze informatie is bedoeld voor volwassenen die zich willen verdiepen in metabole gezondheid en peptides. Sommige producten zijn uitsluitend bedoeld voor onderzoeksdoeleinden en niet voor menselijk gebruik. Dit staat altijd duidelijk vermeld bij het betreffende product.' },
+  ] },
+  { title: 'Calculator & Mixing', items: [
+    { q: 'Hoe werkt de GLP-1 & Peptide Calculator?', a: 'Onze calculator helpt je om op basis van de gegevens van je pen of vial en de gewenste dosis het aantal clicks of de juiste hoeveelheid te berekenen. Vul de gevraagde gegevens in en de calculator toont direct het resultaat.' },
+    { q: 'Is de calculator voor iedere pen of vial geschikt?', a: 'De calculator ondersteunt de meest gebruikte pentypes en biedt daarnaast een instelling voor eigen waarden. Controleer bij twijfel altijd de verpakking of bijsluiter van je eigen pen of vial voordat je een berekening gebruikt.' },
+    { q: 'Wat is het verschil tussen de Calculator en de Mixing tool?', a: 'De Calculator berekent doseringen en pen clicks. De Mixing tool (Vial & Syringe Calculator) helpt bij het berekenen van de juiste verhouding tussen een vial en oplosvloeistof, voor wie peptides zelf voorbereidt.' },
+    { q: 'Zijn de berekeningen 100% nauwkeurig?', a: 'Onze tools zijn zorgvuldig gebouwd en getest, maar zijn hulpmiddelen en geen vervanging voor professioneel medisch advies. Controleer belangrijke berekeningen altijd zelf en raadpleeg bij twijfel een zorgverlener.' },
+  ] },
+  { title: 'Bestellen & Verzending', items: [
+    { q: 'Hoe kan ik contact opnemen over een bestelling?', a: 'Je kunt ons via WhatsApp bereiken voor vragen over producten, bestellingen of de status van je verzending. We reageren zo snel mogelijk persoonlijk.' },
+    { q: 'Kan ik altijd met mijn vragen terecht, ook na aankoop?', a: 'Ja. Onze begeleiding stopt niet zodra je iets hebt besteld. Je kunt ons ook daarna altijd benaderen met vragen, twijfels of wanneer je situatie verandert. Kijk voor meer informatie op onze Guidance pagina.' },
+  ] },
+  { title: 'Journal & Onderzoek', items: [
+    { q: 'Wat is het Nové Vita Journal?', a: 'Het Journal is ons redactionele platform waar we wetenschappelijke inzichten rond metabole gezondheid, peptides, huid en longevity toegankelijk uitleggen, en waar we via What\u2019s New actuele ontwikkelingen volgen.' },
+    { q: 'Zijn de Journal-artikelen medisch advies?', a: 'Nee. De artikelen zijn educatief en gebaseerd op wetenschappelijke literatuur en officiële bronnen. Ze zijn niet bedoeld als diagnose, behandeladvies of vervanging van een gesprek met een zorgverlener.' },
+  ] },
+];
+
+class Component extends DCLogic {
+  state = { open: {} };
+  renderVals() {
+    const { open } = this.state;
+    const groups = RAW_GROUPS.map((group, gi) => ({
+      title: group.title,
+      items: group.items.map((item, ii) => {
+        const key = gi + '-' + ii;
+        const isOpen = !!open[key];
+        return {
+          q: item.q,
+          a: item.a,
+          open: isOpen,
+          icon: isOpen ? '\u2013' : '+',
+          toggle: () => this.setState(s => ({ open: { ...s.open, [key]: !s.open[key] } })),
+        };
+      }),
+    }));
+    return { groups };
+  }
+}
+</script>
+</body>
+</html>

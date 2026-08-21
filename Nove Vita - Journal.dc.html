@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Nové Vita Journal | Metabolic Health, Peptides &amp; Longevity</title>
+<meta name="description" content="Ontdek wetenschappelijke inzichten over metabolic health, peptides, huid, longevity en welzijn in het Nové Vita Journal.">
+<link id="nvJournalCanonical" rel="canonical" href="">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nové Vita Journal | Science, Health &amp; Longevity">
+<meta property="og:description" content="Wetenschappelijke inzichten over metabolic health, peptide science, huid, longevity en welzijn.">
+<meta id="nvJournalOgUrl" property="og:url" content="">
+<meta id="nvJournalOgImage" property="og:image" content="uploads/ChatGPT Image 26 jul 2026, 16_59_16.png">
+<meta property="og:site_name" content="Nové Vita">
+<script src="./image-slot.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; overflow-x:hidden; }
+  a { color:#1F3D33; text-decoration:none; }
+  a:hover { color:#6B7F6E; }
+  .nv-eyebrow { font-family:'Inter'; font-weight:500; font-size:11.5px; letter-spacing:4px; color:#8C8272; text-transform:uppercase; }
+  .nv-cat-pill { font-family:'Inter'; font-weight:500; font-size:12.5px; letter-spacing:1.4px; text-transform:uppercase; color:rgba(248,244,238,0.6); background:none; border:1px solid rgba(248,244,238,0.22); border-radius:100px; padding:9px 20px; cursor:pointer; transition:color 220ms ease, border-color 220ms ease, background 220ms ease; white-space:nowrap; }
+  .nv-cat-pill:hover { color:#F8F4EE; border-color:rgba(200,169,107,0.6); }
+  .nv-cat-pill.active { color:#142922; background:#C8A96B; border-color:#C8A96B; }
+  .nv-news-row:hover h4 { color:#C8A96B; }
+  .nv-news-row h4 { transition:color 220ms ease; }
+  @media (max-width: 760px) {
+    .nv-journal-grid { grid-template-columns:1fr !important; padding:0 24px !important; }
+    .nv-journal-grid > a { grid-column:auto !important; }
+    .nv-cat-row { padding:0 24px !important; }
+  }
+  @media (max-width: 640px) {
+    .nv-news-row { grid-template-columns:1fr !important; }
+    .nv-news-row > div:first-child { display:none; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; background:#2E2117; font-family:'Inter',sans-serif; color:#2D2D2D; overflow:hidden;">
+
+  <dc-import name="Nove Vita Header" active="journal" hint-size="100%,72px"></dc-import>
+
+  <div style="padding:110px 0 0;">
+    <div style="text-align:center; padding:0 10% 60px;">
+      <h1 style="font-family:'Playfair Display'; font-weight:500; font-size:clamp(30px, 4.2vw, 54px); line-height:1.25; letter-spacing:0.2px; color:#F8F4EE; margin:0 auto 20px; max-width:900px;">Journal</h1>
+      <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:44px; color:#F8F4EE; margin-top:0;">Inzichten voor een leven in balans.</h3>
+      <p style="font-family:'Inter'; font-weight:300; font-size:16px; line-height:1.9; color:rgba(248,244,238,0.72); margin-top:22px; max-width:560px; margin-left:auto; margin-right:auto;">
+        Van peptide science en metabole gezondheid tot longevity, huid en lifestyle. Ontdek de wetenschap achter wat er in je lichaam gebeurt.
+      </p>
+    </div>
+
+    <!-- FEATURED -->
+    <a href="{{ featured.url }}" class="nv-journal-card" style="display:block; text-decoration:none; cursor:pointer; max-width:1300px; margin:0 auto 56px; padding:0 64px; transition:transform 0.4s cubic-bezier(.22,1,.36,1);" style-hover="transform:translateY(-6px);">
+      <div style="position:relative; width:100%; height:430px; border-radius:14px; overflow:hidden; box-shadow:0 24px 50px rgba(0,0,0,0.28);">
+        <image-slot id="journal-overview-featured" shape="rect" src="{{ featured.image }}" placeholder="{{ featured.imagePlaceholder }}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.03);"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.68) 0%, rgba(15,30,25,0.05) 55%, rgba(15,30,25,0) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; left:48px; right:48px; bottom:44px; pointer-events:none;">
+          <div style="font-family:'Inter'; font-weight:500; font-size:11.5px; letter-spacing:3px; color:#C8A96B; text-transform:uppercase;">{{ featured.category }}</div>
+          <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:36px; color:#F8F4EE; margin-top:14px; max-width:640px; line-height:1.3;">{{ featured.title }}</h3>
+          <div style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:500; font-size:19px; color:#C8A96B; margin-top:10px;">{{ featured.subtitle }}</div>
+          <p style="font-family:'Inter'; font-weight:300; font-size:15px; line-height:1.8; color:rgba(248,244,238,0.82); margin-top:14px; max-width:560px;">{{ featured.excerpt }}</p>
+          <div style="font-family:'Inter'; font-weight:500; font-size:13px; letter-spacing:1px; color:#F8F4EE; margin-top:20px;">Lees artikel &#8594;</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- CATEGORY NAV -->
+    <div class="nv-cat-row" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; max-width:1300px; margin:0 auto 64px; padding:0 64px;">
+      <sc-for list="{{ categoryPills }}" as="cat" hint-placeholder-count="7">
+        <button class="{{ cat.cls }}" onclick="{{ cat.onClick }}">{{ cat.label }}</button>
+      </sc-for>
+    </div>
+
+    <!-- GRID -->
+    <div class="nv-journal-grid" style="display:grid; grid-template-columns:repeat(12, 1fr); column-gap:40px; row-gap:64px; align-items:start; max-width:1300px; margin:0 auto; padding:0 64px 140px;">
+      <sc-for list="{{ visibleArticles }}" as="a" hint-placeholder-count="3">
+        <a href="{{ a.url }}" class="nv-journal-card" style="display:block; grid-column:span 6; text-decoration:none; cursor:pointer;">
+          <div style="border-radius:10px; overflow:hidden;">
+            <image-slot id="{{ a.slotId }}" shape="rect" fit="{{ a.objectFit }}" src="{{ a.image }}" placeholder="{{ a.imagePlaceholder }}" style="width:100%; height:{{ a.cardImgHeight }}; transition:transform 700ms cubic-bezier(0.22, 1, 0.36, 1);" style-hover="transform:scale(1.025);"></image-slot>
+          </div>
+          <div style="font-family:'Inter'; font-weight:500; font-size:11px; letter-spacing:3px; color:#C8A96B; text-transform:uppercase; margin-top:20px;">{{ a.category }}</div>
+          <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:22px; color:#F8F4EE; margin-top:10px; line-height:1.35;">{{ a.title }}</h3>
+          <p style="font-family:'Inter'; font-weight:300; font-size:14px; line-height:1.7; color:rgba(248,244,238,0.68); margin-top:10px;">{{ a.excerpt }}</p>
+          <div style="font-family:'Inter'; font-weight:500; font-size:13px; letter-spacing:1px; color:#F8F4EE; margin-top:16px;">Lees artikel &#8594;</div>
+        </a>
+      </sc-for>
+      <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+        <div style="grid-column:1 / -1; text-align:center; padding:60px 0; font-family:'Cormorant Garamond'; font-style:italic; font-size:19px; color:rgba(248,244,238,0.6);">Nog geen artikelen in deze categorie.</div>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- WHAT'S NEW -->
+  <div style="background:#241B12; padding:100px 64px 120px; border-top:1px solid rgba(200,169,107,0.16);">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:56px;">
+        <div class="nv-eyebrow" style="color:#C8A96B;">What's New</div>
+        <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:32px; color:#F8F4EE; margin-top:16px;">Ontwikkelingen die we volgen.</h3>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0;">
+        <sc-for list="{{ newsItems }}" as="n" hint-placeholder-count="2">
+          <a href="{{ n.url }}" style="display:grid; grid-template-columns:{{ n.gridCols }}; gap:32px; align-items:center; text-decoration:none; padding:32px 0; border-bottom:1px solid rgba(248,244,238,0.1);" class="nv-news-row">
+            <sc-if value="{{ n.hasImage }}" hint-placeholder-val="{{ true }}">
+              <div style="border-radius:8px; overflow:hidden; height:110px;">
+                <image-slot id="{{ n.slotId }}" shape="rect" src="{{ n.image }}" placeholder="{{ n.imagePlaceholder }}" style="width:100%; height:100%; object-fit:cover;"></image-slot>
+              </div>
+            </sc-if>
+            <div>
+              <div style="display:flex; align-items:center; gap:14px;">
+                <span style="font-family:'Inter'; font-weight:500; font-size:12px; letter-spacing:1.5px; color:rgba(248,244,238,0.5);">{{ n.dateLabel }}</span>
+                <span style="font-family:'Inter'; font-weight:500; font-size:11px; letter-spacing:2px; color:#C8A96B;">{{ n.tag }}</span>
+              </div>
+              <h4 style="font-family:'Playfair Display'; font-weight:500; font-size:21px; color:#F8F4EE; margin-top:10px; line-height:1.35;">{{ n.title }}</h4>
+              <p style="font-family:'Inter'; font-weight:300; font-size:14px; line-height:1.7; color:rgba(248,244,238,0.65); margin-top:8px; max-width:600px;">{{ n.excerpt }}</p>
+              <div style="font-family:'Inter'; font-weight:500; font-size:12.5px; letter-spacing:1px; color:#F8F4EE; margin-top:12px;">Lees verder &#8594;</div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#142922; padding:64px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; max-width:1300px; margin:0 auto; flex-wrap:wrap; gap:20px;">
+      <div style="font-family:'Playfair Display'; font-weight:500; font-size:20px; letter-spacing:3px; color:#F8F4EE;">NOVÉ VITA</div>
+      <a href="./Nove Vita Homepage.dc.html" style="font-family:'Inter'; font-weight:300; font-size:13px; color:#8CA593;">&#8592; Terug naar Home</a>
+    </div>
+    <div style="height:1px; background:rgba(248,244,238,0.12); margin:40px 0 24px;"></div>
+    <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+      <a href="./Nove Vita - Disclaimer.dc.html" style="font-family:'Inter'; font-weight:300; font-size:12px; color:#8CA593;">Disclaimer</a>
+      <a href="./Nove Vita - Privacy.dc.html" style="font-family:'Inter'; font-weight:300; font-size:12px; color:#8CA593;">Privacy</a>
+      <a href="./Nove Vita - Algemene Voorwaarden.dc.html" style="font-family:'Inter'; font-weight:300; font-size:12px; color:#8CA593;">Algemene voorwaarden</a>
+    </div>
+    <div style="text-align:center; font-family:'Inter'; font-weight:300; font-size:12px; color:#8CA593;">&copy; 2026 Nové Vita. All rights reserved. Designed with ❤️ by <a href="https://mijnaistudio.com" target="_blank" rel="noopener" style="color:#C8A96B;">MijnAIStudio.com</a></div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { articles: [], categories: [], activeCategory: 'Alles', news: [] };
+  async componentDidMount() {
+    const mod = await import('./journal-data.js');
+    const newsMod = await import('./news-data.js');
+    this.setState({ articles: mod.ARTICLES, categories: mod.CATEGORIES, news: newsMod.sortedNews(), formatNewsDate: newsMod.formatNewsDate });
+    const canonicalUrl = mod.SITE_URL ? mod.SITE_URL + '/journal' : '/journal';
+    const set = (id, attr, val) => { const el = document.getElementById(id); if (el) el.setAttribute(attr, val); };
+    set('nvJournalCanonical', 'href', canonicalUrl);
+    set('nvJournalOgUrl', 'content', canonicalUrl);
+  }
+  renderVals() {
+    const { articles, categories, activeCategory, news, formatNewsDate } = this.state;
+    const newsItems = (news || []).map((n, i) => ({ ...n, slotId: 'news-row2-' + i, dateLabel: formatNewsDate ? formatNewsDate(n.datePublished) : '', hasImage: !!n.image, gridCols: n.image ? '160px 1fr' : '1fr' }));
+    const featured = articles.find(a => a.slug === 'hoe-glp-1-het-lichaam-beinvloedt') || articles[0] || {};
+    const rest = articles.filter(a => a !== featured)
+      .slice()
+      .sort((a, b) => categories.indexOf(a.category) - categories.indexOf(b.category));
+    const visibleArticles = (activeCategory === 'Alles' ? rest : rest.filter(a => a.category === activeCategory))
+      .map(a => ({ ...a, slotId: 'journal-grid-' + a.slug, objectFit: 'cover', cardImgHeight: '340px' }));
+    const pillNames = ['Alles', ...categories];
+    const categoryPills = pillNames.map(label => ({
+      label,
+      cls: 'nv-cat-pill' + (activeCategory === label ? ' active' : ''),
+      onClick: () => this.setState({ activeCategory: label }),
+    }));
+    const categoryCoveredByFeatured = activeCategory !== 'Alles' && featured.category === activeCategory;
+    return {
+      featured,
+      categoryPills,
+      visibleArticles,
+      newsItems,
+      noResults: articles.length > 0 && visibleArticles.length === 0 && !categoryCoveredByFeatured,
+    };
+  }
+}
+</script>
+</body>
+</html>

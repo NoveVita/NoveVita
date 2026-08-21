@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nové Vita — Vial &amp; Syringe Calculator</title>
+<meta name="description" content="Bereken de juiste verhouding tussen vial en oplosvloeistof voor het voorbereiden van peptides met de Nové Vita Mixing tool.">
+<link rel="canonical" href="https://www.novevita.nl/mixing">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<script src="./insulin-syringe.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #F8F5EF; font-family: 'Inter', sans-serif; color: #1F3D33; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+  @keyframes nvPageIn { from { opacity: 0; } to { opacity: 1; } }
+  body { animation: nvPageIn 220ms ease; }
+  h1, h2, h3, p, div { text-wrap: pretty; }
+  a { color: #C8A96B; }
+  a:hover { color: #1F3D33; }
+
+  input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 3px; background: #E3DCCB; outline: none; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: #1F3D33; border: 3px solid #FFFFFF; box-shadow: 0 1px 4px rgba(31,61,51,0.4); cursor: pointer; }
+  input[type="range"]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #1F3D33; border: 3px solid #FFFFFF; box-shadow: 0 1px 4px rgba(31,61,51,0.4); cursor: pointer; }
+
+  .page { min-height: 100vh; display: flex; flex-direction: column; }
+  .header { background: #142922; padding: 56px 20px 30px; text-align: center; position: relative; }
+  .wordmark { font-family: 'Playfair Display'; font-weight: 500; font-size: 40px; letter-spacing: 4px; color: #F8F4EE; text-transform: uppercase; line-height: 1; margin-top: 6px; }
+  .header-divider { width: 46px; height: 1px; background: linear-gradient(90deg, transparent, #C8A96B, transparent); margin: 18px auto 0; }
+  .h1 { font-family: 'Playfair Display'; font-weight: 500; font-style: italic; font-size: 18px; color: #E3D9C8; margin: 16px 0 0; letter-spacing: 0.2px; }
+  .sub { font-family: 'Inter'; font-weight: 500; font-size: 11.5px; color: #C8A96B; margin-top: 12px; letter-spacing: 2.4px; text-transform: uppercase; }
+  .tabs { display: flex; justify-content: center; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+  .tab-btn { min-height: 42px; padding: 0 22px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.28); background: transparent; color: #E3D9C8; font-family: 'Inter'; font-weight: 600; font-size: 12.5px; letter-spacing: 1.4px; text-transform: uppercase; cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease; }
+  .tab-btn:hover { border-color: rgba(200,169,107,0.6); }
+  .tab-btn.active { border: 1px solid #C8A96B; background: #C8A96B; color: #1F3D33; }
+
+  .content { flex: 1; width: 100%; max-width: 480px; margin: 0 auto; padding: 18px 16px 48px; display: flex; flex-direction: column; gap: 16px; }
+
+  .card { background: linear-gradient(160deg, #FFFFFF, #FBF9F4); border: 1px solid #E3DCCB; border-radius: 24px; padding: 24px; box-shadow: 0 4px 20px rgba(31,61,51,0.06), 0 1px 0 rgba(255,255,255,0.6) inset; transition: box-shadow 0.25s ease; }
+  .card:hover { box-shadow: 0 8px 28px rgba(31,61,51,0.09), 0 1px 0 rgba(255,255,255,0.6) inset; }
+  .card-heading { font-family: 'Playfair Display'; font-weight: 500; font-size: 21px; letter-spacing: 0.01em; color: #1F3D33; margin-bottom: 12px; }
+  .card-dark { position: relative; background: radial-gradient(ellipse 130% 90% at 50% 12%, #2C4B40 0%, #20402F 32%, #17342A 68%, #12291F 100%); border-radius: 24px; padding: 24px 20px; text-align: center; overflow: hidden; box-shadow: 0 0 0 1px rgba(200,169,107,0.28), 0 0 46px rgba(200,169,107,0.14), 0 40px 70px -10px rgba(15,25,20,0.5), 0 18px 30px -8px rgba(15,25,20,0.35); }
+  .card-dark::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.025; mix-blend-mode: overlay; pointer-events: none; }
+  .card-dark::after { content: ''; position: absolute; top: -12%; left: -10%; width: 34%; height: 22%; background: radial-gradient(ellipse, rgba(255,255,255,0.14), transparent 72%); pointer-events: none; z-index: 0; }
+  .card-dark-over { background: #6B2721; box-shadow: 0 0 0 1px rgba(214,138,124,0.35), 0 0 45px rgba(180,70,55,0.28), 0 24px 50px rgba(80,25,20,0.28); }
+  .card-soft { background: #F8F4EE; border: 1px solid #E3DCCB; border-radius: 24px; padding: 20px; }
+  .label-sm { font-family: 'Inter'; font-weight: 600; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #C8A96B; }
+  .field-label { font-family: 'Inter'; font-weight: 600; font-size: 11px; color: #8C8272; text-transform: uppercase; letter-spacing: 1.4px; }
+  select, input[type="text"], input[type="number"] {
+    width: 100%; margin-top: 6px; padding: 12px; border-radius: 9px; border: 1px solid #D8CDC0;
+    font-family: 'Inter'; font-size: 15px; color: #1F3D33; background: #FFFFFF;
+  }
+  .btn-primary { min-height: 46px; border-radius: 10px; border: none; background: linear-gradient(160deg, #2A4A3F, #1F3D33); color: #FFFFFF; font-family: 'Inter'; font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(31,61,51,0.25); transition: box-shadow 0.2s ease, transform 0.2s ease; }
+  .btn-primary:hover { box-shadow: 0 4px 16px rgba(31,61,51,0.32); transform: translateY(-1px); }
+  .btn-outline { min-height: 46px; border-radius: 10px; border: 1px solid #1F3D33; background: transparent; color: #1F3D33; font-family: 'Inter'; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.2s ease; }
+  .btn-outline:hover { background: rgba(31,61,51,0.05); }
+  .med-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .dose-btn { min-height: 44px; border-radius: 10px; font-family: 'Inter'; font-weight: 700; font-size: 13.5px; border: 1px solid #D8CDC0; background: #FFFFFF; color: #1F3D33; cursor: pointer; }
+  .dose-btn.selected { border: 1.5px solid #1F3D33; background: #1F3D33; color: #FFFFFF; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .chip-btn { min-height: 42px; padding: 0 16px; border-radius: 10px; font-family: 'Inter'; font-weight: 600; font-size: 13.5px; border: 1px solid #D8CDC0; background: #FFFFFF; color: #1F3D33; cursor: pointer; transition: box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.15s ease; }
+  .chip-btn:hover:not(.selected) { border-color: #C8A96B; box-shadow: 0 2px 8px rgba(200,169,107,0.18); transform: translateY(-1px); }
+  .chip-btn.selected { border: 1.5px solid #C8A96B; background: linear-gradient(160deg, #DCC08A, #C8A96B); color: #1F3D33; box-shadow: 0 3px 12px rgba(200,169,107,0.4); }
+  .field-group { margin-top: 20px; }
+  .field-group:first-child { margin-top: 0; }
+  .stat-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .stat-label { font-family: 'Inter'; font-weight: 600; font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase; color: #8C8272; }
+  .stat-value { font-family: 'Inter'; font-weight: 700; font-size: 15px; color: #1F3D33; margin-top: 2px; }
+  .note-box { background: #F8F4EE; border: 1px dashed #D8CDC0; border-radius: 10px; padding: 12px 14px; font-family: 'Inter'; font-weight: 500; font-size: 12.5px; color: #8C8272; line-height: 1.5; }
+
+  .faq-item { border-bottom: 1px solid #EAE2D4; }
+  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 14px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; }
+  .faq-q span:first-child { font-family: 'Inter'; font-weight: 500; font-size: 14px; color: #1F3D33; }
+  .faq-q span:last-child { font-family: 'Inter'; font-weight: 600; font-size: 18px; color: #C8A96B; flex-shrink: 0; }
+  .faq-a { font-family: 'Inter'; font-weight: 400; font-size: 13px; color: #5C6B5E; line-height: 1.7; padding: 0 0 14px; }
+
+  .syringe-svg-wrap { margin: 26px -20px 0; width: calc(100% + 40px); overflow: visible; background: radial-gradient(ellipse 60% 75% at 50% 50%, rgba(0,0,0,0.16), transparent 70%); padding: 30px 56px; box-sizing: border-box; position: relative; z-index: 1; }
+  .syringe-scale-group { transform: scale(1.15); transform-origin: center center; }
+  .syringe-photo-wrap { position: relative; width: 100%; }
+  .syringe-photo-wrap img { display: block; width: 100%; height: auto; user-select: none; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35)) contrast(1.04) brightness(1.03); }
+  .syringe-fill-overlay { position: absolute; background: linear-gradient(to bottom, rgba(240,206,110,0.85), rgba(228,184,74,0.9) 50%, rgba(214,168,60,0.85)); border-radius: 3px 2px 2px 3px; transition: width 0.35s ease; }
+  .syringe-stopper-marker { position: absolute; width: 8px; background: #141414; border-radius: 2px; transition: left 0.35s ease; }
+  .syringe-tick-mask { position: absolute; background: rgba(255,255,255,0.12); backdrop-filter: blur(3px); overflow: hidden; }
+  .syringe-green-mask { position: absolute; background: #1D3A31; filter: blur(5px); }
+  .syringe-liquid-clip { position: absolute; overflow: hidden; transform-origin: left center; transition: transform 0.35s ease; }
+
+
+  /* Product carousel — Nové Vita, independent of .content sizing */
+  .nvp-wrap { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 20px 40px 70px; box-sizing: border-box; }
+  .nvp-title { font-family: 'Inter'; font-weight: 800; font-size: 38px; letter-spacing: 0.12em; color: #1F3D33; text-align: center; margin: 0 auto 36px; text-transform: uppercase; max-width: 1144px; }
+  .nvp-grid { display: grid; grid-template-columns: repeat(3, 360px); justify-content: center; gap: 32px; max-width: 1500px; margin: 0 auto; }
+  .nvp-card { width: 360px; min-height: 650px; border-radius: 20px; background: #FFFFFF; border: 1px solid rgba(200,185,145,0.35); box-shadow: 0 18px 40px rgba(31,61,51,0.12); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .nvp-card:hover { transform: translateY(-8px); box-shadow: 0 28px 56px rgba(31,61,51,0.2); }
+  .nvp-photo { height: 460px; width: 100%; display: flex; justify-content: center; align-items: flex-end; overflow: hidden; background: #F8F4EE; flex-shrink: 0; }  .nvp-photo img { width: auto; height: 90%; object-fit: contain; }
+  .nvp-info { padding: 0 24px 24px; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  .nvp-name { font-family: 'Inter'; font-weight: 700; font-size: 30px; color: #1F3D33; margin-top: 22px; }
+  .nvp-sub { font-family: 'Inter'; font-weight: 400; font-size: 17px; line-height: 1.6; color: #5C6B5E; max-width: 94%; margin-top: 14px; margin-bottom: 22px; }
+  .nvp-cta { margin-top: auto; width: 100%; height: 50px; flex-shrink: 0; border-radius: 12px; font-family: 'Inter'; font-weight: 600; font-size: 16px; background: #C8A96B; color: #1F3D33; border: none; cursor: pointer; transition: background 0.2s ease; }
+  .nvp-cta:hover { background: #B6975A; }
+  @media (max-width: 1180px) { .nvp-grid { grid-template-columns: repeat(2, 360px); } }
+  @media (max-width: 780px) { .nvp-grid { grid-template-columns: 360px; } .nvp-wrap { padding: 20px 16px 60px; } }
+  .calc-shell { background: #FFFFFF; border-radius: 24px; padding: 28px; box-shadow: 0 4px 24px rgba(31,61,51,0.08); border: 1px solid #E3DCCB; }
+  .calc-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 1100px) {
+    .calc-grid { grid-template-columns: 42fr 58fr; align-items: start; }
+    .calc-grid .result-col { position: sticky; top: 24px; }
+  }
+
+  .step-row { display: flex; gap: 14px; align-items: flex-start; }
+  .step-num { font-family: 'Playfair Display'; font-style: italic; font-weight: 500; font-size: 22px; color: #C8A96B; flex-shrink: 0; width: 30px; }
+  .step-text { font-family: 'Inter'; font-weight: 400; font-size: 14px; line-height: 1.7; color: #31433A; }
+
+  .footer { text-align: center; padding: 48px 16px 32px; margin-top: 8px; }
+  .footer-divider { width: 100%; max-width: 340px; height: 1px; background: linear-gradient(90deg, transparent, rgba(31,61,51,0.18), transparent); margin: 0 auto 28px; }
+  .footer-meta { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; font-size: 13.5px; color: #B7AA9A; margin-top: 6px; line-height: 1.8; }
+  .footer-meta a { color: #C8A96B; text-decoration: none; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; border: none; background: none; color: #C8A96B; font-family: 'Inter'; font-weight: 600; font-size: 12.5px; letter-spacing: 1.4px; text-transform: uppercase; cursor: pointer; padding: 8px 0; min-height: 44px; text-decoration: none; }
+
+  @media (min-width: 640px) { .content { max-width: 560px; } }
+  @media (min-width: 1024px) {
+    .content { max-width: 640px; padding: 32px 24px 64px; }
+    .content.wide { max-width: 1040px; }
+    .wordmark { font-size: 56px; letter-spacing: 8px; }
+    .h1 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<header id="nvSiteHeader" style="position:sticky; top:0; left:0; right:0; z-index:1000; width:100%; box-sizing:border-box; padding:22px 32px; display:flex; align-items:center; justify-content:space-between; background:rgba(248,245,239,0.72); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid rgba(31,61,51,0.08); box-shadow:0 2px 8px rgba(31,61,51,0.03); transition:padding 250ms ease, background 250ms ease, box-shadow 250ms ease, backdrop-filter 250ms ease;">
+  <a href="./Nove Vita Homepage.dc.html" style="font-family:'Playfair Display'; font-weight:500; font-size:19px; letter-spacing:2.5px; color:#1F3D33; text-decoration:none;">NOVÉ VITA</a>
+  <nav class="nvsh-links" style="display:flex; align-items:center; gap:38px;">
+    <a class="nvsh-link" href="./Nove Vita Homepage.dc.html">Home</a>
+    <div class="nvsh-tools">
+      <span class="nvsh-link">Tools</span>
+      <div class="nvsh-tools-menu">
+        <div class="nvsh-tools-menu-inner">
+          <a class="nvsh-tools-item" href="./Retatrutide Pen Calculator (Standalone).html">Calculator</a>
+          <a class="nvsh-tools-item nvsh-active" href="./Vial &amp; Syringe Calculator (Standalone).html">Mixing</a>
+        </div>
+      </div>
+    </div>
+    <a class="nvsh-link" href="./Nove Vita - Journal.dc.html">Journal</a>
+    <a class="nvsh-link" href="./Nove Vita - Guidance.dc.html">Guidance</a>
+    <a class="nvsh-link" href="./Nove Vita - FAQ.dc.html">FAQ</a>
+    <a class="nvsh-link" href="./Nove Vita - Contact.dc.html">Contact</a>
+  </nav>
+  <label class="nvsh-hamburger" id="nvshHamburger">
+    <span></span><span></span><span></span>
+  </label>
+  <div class="nvsh-mobile" id="nvshMobile">
+    <a class="nvsh-link" href="./Nove Vita Homepage.dc.html">Home</a>
+    <a class="nvsh-link" href="./Retatrutide Pen Calculator (Standalone).html">Calculator</a>
+    <a class="nvsh-link nvsh-active" href="./Vial &amp; Syringe Calculator (Standalone).html">Mixing</a>
+    <a class="nvsh-link" href="./Nove Vita - Journal.dc.html">Journal</a>
+    <a class="nvsh-link" href="./Nove Vita - Guidance.dc.html">Guidance</a>
+    <a class="nvsh-link" href="./Nove Vita - FAQ.dc.html">FAQ</a>
+    <a class="nvsh-link" href="./Nove Vita - Contact.dc.html">Contact</a>
+  </div>
+</header>
+<style>
+  .nvsh-link { font-family:'Inter',sans-serif; font-weight:500; font-size:13px; letter-spacing:1.6px; text-transform:uppercase; color:#1F3D33; text-decoration:none; transition:color 220ms ease; }
+  .nvsh-link:hover { color:#C8A96B; }
+  .nvsh-active { color:#C8A96B; }
+  .nvsh-tools { position:relative; }
+  .nvsh-tools-menu { position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; background:transparent; display:none; flex-direction:column; }
+  .nvsh-tools-menu-inner { background:#F8F4EE; border-radius:6px; box-shadow:0 16px 32px rgba(31,61,51,0.16); padding:10px; display:flex; flex-direction:column; gap:2px; min-width:170px; }
+  .nvsh-tools:hover .nvsh-tools-menu, .nvsh-tools-menu:hover { display:flex; }
+  .nvsh-tools-item { font-family:'Inter',sans-serif; font-weight:500; font-size:12.5px; letter-spacing:0.6px; text-transform:none; color:#1F3D33; text-decoration:none; padding:10px 14px; border-radius:4px; transition:background 180ms ease; }
+  .nvsh-tools-item:hover { background:rgba(31,61,51,0.06); color:#C8A96B; }
+  .nvsh-tools-item.nvsh-active { color:#C8A96B; }
+  .nvsh-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
+  .nvsh-hamburger span { width:20px; height:1.5px; background:#1F3D33; display:block; }
+  .nvsh-mobile { display:none; position:absolute; top:100%; left:0; right:0; background:#F8F4EE; padding:22px 24px; flex-direction:column; gap:18px; border-bottom:1px solid rgba(31,61,51,0.08); box-shadow:0 12px 24px rgba(31,61,51,0.08); }
+  .nvsh-mobile.open { display:flex; }
+  @media (max-width:760px) {
+    .nvsh-links { display:none !important; }
+    .nvsh-hamburger { display:flex !important; }
+    .nvsh-tools-menu { display:none !important; }
+  }
+</style>
+<script>
+  (function () {
+    var h = document.getElementById('nvSiteHeader');
+    window.addEventListener('scroll', function () {
+      var s = window.scrollY > 12;
+      h.style.padding = s ? '14px 32px' : '22px 32px';
+      h.style.background = s ? 'rgba(248,245,239,0.92)' : 'rgba(248,245,239,0.72)';
+      h.style.boxShadow = s ? '0 8px 24px rgba(31,61,51,0.10)' : '0 2px 8px rgba(31,61,51,0.03)';
+      h.style.backdropFilter = s ? 'blur(16px)' : 'blur(10px)';
+      h.style.webkitBackdropFilter = h.style.backdropFilter;
+    }, { passive: true });
+    var burger = document.getElementById('nvshHamburger');
+    var mobile = document.getElementById('nvshMobile');
+    burger.addEventListener('click', function () { mobile.classList.toggle('open'); });
+  })();
+</script>
+<div class="page">
+  <div class="header">
+    <div class="wordmark">Nové Vita</div>
+    <div class="header-divider"></div>
+    <h1 class="h1">Vial &amp; Syringe Calculator</h1>
+    <div class="sub">Reconstitutie • Concentratie • Eenheden</div>
+    <div class="tabs">
+      <button class="tab-btn" id="tabCalc">Calculator</button>
+      <button class="tab-btn" id="tabGuide">Mixing Guide</button>
+    </div>
+  </div>
+  <div class="content" id="content"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var FAQ_DATA = [
+    { q: 'Wat is bacteriostatisch water (BAC water)?', a: 'BAC water is steriel water met een kleine hoeveelheid benzylalcohol als conserveringsmiddel. Het wordt gebruikt om gevriesdroogd (lyofilized) peptidepoeder op te lossen tot een injecteerbare oplossing.' },
+    { q: 'Waarom verandert de concentratie als ik meer water toevoeg?', a: 'Hoe meer BAC water je toevoegt aan dezelfde hoeveelheid mg peptide, hoe lager de concentratie per ml wordt. Minder water geeft een sterkere oplossing, meer water een zwakkere — beide zijn correct zolang je berekening klopt.' },
+    { q: 'Welke spuit moet ik gebruiken?', a: 'Insuline-spuiten (U-100 of U-50) zijn het meest gangbaar voor kleine peptidedoses en meten in eenheden. Een 3 ml-spuit is nauwkeuriger bij grotere volumes maar meet in ml in plaats van eenheden.' },
+    { q: 'Wat als de uitkomst geen ronde unit-waarde is?', a: 'Pas dan de hoeveelheid BAC water aan totdat je gewenste dosis wél op een afleesbare streep van je spuit valt — dat maakt doseren nauwkeuriger en makkelijker.' },
+    { q: 'Hoe lang blijft een gereconstitueerde vial houdbaar?', a: 'Dat verschilt per peptide en bewaarcondities. Bewaar de vial gekoeld en volg altijd de instructies van de fabrikant of je begeleider.' },
+    { q: 'Geeft deze calculator medisch advies?', a: 'Nee. Dit is uitsluitend een technische omrekentool. Bespreek dosering, mixing en gebruik altijd met een bevoegde zorgverlener.' },
+  ];
+
+  function toNum(v) { var n = parseFloat(String(v).replace(',', '.')); return isNaN(n) ? null : n; }
+  function fmtNum(n, dec) { if (n == null || !isFinite(n)) return '—'; return n.toLocaleString('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: dec == null ? 2 : dec }); }
+  function esc(s) { var d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
+
+  var SYRINGE_OPTIONS = [0.5, 1.0];
+  var VIAL_OPTIONS = [5, 10, 15];
+  var BAC_OPTIONS = [1, 2, 3, 5];
+  var DOSE_OPTIONS = [0.5, 1, 2, 2.5];
+
+  var state = {
+    view: 'calculator',
+    syringeMl: 1.0,
+    vialMg: 5,
+    bacWaterMl: 1,
+    desiredDose: 0.5,
+    custom: { syringeMl: false, vialMg: false, bacWaterMl: false, desiredDose: false },
+    faqOpen: null,
+  };
+
+  function setState(patch) { state = Object.assign({}, state, patch); render(); }
+
+  function computeCalc() {
+    var vialMcg = (state.vialMg || 0) * 1000;
+    var concentrationMcgPerMl = state.bacWaterMl > 0 ? vialMcg / state.bacWaterMl : null;
+    var desiredMcg = (state.desiredDose || 0) * 1000;
+    var doseMl = concentrationMcgPerMl ? desiredMcg / concentrationMcgPerMl : null;
+    var maxMl = state.syringeMl || 1;
+    var units = doseMl != null ? doseMl * 100 : null;
+    var overMax = doseMl != null && doseMl > maxMl;
+    var dosesPerVial = desiredMcg > 0 ? vialMcg / desiredMcg : null;
+    var fillPercent = doseMl != null ? Math.max(0, Math.min(100, (doseMl / maxMl) * 100)) : 0;
+    return { concentrationMcgPerMl: concentrationMcgPerMl, doseMl: doseMl, units: units, overMax: overMax, dosesPerVial: dosesPerVial, fillPercent: fillPercent, maxUnits: maxMl * 100 };
+  }
+
+  function renderChipGroup(field, label, options, unit) {
+    var isCustom = state.custom[field];
+    var chips = options.map(function (o) {
+      var selected = !isCustom && state[field] === o;
+      return '<button class="chip-btn' + (selected ? ' selected' : '') + '" data-chip-field="' + field + '" data-chip-value="' + o + '">' + fmtNum(o, o < 1 ? 2 : (Number.isInteger(o) ? 0 : 1)) + ' ' + unit + '</button>';
+    }).join('');
+    chips += '<button class="chip-btn' + (isCustom ? ' selected' : '') + '" data-chip-custom="' + field + '">Anders</button>';
+    var html = '<div class="field-group"><div class="field-label">' + esc(label) + '</div><div class="chip-row">' + chips + '</div>';
+    if (isCustom) {
+      html += '<input type="text" inputmode="decimal" data-custom-input="' + field + '" value="' + state[field] + '" style="margin-top:10px;" placeholder="Eigen waarde in ' + unit + '">';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function renderCalc() {
+    var c = computeCalc();
+    var html = '<div class="calc-shell"><div class="calc-grid"><div class="input-col">';
+
+    html += renderChipGroup('syringeMl', 'Wat is het totale volume van je spuit?', SYRINGE_OPTIONS, 'ml') +
+      renderChipGroup('vialMg', 'Hoeveel mg peptide zit er in de vial?', VIAL_OPTIONS, 'mg') +
+      renderChipGroup('bacWaterMl', 'Hoeveel BAC-water voeg je toe?', BAC_OPTIONS, 'ml') +
+      renderChipGroup('desiredDose', 'Welke dosis wil je per injectie?', DOSE_OPTIONS, 'mg');
+
+    html += '</div><div class="result-col">';
+
+    html += '<div class="card-dark' + (c.overMax ? ' card-dark-over' : '') + '">' +
+      '<div style="font-family:\'Inter\';font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#DCC9A0;">Om een dosis van ' + fmtNum(state.desiredDose, state.desiredDose < 1 ? 2 : 1) + ' mg te krijgen</div>' +
+      (c.overMax ?
+        '<div style="font-family:\'Inter\';font-weight:600;font-size:16px;color:#EADFC0;line-height:1.5;margin-top:14px;">Dit volume past niet in de gekozen spuit. Kies een grotere spuit of pas de verdunning aan.</div>' :
+        '<div style="margin-top:10px;"><span style="font-family:\'Inter\';font-weight:800;font-size:52px;color:#FFFFFF;line-height:1;">' + (c.units != null ? fmtNum(c.units, 0) : '—') + '</span><span style="font-family:\'Inter\';font-weight:600;font-size:20px;color:#F8F4EE;margin-left:8px;">eenheden</span></div>' +
+        '<div style="font-family:\'Inter\';font-weight:500;font-size:14px;color:#E3D9C8;margin-top:2px;">(' + (c.doseMl != null ? fmtNum(c.doseMl, 3) : '—') + ' ml)</div>') +
+      '<div class="syringe-svg-wrap">' +
+        '<div style="font-family:\'Inter\';font-weight:700;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#8C8272;text-align:center;margin-bottom:10px;">' + fmtNum(state.syringeMl, state.syringeMl < 1 ? 2 : 1) + ' ml insulinespuit &middot; ' + fmtNum(c.maxUnits, 0) + ' eenheden</div>' +
+        window.renderInsulinSyringe(c.units || 0, c.maxUnits, fmtNum) +
+      '</div>' +
+      (c.overMax ? '' : '<div style="font-family:\'Inter\';font-weight:400;font-size:13px;color:#E3D9C8;line-height:1.7;margin-top:14px;">Trek de spuit op tot de markering van ' + (c.units != null ? fmtNum(c.units, 0) : '—') + ' eenheden.<br>Dit komt overeen met ' + (c.doseMl != null ? fmtNum(c.doseMl, 3) : '—') + ' ml en levert een dosis van ' + fmtNum(state.desiredDose, state.desiredDose < 1 ? 2 : 1) + ' mg.</div>') +
+      '</div>';
+
+    html += '</div></div></div>';
+
+    html += '<div class="card-soft" style="margin-top:16px;">' +
+      '<div class="label-sm">Voorbeeld</div>' +
+      '<div style="font-family:\'Inter\';font-weight:400;font-size:13.5px;color:#31433A;line-height:1.8;margin-top:10px;">Je kiest:</div>' +
+      '<div style="font-family:\'Inter\';font-weight:500;font-size:13.5px;color:#31433A;line-height:1.8;">&bull; Vial: 5 mg<br>&bull; BAC-water: 1 ml<br>&bull; Gewenste dosis: 0,5 mg</div>' +
+      '<div style="font-family:\'Inter\';font-weight:700;font-size:13.5px;color:#1F3D33;line-height:1.8;margin-top:10px;">Resultaat: je trekt de spuit op tot 10 eenheden (0,1 ml).</div>' +
+      '</div>';
+
+    html += '</div>';
+
+    html += '<div class="card">' +
+      '<div class="card-heading">Hoe werkt de berekening?</div>' +
+      '<div style="font-family:\'Inter\';font-weight:400;font-size:13.5px;color:#31433A;line-height:1.7;">De vial bevat een vaste hoeveelheid peptide (mg). Door BAC-water toe te voegen ontstaat een oplossing met een concentratie (mg per ml). Je gewenste dosis delen door die concentratie geeft het volume dat je moet optrekken — omgerekend naar eenheden op de gekozen spuit.</div>' +
+      '</div>';
+
+    html += '<div class="card">' +
+      '<div class="card-heading" style="margin-bottom:2px;">Veelgestelde vragen</div>' +
+      FAQ_DATA.map(function (f, i) {
+        var open = state.faqOpen === i;
+        return '<div class="faq-item"><button class="faq-q" data-faq="' + i + '"><span>' + esc(f.q) + '</span><span>' + (open ? '–' : '+') + '</span></button>' + (open ? '<div class="faq-a">' + esc(f.a) + '</div>' : '') + '</div>';
+      }).join('') +
+      '</div>';
+
+    html += '<div class="card-dark" style="text-align:center;">' +
+      '<div style="font-family:\'Inter\';font-weight:400;font-size:12px;color:#E3D9C8;line-height:1.7;">Deze calculator is uitsluitend bedoeld als technische omrekentool voor reconstitutie en dosering. De app stelt geen diagnose, schrijft geen dosis voor en vervangt geen medisch advies. Werk altijd steriel en volgens de instructies van je begeleider.</div>' +
+      '</div>';
+
+    return html;
+  }
+
+  function renderGuide() {
+    var steps = [
+      'Was je handen en werk op een schone, vlakke ondergrond.',
+      'Desinfecteer de rubberen dop van de vial en de BAC-water flacon met een alcoholdoekje.',
+      'Trek met een schone spuit lucht op, gelijk aan de hoeveelheid BAC-water die je gaat toevoegen, en spuit deze lucht in de vial om drukopbouw te voorkomen.',
+      'Trek met dezelfde of een schone spuit de berekende hoeveelheid BAC-water op en verwijder eventuele luchtbubbels door zachtjes tegen de spuit te tikken en de lucht eruit te drukken.',
+      'Injecteer het water langzaam tegen de binnenwand van de vial, nooit direct op het poeder.',
+      'Zwenk de vial voorzichtig rond tot het poeder volledig is opgelost. Niet schudden.',
+      'Bewaar de gereconstitueerde vial gekoeld en gebruik voor elke dosis een schone naald.',
+    ];
+    var html = '<div class="card">' +
+      '<div class="card-heading" style="font-size:22px;margin-bottom:4px;">Mixing Guide</div>' +
+      '<div style="font-family:\'Cormorant Garamond\';font-style:italic;font-weight:400;font-size:15px;color:#5C6B5E;line-height:1.6;margin-bottom:16px;">Stap voor stap peptidepoeder reconstitueren met BAC-water.</div>' +
+      steps.map(function (s, i) { return '<div class="step-row" style="margin-top:' + (i === 0 ? '0' : '18') + 'px;"><div class="step-num">' + (i + 1) + '</div><div class="step-text">' + esc(s) + '</div></div>'; }).join('') +
+      '</div>';
+    html += '<div class="note-box">Gebruik altijd steriele naalden en spuiten, en injecteer nooit met dezelfde naald waarmee je hebt opgetrokken uit de vial.</div>';
+    return html;
+  }
+
+  function render() {
+    document.getElementById('tabCalc').className = 'tab-btn' + (state.view === 'calculator' ? ' active' : '');
+    document.getElementById('tabGuide').className = 'tab-btn' + (state.view === 'guide' ? ' active' : '');
+    var content = document.getElementById('content');
+    content.className = 'content' + (state.view === 'calculator' ? ' wide' : '');
+    content.innerHTML = state.view === 'calculator' ? renderCalc() : renderGuide();
+    attachHandlers();
+  }
+
+  function attachHandlers() {
+    document.querySelectorAll('[data-chip-field]').forEach(function (btn) {
+      btn.onclick = function () {
+        var field = btn.getAttribute('data-chip-field');
+        var value = toNum(btn.getAttribute('data-chip-value'));
+        var custom = Object.assign({}, state.custom); custom[field] = false;
+        var patch = { custom: custom }; patch[field] = value;
+        setState(patch);
+      };
+    });
+    document.querySelectorAll('[data-chip-custom]').forEach(function (btn) {
+      btn.onclick = function () {
+        var field = btn.getAttribute('data-chip-custom');
+        var custom = Object.assign({}, state.custom); custom[field] = true;
+        setState({ custom: custom });
+      };
+    });
+    document.querySelectorAll('[data-custom-input]').forEach(function (inp) {
+      inp.onchange = function (e) {
+        var field = inp.getAttribute('data-custom-input');
+        var patch = {}; patch[field] = toNum(e.target.value) || 0;
+        setState(patch);
+      };
+    });
+    document.querySelectorAll('[data-faq]').forEach(function (btn) {
+      btn.onclick = function () { var i = parseInt(btn.getAttribute('data-faq'), 10); setState({ faqOpen: state.faqOpen === i ? null : i }); };
+    });
+  }
+
+  document.getElementById('tabCalc').onclick = function () { setState({ view: 'calculator' }); };
+  document.getElementById('tabGuide').onclick = function () { setState({ view: 'guide' }); };
+
+  render();
+})();
+</script>
+
+<div class="footer">
+  <div class="footer-divider"></div>
+  <a class="back-btn" href="./Retatrutide Pen Calculator (Standalone).html">&larr; Pen Calculator</a>
+  <div class="footer-meta">&copy; 2026 Nové Vita. Alle berekeningen zijn technisch van aard en vervangen geen medisch advies.</div>
+  <div class="footer-meta">&copy; 2026 Nové Vita. All rights reserved. Designed with ❤️ by <a href="https://mijnaistudio.com" target="_blank" rel="noopener">MijnAIStudio.com</a></div>
+</div>
+
+</body>
+</html>

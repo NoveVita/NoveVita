@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title id="nvSeoTitle">GLP-1 en haarverlies: nieuw onderzoek | Nové Vita</title>
+<meta id="nvSeoDesc" name="description" content="">
+<link id="nvSeoCanonical" rel="canonical" href="">
+<meta id="nvOgType" property="og:type" content="article">
+<meta id="nvOgTitle" property="og:title" content="">
+<meta id="nvOgDesc" property="og:description" content="">
+<meta id="nvOgUrl" property="og:url" content="">
+<meta id="nvOgImage" property="og:image" content="">
+<meta property="og:site_name" content="Nové Vita">
+<script src="./image-slot.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; overflow-x:hidden; }
+  a { color:#1F3D33; text-decoration:none; }
+  a:hover { color:#6B7F6E; }
+  .nv-tag-chip { font-family:'Inter'; font-weight:600; font-size:11px; letter-spacing:2px; color:#142922; text-transform:uppercase; background:#C8A96B; padding:6px 14px; border-radius:3px; }
+  .nv-news-body p { font-family:'Inter'; font-weight:300; font-size:17px; line-height:1.9; color:#31433A; margin-top:22px; }
+  @media (max-width: 760px) {
+    .nv-news-masthead, .nv-news-body, .nv-news-foot { padding-left:24px !important; padding-right:24px !important; }
+    .nv-footer { padding:70px 24px 32px !important; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; background:#F8F4EE; font-family:'Inter',sans-serif; color:#2D2D2D; overflow:hidden;">
+
+  <dc-import name="Nove Vita Header" active="journal" bg="rgba(20,41,34,0.94)" dark="true" hint-size="100%,72px"></dc-import>
+
+  <div class="nv-news-masthead" style="max-width:680px; margin:0 auto; padding:150px 24px 28px; border-bottom:3px double #1F3D33;">
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <div style="font-family:'Inter'; font-weight:500; font-size:12px; letter-spacing:2px; color:#8C8272; text-transform:uppercase;">Nové Vita Newsroom &middot; {{ dateLabel }}</div>
+      <span class="nv-tag-chip">{{ tag }}</span>
+    </div>
+    <h1 style="font-family:'Playfair Display'; font-weight:600; font-size:clamp(28px,4vw,40px); color:#1F3D33; margin-top:20px; line-height:1.3;">{{ title }}</h1>
+    <script id="nvNewsJsonLd" type="application/ld+json">{}</script>
+  </div>
+
+  <div style="max-width:900px; margin:36px auto 0; padding:0 24px;">
+    <div style="border-radius:6px; overflow:hidden; height:300px; box-shadow:0 20px 44px rgba(31,61,51,0.14);">
+      <image-slot id="news-hairloss-hero-img" shape="rect" src="{{ image }}" placeholder="{{ imagePlaceholder }}" aria-label="{{ heroImageAlt }}" style="width:100%; height:100%; object-fit:cover;"></image-slot>
+    </div>
+  </div>
+
+  <div class="nv-news-body" style="max-width:680px; margin:0 auto; padding:36px 24px 0;">
+    <sc-for list="{{ paragraphs }}" as="p" hint-placeholder-count="4">
+      <p>{{ p }}</p>
+    </sc-for>
+  </div>
+
+  <div class="nv-news-foot" style="max-width:680px; margin:0 auto; padding:40px 24px 56px;">
+    <div style="height:1px; background:rgba(31,61,51,0.14); margin-bottom:28px;"></div>
+    <div style="font-family:'Playfair Display'; font-weight:500; font-size:15px; color:#8C8272; margin-bottom:14px;">Bronnen &amp; verder lezen</div>
+    <a href="{{ sourceUrl }}" target="_blank" rel="noopener noreferrer" style="font-family:'Inter'; font-weight:500; font-size:14px; color:#1F3D33; border-bottom:1px solid #C8A96B;">{{ sourceLabel }}</a>
+    <div style="font-family:'Inter'; font-weight:300; font-size:12.5px; color:#8C8272; margin-top:4px;">{{ sourcePublisher }}</div>
+    <div style="margin-top:20px;">
+      <a href="{{ source2Url }}" target="_blank" rel="noopener noreferrer" style="font-family:'Inter'; font-weight:500; font-size:14px; color:#1F3D33; border-bottom:1px solid #C8A96B;">{{ source2Label }}</a>
+      <div style="font-family:'Inter'; font-weight:300; font-size:12.5px; color:#8C8272; margin-top:4px;">{{ source2Publisher }}</div>
+    </div>
+  </div>
+
+  <div class="nv-footer" style="background:#142922; padding:80px 64px 40px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; max-width:1300px; margin:0 auto; flex-wrap:wrap; gap:20px;">
+      <div style="font-family:'Playfair Display'; font-weight:500; font-size:20px; letter-spacing:3px; color:#F8F4EE;">NOVÉ VITA</div>
+      <a href="./Nove Vita - Journal.dc.html" style="font-family:'Inter'; font-weight:300; font-size:13px; color:#8CA593;">&#8592; Terug naar Journal</a>
+    </div>
+    <div style="height:1px; background:rgba(248,244,238,0.12); margin:40px 0 24px;"></div>
+    <div style="text-align:center; font-family:'Inter'; font-weight:300; font-size:12px; color:#8CA593;">&copy; 2026 Nové Vita. All rights reserved. Designed with ❤️ by <a href="https://mijnaistudio.com" target="_blank" rel="noopener" style="color:#C8A96B;">MijnAIStudio.com</a></div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { item: null };
+  async componentDidMount() {
+    const mod = await import('./news-data.js');
+    const item = mod.NEWS_ITEMS.find(n => n.slug === 'glp-1-haarverlies-onderzoek');
+    this.setState({ item, dateLabel: item ? mod.formatNewsDate(item.datePublished) : '' });
+    if (item) {
+      const seo = mod.buildNewsSeo(item);
+      const set = (id, attr, val) => { const el = document.getElementById(id); if (el && val) el.setAttribute(attr, val); };
+      set('nvSeoDesc', 'content', seo.metaDescription);
+      set('nvSeoCanonical', 'href', seo.canonicalUrl);
+      set('nvOgTitle', 'content', seo.ogTitle);
+      set('nvOgDesc', 'content', seo.ogDescription);
+      set('nvOgUrl', 'content', seo.canonicalUrl);
+      set('nvOgImage', 'content', seo.ogImage);
+      const ld = document.getElementById('nvNewsJsonLd');
+      if (ld) ld.textContent = JSON.stringify(seo.jsonLd);
+    }
+  }
+  renderVals() {
+    const { item, dateLabel } = this.state;
+    return {
+      title: item ? item.title : '',
+      tag: item ? item.tag : '',
+      dateLabel: dateLabel || '',
+      image: item ? item.image : '',
+      imagePlaceholder: item ? item.imagePlaceholder : '',
+      heroImageAlt: item ? item.heroImageAlt : '',
+      paragraphs: item ? item.paragraphs : [],
+      sourceUrl: item ? item.source.url : '',
+      sourceLabel: item ? item.source.label : '',
+      sourcePublisher: item ? item.source.publisher : '',
+      source2Url: item ? item.source2.url : '',
+      source2Label: item ? item.source2.label : '',
+      source2Publisher: item ? item.source2.publisher : '',
+    };
+  }
+}
+</script>
+</body>
+</html>

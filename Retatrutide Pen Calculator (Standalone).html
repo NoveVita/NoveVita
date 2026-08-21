@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nové Vita — Peptide &amp; GLP-1 Dose Calculator</title>
+<meta name="description" content="Gratis GLP-1 en peptide dosering calculator. Bereken pen clicks en protocol snel en nauwkeurig met Nové Vita.">
+<link rel="canonical" href="https://www.novevita.nl/calculator">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #F8F4EE; font-family: 'Inter', sans-serif; color: #1F3D33; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+  @keyframes nvPageIn { from { opacity: 0; } to { opacity: 1; } }
+  body { animation: nvPageIn 220ms ease; }
+  h1, h2, h3, p, div { text-wrap: pretty; }
+  a { color: #C8A96B; }
+  a:hover { color: #1F3D33; }
+
+  input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 3px; background: #E3DCCB; outline: none; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: #1F3D33; border: 3px solid #FFFFFF; box-shadow: 0 1px 4px rgba(31,61,51,0.4); cursor: pointer; }
+  input[type="range"]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #1F3D33; border: 3px solid #FFFFFF; box-shadow: 0 1px 4px rgba(31,61,51,0.4); cursor: pointer; }
+
+  .page { min-height: 100vh; display: flex; flex-direction: column; }
+  .header { background: #142922; padding: 48px 20px 24px; text-align: center; position: relative; }
+  .gear-btn { position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; min-width: 40px; min-height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .wordmark { font-family: 'Playfair Display'; font-weight: 500; font-size: 40px; letter-spacing: 4px; color: #F8F4EE; text-transform: uppercase; line-height: 1; margin-top: 6px; }
+  .h1 { font-family: 'Inter'; font-weight: 600; font-size: 15px; color: #E3D9C8; margin: 14px 0 0; letter-spacing: 0.2px; }
+  .sub { font-family: 'Inter'; font-weight: 500; font-size: 11.5px; color: #C8A96B; margin-top: 10px; letter-spacing: 1.6px; text-transform: uppercase; }
+  .tabs { display: flex; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+  .tab-btn { min-height: 40px; padding: 0 18px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #E3D9C8; font-family: 'Inter'; font-weight: 700; font-size: 13px; cursor: pointer; }
+  .tab-btn.active { border: 1px solid #C8A96B; background: #C8A96B; color: #1F3D33; }
+
+  .content { flex: 1; width: 100%; max-width: 480px; margin: 0 auto; padding: 18px 16px 48px; display: flex; flex-direction: column; gap: 16px; }
+
+  .card { background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 18px; padding: 20px; box-shadow: 0 2px 10px rgba(31,61,51,0.05); }
+  .card-dark { background: #142922; border-radius: 18px; padding: 24px 20px; text-align: center; box-shadow: 0 4px 16px rgba(31,61,51,0.18); }
+  .card-soft { background: #F8F4EE; border: 1px solid #E3DCCB; border-radius: 18px; padding: 20px; }
+  .label-sm { font-family: 'Inter'; font-weight: 700; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: #C8A96B; }
+  .field-label { font-family: 'Inter'; font-weight: 600; font-size: 11px; color: #8C8272; text-transform: uppercase; letter-spacing: 0.8px; }
+  select, input[type="text"], input[type="password"], input[type="number"], textarea {
+    width: 100%; margin-top: 6px; padding: 12px; border-radius: 9px; border: 1px solid #D8CDC0;
+    font-family: 'Inter'; font-size: 15px; color: #1F3D33; background: #FFFFFF;
+  }
+  .btn-primary { min-height: 46px; border-radius: 10px; border: none; background: #1F3D33; color: #FFFFFF; font-family: 'Inter'; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .btn-outline { min-height: 46px; border-radius: 10px; border: 1px solid #1F3D33; background: transparent; color: #1F3D33; font-family: 'Inter'; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .btn-ghost { min-height: 46px; border-radius: 10px; border: 1px solid #D8CDC0; background: #FFFFFF; color: #5C6B5E; font-family: 'Inter'; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .dose-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 18px; }
+  .dose-btn { min-height: 44px; border-radius: 10px; font-family: 'Inter'; font-weight: 700; font-size: 12.5px; border: 1px solid #D8CDC0; background: #FFFFFF; color: #1F3D33; cursor: pointer; }
+  .dose-btn.selected { border: 1.5px solid #1F3D33; background: #1F3D33; color: #FFFFFF; }
+  .dose-btn.disabled { background: #F8F4EE; color: #B7AA9A; cursor: not-allowed; }
+  .stat-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .stat-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .stat-label { font-family: 'Inter'; font-weight: 600; font-size: 10.5px; letter-spacing: 0.8px; text-transform: uppercase; color: #8C8272; }
+  .stat-value { font-family: 'Inter'; font-weight: 700; font-size: 15px; color: #1F3D33; margin-top: 2px; }
+  .note-box { background: #F8F4EE; border: 1px dashed #D8CDC0; border-radius: 10px; padding: 12px 14px; font-family: 'Inter'; font-weight: 500; font-size: 12.5px; color: #8C8272; line-height: 1.5; }
+  .toast { background: #EFE8DE; border: 1px solid #D8CDC0; border-radius: 10px; padding: 10px 14px; font-family: 'Inter'; font-weight: 700; font-size: 13px; color: #1F3D33; text-align: center; }
+  .err-box { background: #F7ECE4; border: 1px solid #E0BFA8; border-radius: 10px; padding: 10px 12px; font-family: 'Inter'; font-weight: 600; font-size: 12.5px; color: #8A4B2A; }
+
+  .faq-item { border-bottom: 1px solid #EAE2D4; }
+  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 14px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; }
+  .faq-q span:first-child { font-family: 'Inter'; font-weight: 600; font-size: 13.5px; color: #1F3D33; }
+  .faq-q span:last-child { font-family: 'Inter'; font-weight: 600; font-size: 18px; color: #C8A96B; flex-shrink: 0; }
+  .faq-a { font-family: 'Inter'; font-weight: 400; font-size: 13px; color: #5C6B5E; line-height: 1.7; padding: 0 0 14px; }
+
+  .summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #E3DCCB; gap: 10px; }
+  .summary-row .l { font-family: 'Inter'; font-weight: 500; font-size: 13px; color: #5C6B5E; }
+  .summary-row .r { font-family: 'Inter'; font-weight: 700; font-size: 13px; color: #1F3D33; text-align: right; }
+
+  .progress-track { height: 10px; border-radius: 6px; background: #E3DCCB; margin-top: 14px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 6px; background: #C8A96B; }
+
+  .timeline-row { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #EAE2D4; }
+  .timeline-dot { width: 10px; height: 10px; border-radius: 50%; background: #C8A96B; margin-top: 5px; flex-shrink: 0; }
+
+  .pen-admin-card { background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+  .status-chip { font-family: 'Inter'; font-weight: 700; font-size: 10.5px; letter-spacing: 0.6px; text-transform: uppercase; padding: 4px 9px; border-radius: 100px; flex-shrink: 0; }
+  .checkbox-row { display: flex; align-items: center; gap: 8px; font-family: 'Inter'; font-weight: 600; font-size: 13px; color: #1F3D33; }
+  .checkbox-row input { width: auto; margin: 0; }
+
+  .footer { text-align: center; padding: 40px 16px 28px; margin-top: 8px; }
+  .footer-links { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; font-family: 'Inter'; font-weight: 600; font-size: 12.5px; color: #8C8272; }
+  .footer-links a { color: #8C8272; text-decoration: none; }
+  .footer-links a:hover { color: #1F3D33; }
+  .footer-sep { color: #D8CDC0; }
+  .footer-links.mobile { flex-direction: column; gap: 10px; }
+  .footer-links.desktop { display: none; }
+  .footer-meta { font-family: 'Inter'; font-weight: 400; font-size: 12px; color: #B7AA9A; margin-top: 18px; line-height: 1.7; }
+  .footer-meta a { color: #C8A96B; text-decoration: none; }
+  .footer-meta a:hover { color: #1F3D33; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; border: none; background: none; color: #C8A96B; font-family: 'Inter'; font-weight: 700; font-size: 13.5px; cursor: pointer; padding: 8px 0; min-height: 44px; }
+  .legal-text p { font-family: 'Inter'; font-weight: 400; font-size: 13.5px; color: #1F3D33; line-height: 1.75; margin: 0 0 14px; }
+  .legal-text ul { margin: 0 0 14px; padding-left: 18px; }
+  .legal-text li { font-family: 'Inter'; font-weight: 400; font-size: 13.5px; color: #1F3D33; line-height: 1.75; margin-bottom: 6px; }
+  .consent-line { font-family: 'Inter'; font-weight: 500; font-size: 12px; color: #8C8272; line-height: 1.6; text-align: center; margin-top: 4px; }
+  .consent-line a { color: #C8A96B; text-decoration: underline; }
+
+  @media (min-width: 640px) {
+    .content { max-width: 560px; }
+    .footer-links.mobile { display: none; }
+    .footer-links.desktop { display: flex; }
+  }
+  @media (min-width: 1024px) {
+    .content { max-width: 640px; padding: 32px 24px 64px; }
+    .wordmark { font-size: 56px; letter-spacing: 8px; }
+    .h1 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<header id="nvSiteHeader" style="position:sticky; top:0; left:0; right:0; z-index:1000; width:100%; box-sizing:border-box; padding:22px 32px; display:flex; align-items:center; justify-content:space-between; background:rgba(248,245,239,0.72); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid rgba(31,61,51,0.08); box-shadow:0 2px 8px rgba(31,61,51,0.03); transition:padding 250ms ease, background 250ms ease, box-shadow 250ms ease, backdrop-filter 250ms ease;">
+  <a href="./Nove Vita Homepage.dc.html" style="font-family:'Playfair Display'; font-weight:500; font-size:19px; letter-spacing:2.5px; color:#1F3D33; text-decoration:none;">NOVÉ VITA</a>
+  <nav class="nvsh-links" style="display:flex; align-items:center; gap:38px;">
+    <a class="nvsh-link" href="./Nove Vita Homepage.dc.html">Home</a>
+    <div class="nvsh-tools">
+      <span class="nvsh-link nvsh-active">Tools</span>
+      <div class="nvsh-tools-menu">
+        <div class="nvsh-tools-menu-inner">
+          <a class="nvsh-tools-item nvsh-active" href="./Retatrutide Pen Calculator (Standalone).html">Calculator</a>
+          <a class="nvsh-tools-item" href="./Vial &amp; Syringe Calculator (Standalone).html">Mixing</a>
+        </div>
+      </div>
+    </div>
+    <a class="nvsh-link" href="./Nove Vita - Journal.dc.html">Journal</a>
+    <a class="nvsh-link" href="./Nove Vita - Guidance.dc.html">Guidance</a>
+    <a class="nvsh-link" href="./Nove Vita - FAQ.dc.html">FAQ</a>
+    <a class="nvsh-link" href="./Nove Vita - Contact.dc.html">Contact</a>
+  </nav>
+  <label class="nvsh-hamburger" id="nvshHamburger">
+    <span></span><span></span><span></span>
+  </label>
+  <div class="nvsh-mobile" id="nvshMobile">
+    <a class="nvsh-link nvsh-active" href="./Nove Vita Homepage.dc.html">Home</a>
+    <a class="nvsh-link nvsh-active" href="./Retatrutide Pen Calculator (Standalone).html">Calculator</a>
+    <a class="nvsh-link" href="./Vial &amp; Syringe Calculator (Standalone).html">Mixing</a>
+    <a class="nvsh-link" href="./Nove Vita - Journal.dc.html">Journal</a>
+    <a class="nvsh-link" href="./Nove Vita - Guidance.dc.html">Guidance</a>
+    <a class="nvsh-link" href="./Nove Vita - FAQ.dc.html">FAQ</a>
+    <a class="nvsh-link" href="./Nove Vita - Contact.dc.html">Contact</a>
+  </div>
+</header>
+<style>
+  .nvsh-link { font-family:'Inter',sans-serif; font-weight:500; font-size:13px; letter-spacing:1.6px; text-transform:uppercase; color:#1F3D33; text-decoration:none; transition:color 220ms ease; }
+  .nvsh-link:hover { color:#C8A96B; }
+  .nvsh-active { color:#C8A96B; }
+  .nvsh-tools { position:relative; }
+  .nvsh-tools-menu { position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; background:transparent; display:none; flex-direction:column; }
+  .nvsh-tools-menu-inner { background:#F8F4EE; border-radius:6px; box-shadow:0 16px 32px rgba(31,61,51,0.16); padding:10px; display:flex; flex-direction:column; gap:2px; min-width:170px; }
+  .nvsh-tools:hover .nvsh-tools-menu, .nvsh-tools-menu:hover { display:flex; }
+  .nvsh-tools-item { font-family:'Inter',sans-serif; font-weight:500; font-size:12.5px; letter-spacing:0.6px; text-transform:none; color:#1F3D33; text-decoration:none; padding:10px 14px; border-radius:4px; transition:background 180ms ease; }
+  .nvsh-tools-item:hover { background:rgba(31,61,51,0.06); color:#C8A96B; }
+  .nvsh-tools-item.nvsh-active { color:#C8A96B; }
+  .nvsh-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
+  .nvsh-hamburger span { width:20px; height:1.5px; background:#1F3D33; display:block; }
+  .nvsh-mobile { display:none; position:absolute; top:100%; left:0; right:0; background:#F8F4EE; padding:22px 24px; flex-direction:column; gap:18px; border-bottom:1px solid rgba(31,61,51,0.08); box-shadow:0 12px 24px rgba(31,61,51,0.08); }
+  .nvsh-mobile.open { display:flex; }
+  @media (max-width:760px) {
+    .nvsh-links { display:none !important; }
+    .nvsh-hamburger { display:flex !important; }
+    .nvsh-tools-menu { display:none !important; }
+  }
+</style>
+<script>
+  (function () {
+    var h = document.getElementById('nvSiteHeader');
+    window.addEventListener('scroll', function () {
+      var s = window.scrollY > 12;
+      h.style.padding = s ? '14px 32px' : '22px 32px';
+      h.style.background = s ? 'rgba(248,245,239,0.92)' : 'rgba(248,245,239,0.72)';
+      h.style.boxShadow = s ? '0 8px 24px rgba(31,61,51,0.10)' : '0 2px 8px rgba(31,61,51,0.03)';
+      h.style.backdropFilter = s ? 'blur(16px)' : 'blur(10px)';
+      h.style.webkitBackdropFilter = h.style.backdropFilter;
+    }, { passive: true });
+    var burger = document.getElementById('nvshHamburger');
+    var mobile = document.getElementById('nvshMobile');
+    burger.addEventListener('click', function () { mobile.classList.toggle('open'); });
+  })();
+</script>
+<div class="page">
+  <div class="header">
+    <button class="gear-btn" id="gearBtn" title="Beheer" aria-label="Beheer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E3D9C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    </button>
+    <div class="wordmark">Nové Vita</div>
+    <h1 class="h1">Peptide &amp; GLP-1 Dose Calculator</h1>
+    <div class="sub">Clicks • Mixing • Syringes • Reconstitution</div>
+    <div class="tabs">
+      <button class="tab-btn" id="tabCalc">Calculator</button>
+      <button class="tab-btn" id="tabSchema">Opbouwschema</button>
+    </div>
+  </div>
+  <div class="content" id="content"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'noveVitaPenData';
+  var STANDARD_DOSES = [0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,6,8,10,12];
+  var MOUNJARO_DOSES = [2.5,3.75,5,7.5,10,12.5,15];
+  var ALL_FIXED_DOSES = [0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,6,7.5,8,10,12.5,15,17.5,20];
+  var CURRENCY_SYMBOL = { EUR: '€', GBP: '£', USD: '$', AED: 'AED' };
+
+  function doseListForPen(pen) {
+    if (!pen) return STANDARD_DOSES;
+    if (pen.calculationType === 'dynamicClicks') return MOUNJARO_DOSES;
+    return pen.allowedDoses && pen.allowedDoses.length ? pen.allowedDoses : STANDARD_DOSES;
+  }
+  var FAQ_DATA = [
+    { q: 'Hoe weet ik welk pentype ik heb?', a: 'Controleer de verpakking of bijsluiter van je pen op naam, merk en inhoud. Neem bij twijfel contact op met de leverancier voordat je een berekening gebruikt.' },
+    { q: 'Waarom verschillen clicks per pen?', a: 'Elke fabrikant verdeelt de totale hoeveelheid medicatie anders over het aantal clicks van de pen. Daardoor kan hetzelfde aantal milligram bij een andere pen een ander aantal clicks per mg opleveren.' },
+    { q: 'Kan dezelfde dosis bij twee pennen een ander aantal clicks hebben?', a: 'Ja. Twee pennen met evenveel milligram kunnen een verschillend totaal aantal clicks hebben, waardoor de mg per click en dus het benodigde aantal clicks per dosis verschilt.' },
+    { q: 'Wat gebeurt er als de uitkomst geen heel aantal clicks is?', a: 'De app toont dan een duidelijke melding dat de gekozen dosis niet exact overeenkomt met een heel aantal clicks voor de geselecteerde pen.' },
+    { q: 'Hoe wordt de gebruiksduur berekend?', a: 'Op basis van de totale hoeveelheid medicatie in de pen, gedeeld door de gekozen wekelijkse dosis, uitgaande van één injectie per week.' },
+    { q: 'Geeft deze calculator medisch advies?', a: 'Nee. De calculator rekent alleen met vooraf ingevoerde pengegevens. Bespreek dosering, bijwerkingen en gebruik altijd met een bevoegde zorgverlener.' }
+  ];
+
+  function defaultRetatrutidePen() {
+    return {
+      id: 'p1', name: 'Alluvi Retatrutide 20 mg', brand: 'Alluvi', medicine: 'retatrutide',
+      calculationType: 'fixedClicks',
+      totalMg: 20, totalClicks: 240, mgPerClick: 20 / 240, clicksPerMg: 12,
+      price: null, currency: 'EUR',
+      allowedDoses: [0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,6,8,10,12],
+      minDose: 0.5, maxDose: 12,
+      verified: true, verificationNote: '', active: true, allowRounding: false
+    };
+  }
+
+  function defaultRetatrutide40Pen() {
+    return {
+      id: 'p2', name: 'Alluvi Retatrutide 40 mg', brand: 'Alluvi', medicine: 'retatrutide',
+      calculationType: 'fixedClicks',
+      totalMg: 40, totalClicks: 240, mgPerClick: 40 / 240, clicksPerMg: 6,
+      price: null, currency: 'EUR',
+      allowedDoses: [0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,6,7.5,8,10,12.5,15,17.5,20],
+      minDose: 0.5, maxDose: 20,
+      verified: true, verificationNote: '', active: true, allowRounding: false
+    };
+  }
+
+  function defaultMounjaroPens() {
+    var strengths = [2.5, 5, 7.5, 10, 12.5, 15];
+    return strengths.map(function (strength, i) {
+      var totalMg = strength * 4;
+      var totalClicks = 240;
+      return {
+        id: 'mj' + (i + 1), name: 'Mounjaro ' + fmtNum(strength, 2) + ' mg', brand: 'Eli Lilly', medicine: 'mounjaro',
+        calculationType: 'dynamicClicks', penStrength: strength, clicksPerDose: 60,
+        totalMg: totalMg, totalClicks: totalClicks, mgPerClick: totalMg / totalClicks, clicksPerMg: totalClicks / totalMg,
+        price: null, currency: 'EUR',
+        allowedDoses: MOUNJARO_DOSES.slice(), minDose: 2.5, maxDose: 15,
+        verified: true, verificationNote: 'Officiële Eli Lilly KwikPen. Volledige dosis = 60 clicks.',
+        active: true, allowRounding: false
+      };
+    });
+  }
+
+  function defaultPens() { return [defaultRetatrutidePen(), defaultRetatrutide40Pen()].concat(defaultMounjaroPens()); }
+
+  function migratePens(pens) {
+    var changed = false;
+    pens = pens.map(function (p) {
+      if (!p.medicine) { p = Object.assign({}, p, { medicine: 'retatrutide' }); changed = true; }
+      if (!p.calculationType) { p = Object.assign({}, p, { calculationType: 'fixedClicks' }); changed = true; }
+      return p;
+    });
+    var hasMounjaro = pens.some(function (p) { return p.medicine === 'mounjaro'; });
+    if (!hasMounjaro) { pens = pens.concat(defaultMounjaroPens()); changed = true; }
+    var has40mg = pens.some(function (p) { return p.id === 'p2'; });
+    if (!has40mg) { pens = pens.concat([defaultRetatrutide40Pen()]); changed = true; }
+    if (changed) savePens(pens);
+    return pens;
+  }
+
+  function loadPens() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultPens();
+      var parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed) || parsed.length === 0) return defaultPens();
+      return migratePens(parsed);
+    } catch (e) { return defaultPens(); }
+  }
+  function savePens(pens) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(pens)); } catch (e) {}
+  }
+
+  function esc(str) {
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function toNum(v) { var n = parseFloat(String(v).replace(',', '.')); return isNaN(n) ? null : n; }
+  function fmtNum(n, dec) {
+    if (n == null || !isFinite(n)) return '—';
+    return n.toLocaleString('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: dec == null ? 2 : dec });
+  }
+  function fmtMoney(n, currency, decimals) {
+    if (n == null || !isFinite(n)) return '—';
+    var sym = CURRENCY_SYMBOL[currency] || currency || '';
+    var numStr = Math.abs(n).toLocaleString('nl-NL', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    return sym + ' ' + numStr;
+  }
+  function fmtCurrency(n, currency) { return fmtMoney(n, currency, 2); }
+
+  var LEGAL_CONTENT = {
+    privacy: {
+      title: 'Privacybeleid',
+      paragraphs: [
+        'Nové Vita respecteert jouw privacy.',
+        'Deze applicatie verzamelt standaard geen persoonlijke medische gegevens.',
+        'Wanneer instellingen lokaal worden opgeslagen, gebeurt dit uitsluitend via localStorage op jouw eigen apparaat.',
+        'Er worden geen persoonsgegevens gedeeld met derden.',
+        'Wanneer in een toekomstige versie een account wordt toegevoegd, wordt dit privacybeleid uitgebreid.'
+      ],
+      footnoteLabel: 'Laatste wijziging:', footnoteValue: 'Juli 2026'
+    },
+    disclaimer: {
+      title: 'Disclaimer',
+      paragraphs: [
+        'De Nové Vita Peptide & GLP-1 Dose Calculator is uitsluitend bedoeld als technische rekenhulp.',
+        'Alle berekeningen worden automatisch uitgevoerd op basis van de ingevoerde gegevens.',
+        'De applicatie geeft geen medisch advies.',
+        'De applicatie vervangt geen arts, apotheker of andere zorgverlener.',
+        'De gebruiker blijft altijd zelf verantwoordelijk voor het controleren van berekeningen en het juiste gebruik van geneesmiddelen, GLP-1 medicatie, peptides, reconstitutie en injectiematerialen.',
+        'Nové Vita aanvaardt geen aansprakelijkheid voor schade of fouten die ontstaan door onjuist gebruik van de calculator.'
+      ]
+    },
+    terms: {
+      title: 'Gebruiksvoorwaarden',
+      paragraphs: ['Door gebruik te maken van deze applicatie verklaart de gebruiker:'],
+      list: [
+        '18 jaar of ouder te zijn.',
+        'De calculator uitsluitend als technische rekenhulp te gebruiken.',
+        'Zelf verantwoordelijk te blijven voor iedere berekening.',
+        'Geen medisch advies te verwachten van deze applicatie.',
+        'De calculator niet te gebruiken als vervanging van professioneel medisch advies.'
+      ],
+      paragraphsAfter: ['Nové Vita behoudt zich het recht voor de inhoud en functionaliteit van de applicatie op ieder moment te wijzigen.']
+    }
+  };
+
+  function renderLegalView(type) {
+    var c = LEGAL_CONTENT[type];
+    var html = '<button class="back-btn" id="legalBackBtn">&larr; Terug</button>';
+    html += '<div class="card">';
+    html += '<div style="font-family:\'Playfair Display\';font-weight:500;font-size:24px;color:#1F3D33;margin-bottom:14px;">' + esc(c.title) + '</div>';
+    html += '<div class="legal-text">';
+    html += c.paragraphs.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
+    if (c.list) html += '<ul>' + c.list.map(function (li) { return '<li>' + esc(li) + '</li>'; }).join('') + '</ul>';
+    if (c.paragraphsAfter) html += c.paragraphsAfter.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
+    html += '</div>';
+    if (c.footnoteLabel) {
+      html += '<div style="font-family:\'Inter\';font-weight:600;font-size:12px;color:#8C8272;margin-top:10px;">' + esc(c.footnoteLabel) + '<br>' + esc(c.footnoteValue) + '</div>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function renderFooter() {
+    var linkHtml = function (sep) {
+      return '<a href="#" class="footer-link" data-legal="privacy">Privacybeleid</a>' + (sep ? '<span class="footer-sep">•</span>' : '') +
+        '<a href="#" class="footer-link" data-legal="disclaimer">Disclaimer</a>' + (sep ? '<span class="footer-sep">•</span>' : '') +
+        '<a href="#" class="footer-link" data-legal="terms">Gebruiksvoorwaarden</a>';
+    };
+    return '<div class="footer">' +
+      '<div class="footer-links desktop">' + linkHtml(true) + '</div>' +
+      '<div class="footer-links mobile">' + linkHtml(false) + '</div>' +
+      '<div class="footer-meta">© 2026 Nové Vita. All rights reserved.<br>Crafted with ❤️ by <a href="https://mijnaistudio.com" target="_blank" rel="noopener">MijnAIStudio.com</a></div>' +
+      '</div>';
+  }
+
+  var state = {
+    view: 'calculator',
+    pens: loadPens(),
+    selectedPenId: 'p1',
+    selectedDose: 1,
+    faqOpen: null,
+    editingId: null,
+    draft: null,
+    adminError: '',
+    savedMessage: '',
+    medicine: 'retatrutide',
+    previousView: null,
+    phases: [{ id: 1, weeks: 4, doseMg: 1 }, { id: 2, weeks: 10, doseMg: 2.5 }],
+    nextPhaseId: 3
+  };
+
+  var savedMsgTimer = null;
+  var contentEl = document.getElementById('content');
+
+  function setState(patch) {
+    Object.assign(state, patch);
+    render();
+  }
+
+  // ---------- calculator view ----------
+  function getSelectedPen() {
+    var activePens = state.pens.filter(function (p) { return p.active && p.medicine === state.medicine; });
+    var pen = activePens.filter(function (p) { return p.id === state.selectedPenId; })[0] || activePens[0] || null;
+    return { activePens: activePens, pen: pen };
+  }
+
+  function renderCalculatorView() {
+    var res = getSelectedPen();
+    var activePens = res.activePens, pen = res.pen;
+    var isComplete = !!pen && pen.totalMg > 0 && pen.totalClicks > 0;
+    var mgPerClick = isComplete ? pen.totalMg / pen.totalClicks : null;
+    var canCalculate = isComplete && pen.allowedDoses && pen.allowedDoses.length > 0;
+    var allowed = canCalculate ? pen.allowedDoses : [];
+    var sliderMin = canCalculate ? (pen.minDose != null ? pen.minDose : Math.min.apply(null, allowed)) : 0.5;
+    var sliderMax = canCalculate ? (pen.maxDose != null ? pen.maxDose : Math.max.apply(null, allowed)) : 12;
+    var defaultDose = canCalculate ? allowed[0] : null;
+    var effectiveDose = state.selectedDose != null ? state.selectedDose : defaultDose;
+    var doseList = doseListForPen(pen);
+    var doseExceedsPenStrength = !!(canCalculate && pen.calculationType === 'dynamicClicks' && effectiveDose != null && effectiveDose > pen.penStrength);
+
+    var html = '';
+    html += '<div style="display:flex;gap:10px;align-items:flex-start;background:#EFE8DE;border:1px solid #D8CDC0;border-radius:14px;padding:14px 16px;">' +
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F3D33" stroke-width="2" style="flex-shrink:0;margin-top:1px;"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>' +
+      '<div style="font-family:\'Inter\';font-weight:500;font-size:12.5px;color:#1F3D33;line-height:1.5;">Controleer altijd of het gekozen pentype exact overeenkomt met de pen die je gebruikt. Verschillende pennen met hetzelfde aantal milligram kunnen een andere clickverdeling hebben.</div>' +
+      '</div>';
+
+    html += '<div class="card">' +
+      '<label class="label-sm">Kies medicijn</label>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">' +
+      '<button class="dose-btn' + (state.medicine === 'retatrutide' ? ' selected' : '') + '" id="medRetatrutide" style="min-height:44px;">Retatrutide</button>' +
+      '<button class="dose-btn' + (state.medicine === 'mounjaro' ? ' selected' : '') + '" id="medMounjaro" style="min-height:44px;">Mounjaro</button>' +
+      '</div>' +
+      '<div class="consent-line" style="margin-top:14px;">Door verder te gaan ga je akkoord met ons <a href="#" class="footer-link" data-legal="privacy">Privacybeleid</a>, de <a href="#" class="footer-link" data-legal="disclaimer">Disclaimer</a> en de <a href="#" class="footer-link" data-legal="terms">Gebruiksvoorwaarden</a>.</div>' +
+      '</div>';
+
+    // pen selector
+    html += '<div class="card">' +
+      '<label class="label-sm">Selecteer je pentype</label>' +
+      '<select id="penSelect" style="font-weight:600;font-size:15px;">' +
+      activePens.map(function (p) { return '<option value="' + esc(p.id) + '"' + (pen && pen.id === p.id ? ' selected' : '') + '>' + esc(p.name) + '</option>'; }).join('') +
+      '</select>';
+    if (activePens.length === 0) {
+      html += '<div style="margin-top:14px;font-family:\'Inter\';font-size:13px;color:#8C8272;">Er zijn nog geen actieve pentypes geconfigureerd.</div>';
+    }
+    if (pen) {
+      html += '<div class="stat-grid-2">' +
+        '<div><div class="stat-label">Totale inhoud</div><div class="stat-value">' + fmtNum(pen.totalMg, 2) + ' mg</div></div>' +
+        '<div><div class="stat-label">Totaal aantal clicks</div><div class="stat-value">' + (pen.totalClicks ? String(pen.totalClicks) : 'niet ingesteld') + '</div></div>' +
+        '<div><div class="stat-label">Mg per click</div><div class="stat-value">' + (mgPerClick != null ? fmtNum(mgPerClick, 4) + ' mg' : '—') + '</div></div>' +
+        '<div><div class="stat-label">Verificatiestatus</div><div style="display:flex;align-items:center;gap:5px;margin-top:2px;">' +
+          (pen.verified ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C8A96B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' : '') +
+          '<div style="font-family:\'Inter\';font-weight:700;font-size:14px;color:#1F3D33;">' + (pen.verified ? 'Geverifieerd' : 'Niet geverifieerd') + '</div></div></div>' +
+        '</div>';
+      if (!isComplete) {
+        html += '<div class="note-box" style="margin-top:14px;">Deze pen is nog niet volledig geconfigureerd door de beheerder. Vul eerst het totaal aantal clicks in bij Beheer.</div>';
+      }
+    }
+    html += '</div>';
+
+    // dose selector
+    html += '<div class="card">' +
+      '<label class="label-sm">Gewenste wekelijkse dosis</label>' +
+      '<div style="text-align:center;margin-top:12px;"><div style="font-family:\'Inter\';font-weight:800;font-size:40px;color:#1F3D33;line-height:1;">' + (effectiveDose != null ? fmtNum(effectiveDose, 2) + ' mg' : '— mg') + '</div></div>';
+    if (canCalculate) {
+      html += '<div style="margin-top:16px;">' +
+        '<input type="range" id="doseSlider" min="' + sliderMin + '" max="' + sliderMax + '" step="0.25" value="' + effectiveDose + '">' +
+        '<div style="display:flex;justify-content:space-between;font-family:\'Inter\';font-weight:500;font-size:11px;color:#8C8272;margin-top:4px;"><span>' + fmtNum(sliderMin, 1) + ' mg</span><span>' + fmtNum(sliderMax, 1) + ' mg</span></div>' +
+        '</div>';
+      html += '<div class="dose-grid">' + doseList.map(function (v) {
+        var isAllowed = allowed.indexOf(v) !== -1;
+        var selected = canCalculate && effectiveDose === v;
+        return '<button class="dose-btn' + (selected ? ' selected' : '') + (isAllowed ? '' : ' disabled') + '" data-dose="' + v + '"' + (isAllowed ? '' : ' disabled') + '>' + fmtNum(v, pen.calculationType === 'dynamicClicks' ? 2 : 1) + ' mg</button>';
+      }).join('') + '</div>';
+    } else if (isComplete) {
+      html += '<div class="note-box" style="margin-top:16px;text-align:center;">Stel eerst toegestane doseringen in voor deze pen bij Beheer.</div>';
+    }
+    html += '</div>';
+
+    // results
+    var clicksBig = '—', showClicksWarning = false, weeksBig = '—', fullDosesLabel = '—', remainderLabel = '—';
+    var costBig = '—', costNote = '', showCostNote = false;
+    var costPerClickLabel = '—', costPerInjectionLabel = '—', costPerWeekLabel = '—', remainingValueLabel = '—';
+    var fixedCostPerClick = (pen && pen.price != null && pen.totalClicks > 0) ? pen.price / pen.totalClicks : null;
+
+    if (doseExceedsPenStrength) {
+      // handled inline in the clicks card below
+    } else if (canCalculate && effectiveDose != null) {
+      var clicksExact = effectiveDose / mgPerClick;
+      var isInt = Math.abs(clicksExact - Math.round(clicksExact)) < 0.02;
+      if (isInt) { clicksBig = String(Math.round(clicksExact)); }
+      else if (pen.allowRounding) { clicksBig = String(Math.round(clicksExact)); showClicksWarning = true; }
+      else { clicksBig = fmtNum(clicksExact, 2); showClicksWarning = true; }
+
+      var fullDoses = Math.floor(pen.totalMg / effectiveDose + 1e-9);
+      var remainderMg = Math.max(0, +(pen.totalMg - fullDoses * effectiveDose).toFixed(2));
+      weeksBig = String(fullDoses) + (fullDoses === 1 ? ' week' : ' weken');
+      fullDosesLabel = String(fullDoses);
+      remainderLabel = remainderMg > 0 ? (fmtNum(remainderMg, 2) + ' mg') : '0 mg';
+
+      if (pen.price != null && fullDoses > 0) {
+        costBig = fmtCurrency(pen.price / fullDoses, pen.currency);
+      } else if (pen.price == null) {
+        costBig = '—'; costNote = 'Prijs nog niet ingesteld door de beheerder.'; showCostNote = true;
+      } else {
+        costBig = '—'; costNote = 'Onvoldoende doses om kosten te berekenen.'; showCostNote = true;
+      }
+
+      if (fixedCostPerClick != null) {
+        costPerClickLabel = fmtMoney(fixedCostPerClick, pen.currency, 4);
+        costPerInjectionLabel = fmtMoney(clicksExact * fixedCostPerClick, pen.currency, 2);
+        costPerWeekLabel = costPerInjectionLabel;
+        remainingValueLabel = fmtMoney((remainderMg / mgPerClick) * fixedCostPerClick, pen.currency, 2);
+      }
+    }
+
+    html += '<div class="card-dark">' +
+      '<div style="font-family:\'Inter\';font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#DCC9A0;">Benodigd aantal clicks</div>' +
+      (doseExceedsPenStrength ?
+        '<div style="font-family:\'Inter\';font-weight:600;font-size:16px;color:#EADFC0;line-height:1.5;margin-top:14px;">Deze dosis is hoger dan één volledige dosis van deze pen.</div>' :
+        '<div style="font-family:\'Inter\';font-weight:800;font-size:52px;color:#FFFFFF;line-height:1.1;margin-top:8px;">' + clicksBig + '</div>' +
+        '<div style="font-family:\'Inter\';font-weight:500;font-size:13px;color:#E3D9C8;margin-top:2px;">clicks per injectie</div>') +
+      (showClicksWarning ? '<div style="margin-top:12px;background:rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px;font-family:\'Inter\';font-weight:500;font-size:12px;color:#EADFC0;line-height:1.5;">Deze dosis komt niet exact overeen met een heel aantal clicks voor deze pen.</div>' : '') +
+      '</div>';
+
+    html += '<div class="card" style="text-align:center;">' +
+      '<div class="label-sm">Geschatte gebruiksduur</div>' +
+      '<div style="font-family:\'Inter\';font-weight:800;font-size:44px;color:#1F3D33;line-height:1.1;margin-top:8px;">' + weeksBig + '</div>' +
+      '<div style="font-family:\'Inter\';font-weight:500;font-size:13px;color:#8C8272;margin-top:2px;">op basis van één injectie per week</div>' +
+      '<div style="display:flex;justify-content:center;gap:24px;margin-top:16px;padding-top:16px;border-top:1px solid #EAE2D4;">' +
+      '<div><div style="font-family:\'Inter\';font-weight:700;font-size:16px;color:#1F3D33;">' + fullDosesLabel + '</div><div style="font-family:\'Inter\';font-weight:500;font-size:11px;color:#8C8272;">volledige injecties</div></div>' +
+      '<div><div style="font-family:\'Inter\';font-weight:700;font-size:16px;color:#1F3D33;">' + remainderLabel + '</div><div style="font-family:\'Inter\';font-weight:500;font-size:11px;color:#8C8272;">restant in pen</div></div>' +
+      '</div></div>';
+
+    html += '<div class="card" style="text-align:center;">' +
+      '<div class="label-sm">Geschatte kosten per week</div>' +
+      '<div style="font-family:\'Inter\';font-weight:800;font-size:36px;color:#1F3D33;line-height:1.1;margin-top:8px;">' + costBig + '</div>' +
+      (showCostNote ? '<div style="font-family:\'Inter\';font-weight:500;font-size:12px;color:#8C8272;margin-top:4px;">' + costNote + '</div>' : '') +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid #EAE2D4;text-align:left;">' +
+      '<div><div class="stat-label">Prijs per click</div><div style="font-family:\'Inter\';font-weight:700;font-size:14px;color:#1F3D33;">' + costPerClickLabel + '</div></div>' +
+      '<div><div class="stat-label">Kosten per injectie</div><div style="font-family:\'Inter\';font-weight:700;font-size:14px;color:#1F3D33;">' + costPerInjectionLabel + '</div></div>' +
+      '<div><div class="stat-label">Kosten per week</div><div style="font-family:\'Inter\';font-weight:700;font-size:14px;color:#1F3D33;">' + costPerWeekLabel + '</div></div>' +
+      '<div><div class="stat-label">Waarde restant</div><div style="font-family:\'Inter\';font-weight:700;font-size:14px;color:#1F3D33;">' + remainingValueLabel + '</div></div>' +
+      '</div></div>';
+
+    // summary
+    var summaryRows = pen ? [
+      ['Gekozen pen', pen.name],
+      ['Gekozen dosis', effectiveDose != null ? fmtNum(effectiveDose, 2) + ' mg' : '—'],
+      ['Clicks per injectie', clicksBig],
+      ['Aantal volledige doseringen', fullDosesLabel],
+      ['Geschatte gebruiksduur', weeksBig],
+      ['Kosten per week', costBig]
+    ] : [];
+    html += '<div class="card-soft">' +
+      '<div style="font-family:\'Playfair Display\';font-weight:500;font-size:20px;color:#1F3D33;margin-bottom:10px;">Samenvatting</div>' +
+      summaryRows.map(function (r) { return '<div class="summary-row"><div class="l">' + esc(r[0]) + '</div><div class="r">' + esc(r[1]) + '</div></div>'; }).join('') +
+      '<button class="btn-outline" id="resetBtn" style="width:100%;margin-top:16px;">Berekening opnieuw instellen</button>' +
+      '</div>';
+
+    html += '<div class="card">' +
+      '<div style="font-family:\'Playfair Display\';font-weight:500;font-size:20px;color:#1F3D33;margin-bottom:10px;">Hoe werkt de berekening?</div>' +
+      '<div style="font-family:\'Inter\';font-weight:400;font-size:13.5px;color:#1F3D33;line-height:1.7;">Elke pen heeft een eigen vaste hoeveelheid medicatie per click. Deze app deelt de gekozen wekelijkse dosis door het aantal mg per click van de geselecteerde pen, en telt zo het aantal clicks per injectie. De geschatte gebruiksduur wordt berekend op basis van de totale hoeveelheid medicatie in de pen, gedeeld door je gekozen dosis.</div>' +
+      '</div>';
+
+    html += '<div class="card">' +
+      '<div style="font-family:\'Playfair Display\';font-weight:500;font-size:20px;color:#1F3D33;margin-bottom:6px;">Veelgestelde vragen</div>' +
+      FAQ_DATA.map(function (f, i) {
+        var open = state.faqOpen === i;
+        return '<div class="faq-item"><button class="faq-q" data-faq="' + i + '"><span>' + esc(f.q) + '</span><span>' + (open ? '–' : '+') + '</span></button>' +
+          (open ? '<div class="faq-a">' + esc(f.a) + '</div>' : '') + '</div>';
+      }).join('') + '</div>';
+
+    html += '<div class="card-dark" style="text-align:center;">' +
+      '<div style="font-family:\'Inter\';font-weight:400;font-size:12px;color:#E3D9C8;line-height:1.7;">Retatrutide is nog niet algemeen goedgekeurd als geneesmiddel. Deze calculator is uitsluitend bedoeld als technische omrekentool. De app stelt geen diagnose, schrijft geen dosis voor en vervangt geen medisch advies. Gebruik alleen gegevens die exact overeenkomen met jouw specifieke pen.</div>' +
+      '</div>';
+
+    return html;
+  }
+
+  // ---------- opbouwschema view ----------
+  function computeSchema() {
+    var basePen = getSelectedPen().pen || state.pens[0];
+    var clicksPerMg = basePen ? (basePen.totalClicks / basePen.totalMg) : 12;
+    var doseList = doseListForPen(basePen);
+    var costPerClick = (basePen && basePen.price != null && basePen.totalClicks > 0) ? basePen.price / basePen.totalClicks : null;
+    var runningMg = basePen ? basePen.totalMg : 20;
+    var runningWeek = 1;
+    var penEmpty = false;
+    var totalUsedMg = 0, totalUsedClicks = 0, totalWeeks = 0;
+
+    var rows = state.phases.map(function (p) {
+      var weeks = p.weeks || 0, doseMg = p.doseMg || 0;
+      var startWeek = runningWeek;
+      var availableMg = runningMg, availableClicks = Math.round(runningMg * clicksPerMg);
+      if (penEmpty || weeks <= 0 || doseMg <= 0) {
+        return {
+          id: p.id, startWeek: startWeek, endWeek: startWeek, weeks: weeks, doseMg: doseMg,
+          availableMg: availableMg, availableClicks: availableClicks,
+          clicksPerInjection: Math.round(doseMg * clicksPerMg), usedMg: 0, usedClicks: 0,
+          remainingMg: runningMg, remainingClicks: runningMg * clicksPerMg,
+          limited: false, skipped: penEmpty, usedWeeks: 0,
+          costPerInjection: costPerClick != null ? doseMg * clicksPerMg * costPerClick : null,
+          phaseCost: costPerClick != null ? 0 : null,
+          remainingValue: costPerClick != null ? availableClicks * costPerClick : null
+        };
+      }
+      var requestedMg = weeks * doseMg;
+      var usedWeeks, usedMg, limited = false;
+      if (requestedMg <= runningMg + 1e-9) { usedWeeks = weeks; usedMg = requestedMg; }
+      else { usedWeeks = Math.floor(runningMg / doseMg + 1e-9); usedMg = usedWeeks * doseMg; limited = true; }
+      var usedClicks = Math.round(usedMg * clicksPerMg);
+      var remainingMg = Math.max(0, +(runningMg - usedMg).toFixed(4));
+      var remainingClicks = Math.round(remainingMg * clicksPerMg);
+      runningMg = remainingMg;
+      runningWeek += usedWeeks;
+      totalUsedMg += usedMg; totalUsedClicks += usedClicks; totalWeeks += usedWeeks;
+      if (remainingMg <= 1e-6) penEmpty = true;
+      var row = {
+        id: p.id, startWeek: startWeek, endWeek: startWeek + usedWeeks - 1, weeks: weeks, doseMg: doseMg,
+        availableMg: availableMg, availableClicks: availableClicks,
+        clicksPerInjection: Math.round(doseMg * clicksPerMg), usedMg: usedMg, usedClicks: usedClicks,
+        remainingMg: remainingMg, remainingClicks: remainingClicks,
+        limited: limited, skipped: false, usedWeeks: usedWeeks,
+        costPerInjection: costPerClick != null ? doseMg * clicksPerMg * costPerClick : null,
+        phaseCost: costPerClick != null ? usedClicks * costPerClick : null,
+        remainingValue: costPerClick != null ? remainingClicks * costPerClick : null
+      };
+      return row;
+    });
+
+    return {
+      basePen: basePen, rows: rows, penEmpty: penEmpty, doseList: doseList,
+      remainingMg: Math.max(0, runningMg), remainingClicks: Math.round(Math.max(0, runningMg) * clicksPerMg),
+      remainingPercent: basePen ? Math.max(0, Math.min(100, (runningMg / basePen.totalMg) * 100)) : 0,
+      totalUsedMg: totalUsedMg, totalUsedClicks: totalUsedClicks, totalWeeks: totalWeeks,
+      totalUsedValue: costPerClick != null ? totalUsedClicks * costPerClick : null,
+      remainingValue: costPerClick != null ? Math.round(Math.max(0, runningMg) * clicksPerMg) * costPerClick : null,
+      currency: basePen ? basePen.currency : 'EUR'
+    };
+  }
+
+  function renderSchemaView() {
+    var sc = computeSchema();
+    var cur = sc.currency;
+    var html = '';
+    html += '<div style="font-family:\'Playfair Display\';font-weight:600;font-size:22px;color:#1F3D33;">Opbouwschema</div>';
+    html += '<div style="font-family:\'Inter\';font-weight:400;font-size:13px;color:#5C6B5E;line-height:1.6;">Voeg fasen toe met een aantal weken en een wekelijkse dosis. De app berekent per fase het verbruik en houdt bij wanneer de pen (' + esc(sc.basePen ? sc.basePen.name : '') + ') leeg raakt.</div>';
+
+    html += '<div class="card">' +
+      '<div class="label-sm">Penstatus</div>' +
+      '<div class="stat-grid-3">' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#1F3D33;">' + fmtNum(sc.remainingMg, 2) + ' mg</div><div style="font-family:\'Inter\';font-weight:500;font-size:11px;color:#8C8272;">resterend</div></div>' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#1F3D33;">' + sc.remainingClicks + '</div><div style="font-family:\'Inter\';font-weight:500;font-size:11px;color:#8C8272;">clicks resterend</div></div>' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#1F3D33;">' + Math.round(sc.remainingPercent) + '%</div><div style="font-family:\'Inter\';font-weight:500;font-size:11px;color:#8C8272;">% resterend</div></div>' +
+      '</div>' +
+      '<div class="progress-track"><div class="progress-fill" style="width:' + Math.round(sc.remainingPercent) + '%;"></div></div>' +
+      '<div style="font-family:\'Inter\';font-weight:600;font-size:12.5px;color:#C8A96B;margin-top:10px;">Waarde resterende inhoud: ' + fmtMoney(sc.remainingValue, cur, 2) + '</div>' +
+      '</div>';
+
+    html += sc.rows.map(function (r, i) {
+      var inner = '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+        '<div style="font-family:\'Inter\';font-weight:700;font-size:13.5px;color:#1F3D33;">Fase ' + (i + 1) + ' · start week ' + r.startWeek + '</div>' +
+        '<button class="phase-remove" data-phase="' + r.id + '" style="border:none;background:none;color:#8C8272;font-family:\'Inter\';font-weight:600;font-size:12px;cursor:pointer;">Verwijderen</button>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
+        '<div><div class="field-label">Aantal weken</div><input type="number" min="1" class="phase-weeks" data-phase="' + r.id + '" value="' + r.weeks + '"></div>' +
+        '<div><div class="field-label">Wekelijkse dosis</div><select class="phase-dose" data-phase="' + r.id + '">' +
+        sc.doseList.map(function (v) { return '<option value="' + v + '"' + (v === r.doseMg ? ' selected' : '') + '>' + fmtNum(v, 2) + ' mg</option>'; }).join('') +
+        '</select></div></div>' +
+        '<div style="padding-top:4px;"><div class="field-label" style="margin-bottom:4px;">Beschikbaar bij start fase</div><div class="stat-value">' + fmtNum(r.availableMg, 2) + ' mg · ' + r.availableClicks + ' clicks</div></div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:8px;border-top:1px solid #EAE2D4;">' +
+        '<div><div class="stat-label">Clicks per injectie</div><div class="stat-value">' + r.clicksPerInjection + '</div></div>' +
+        '<div><div class="stat-label">Totaal clicks fase</div><div class="stat-value">' + r.usedClicks + '</div></div>' +
+        '<div><div class="stat-label">Mg verbruikt</div><div class="stat-value">' + fmtNum(r.usedMg, 2) + ' mg</div></div>' +
+        '<div><div class="stat-label">Resterend na fase</div><div class="stat-value">' + fmtNum(r.remainingMg, 2) + ' mg · ' + fmtNum(r.remainingClicks, 0) + ' clicks</div></div>' +
+        '<div><div class="stat-label">Kosten per injectie</div><div class="stat-value">' + fmtMoney(r.costPerInjection, cur, 2) + '</div></div>' +
+        '<div><div class="stat-label">Totale kosten fase</div><div class="stat-value">' + fmtMoney(r.phaseCost, cur, 2) + '</div></div>' +
+        '</div>';
+      if (r.limited) {
+        inner += '<div class="note-box">Onvoldoende inhoud voor de volledige fase.<br>Nog mogelijk: ' + r.usedWeeks + ' volledige injecties.<br>Daarna blijft over: ' + fmtNum(r.remainingMg, 2) + ' mg · ' + fmtNum(r.remainingClicks, 0) + ' clicks.</div>';
+      }
+      if (r.skipped) {
+        inner += '<div class="note-box">Pen is al leeg vóór deze fase — geen doses meer mogelijk.</div>';
+      }
+      return '<div class="pen-admin-card">' + inner + '</div>';
+    }).join('');
+
+    html += '<button class="btn-outline" id="addPhaseBtn" style="border:1px dashed #C8A96B;background:#F8F4EE;color:#1F3D33;">Volgende fase toevoegen</button>';
+
+    html += '<div class="card">' +
+      '<div style="font-family:\'Playfair Display\';font-weight:600;font-size:18px;color:#1F3D33;margin-bottom:10px;">Tijdlijn</div>' +
+      sc.rows.map(function (r) {
+        return '<div class="timeline-row"><div class="timeline-dot"></div><div>' +
+          '<div style="font-family:\'Inter\';font-weight:700;font-size:13.5px;color:#1F3D33;">Week ' + r.startWeek + ' t/m ' + r.endWeek + '</div>' +
+          '<div style="font-family:\'Inter\';font-weight:500;font-size:12.5px;color:#5C6B5E;margin-top:3px;line-height:1.6;">' + fmtNum(r.doseMg, 2) + ' mg per week · ' + r.usedClicks + ' clicks gebruikt<br>' + fmtNum(r.remainingMg, 2) + ' mg over · ' + fmtNum(r.remainingClicks, 0) + ' clicks over<br>Kosten fase: ' + fmtMoney(r.phaseCost, cur, 2) + ' · Waarde restant: ' + fmtMoney(r.remainingValue, cur, 2) + '</div>' +
+          '</div></div>';
+      }).join('') + '</div>';
+
+    html += '<div class="card-dark" style="text-align:left;">' +
+      '<div style="font-family:\'Inter\';font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#DCC9A0;margin-bottom:12px;">Totaal over alle fasen</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:26px;color:#FFFFFF;">' + sc.totalWeeks + '</div><div style="font-family:\'Inter\';font-weight:500;font-size:11.5px;color:#E3D9C8;">weken totale gebruiksduur</div></div>' +
+      '<div>' + (sc.penEmpty ?
+        '<div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#FFFFFF;">Pen raakt leeg in week ' + sc.totalWeeks + '</div>' :
+        '<div style="font-family:\'Inter\';font-weight:800;font-size:18px;color:#FFFFFF;">Pen nog niet leeg</div><div style="font-family:\'Inter\';font-weight:500;font-size:11.5px;color:#E3D9C8;margin-top:2px;">Resterend: ' + fmtNum(sc.remainingMg, 2) + ' mg · ' + sc.remainingClicks + ' clicks</div>'
+      ) + '</div>' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#FFFFFF;">' + fmtNum(sc.totalUsedMg, 2) + ' mg</div><div style="font-family:\'Inter\';font-weight:500;font-size:11.5px;color:#E3D9C8;">totaal gebruikte mg</div></div>' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#FFFFFF;">' + sc.totalUsedClicks + '</div><div style="font-family:\'Inter\';font-weight:500;font-size:11.5px;color:#E3D9C8;">totaal gebruikte clicks</div></div>' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#FFFFFF;">' + fmtNum(sc.remainingMg, 2) + ' mg</div><div style="font-family:\'Inter\';font-weight:500;font-size:11.5px;color:#E3D9C8;">resterende mg</div></div>' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#FFFFFF;">' + sc.remainingClicks + '</div><div style="font-family:\'Inter\';font-weight:500;font-size:11.5px;color:#E3D9C8;">resterende clicks</div></div>' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#FFFFFF;">' + fmtMoney(sc.totalUsedValue, cur, 2) + '</div><div style="font-family:\'Inter\';font-weight:500;font-size:11.5px;color:#E3D9C8;">totale gebruikte waarde</div></div>' +
+      '<div><div style="font-family:\'Inter\';font-weight:800;font-size:20px;color:#FFFFFF;">' + fmtMoney(sc.remainingValue, cur, 2) + '</div><div style="font-family:\'Inter\';font-weight:500;font-size:11.5px;color:#E3D9C8;">waarde resterende inhoud</div></div>' +
+      '</div></div>';
+
+    return html;
+  }
+
+  // ---------- admin view ----------
+  function renderAdminView() {
+    var html = '';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+      '<div style="font-family:\'Playfair Display\';font-weight:600;font-size:22px;color:#1F3D33;">Beheer pennen</div>' +
+      '<button class="btn-primary" id="startAddBtn" style="min-height:40px;padding:0 16px;font-size:13px;">+ Nieuwe pen</button>' +
+      '</div>';
+
+    if (state.savedMessage) {
+      html += '<div class="toast">' + esc(state.savedMessage) + '</div>';
+    }
+
+    if (state.editingId) {
+      var d = state.draft;
+      var tm = toNum(d.totalMg), tc = toNum(d.totalClicks);
+      var validTmTc = !!(tm && tc && tm > 0 && tc > 0);
+      var clicksPerMgPreview = validTmTc ? fmtNum(tc / tm, 4) : '—';
+      var mgPerClickPreview = validTmTc ? fmtNum(tm / tc, 6) + ' mg' : '—';
+      var price = d.price === '' ? null : toNum(d.price);
+      var costPreview = { perClick: '—', exampleClicks: '—', exampleCost: '—' };
+      if (tc && tc > 0 && price != null) {
+        var perClick = price / tc;
+        var mgPerClickVal = tm ? tm / tc : null;
+        var exampleClicks = mgPerClickVal ? Math.round(1 / mgPerClickVal) : null;
+        costPreview.perClick = fmtMoney(perClick, d.currency, 4);
+        if (exampleClicks != null) {
+          costPreview.exampleClicks = String(exampleClicks);
+          costPreview.exampleCost = fmtMoney(exampleClicks * perClick, d.currency, 2);
+        }
+      }
+
+      html += '<div class="card" style="border:1px solid #1F3D33;display:flex;flex-direction:column;gap:14px;">' +
+        '<div style="font-family:\'Playfair Display\';font-weight:600;font-size:18px;color:#1F3D33;">' + (state.editingId === 'new' ? 'Nieuwe pen toevoegen' : 'Pen bewerken') + '</div>' +
+        (state.adminError ? '<div class="err-box">' + esc(state.adminError) + '</div>' : '') +
+        '<div><div class="field-label">Naam</div><input type="text" id="draftName" value="' + esc(d.name) + '"></div>' +
+        '<div><div class="field-label">Merk</div><input type="text" id="draftBrand" value="' + esc(d.brand) + '"></div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
+        '<div><div class="field-label">Totale inhoud (mg)</div><input type="text" inputmode="decimal" id="draftTotalMg" value="' + esc(d.totalMg) + '"></div>' +
+        '<div><div class="field-label">Totaal aantal clicks</div><input type="text" inputmode="numeric" id="draftTotalClicks" value="' + esc(d.totalClicks) + '"></div>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
+        '<div><div class="field-label">Clicks per mg</div><div style="margin-top:6px;padding:12px;border-radius:9px;border:1px solid #E3DCCB;background:#F8F4EE;font-family:\'Inter\';font-weight:700;font-size:14px;color:#1F3D33;">' + clicksPerMgPreview + '</div></div>' +
+        '<div><div class="field-label">Mg per click</div><div style="margin-top:6px;padding:12px;border-radius:9px;border:1px solid #E3DCCB;background:#F8F4EE;font-family:\'Inter\';font-weight:700;font-size:14px;color:#1F3D33;">' + mgPerClickPreview + '</div></div>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
+        '<div><div class="field-label">Prijs</div><input type="text" inputmode="decimal" id="draftPrice" value="' + esc(d.price) + '"></div>' +
+        '<div><div class="field-label">Valuta</div><select id="draftCurrency">' +
+        ['EUR', 'GBP', 'USD', 'AED'].map(function (c) { return '<option value="' + c + '"' + (d.currency === c ? ' selected' : '') + '>' + c + '</option>'; }).join('') +
+        '</select></div></div>' +
+        '<div class="card-soft" style="padding:12px 14px;display:flex;flex-direction:column;gap:4px;">' +
+        '<div style="font-family:\'Inter\';font-weight:600;font-size:12.5px;color:#C8A96B;">Prijs per click: ' + costPreview.perClick + '</div>' +
+        '<div style="font-family:\'Inter\';font-weight:500;font-size:12px;color:#5C6B5E;">Voorbeeldkosten bij 1 mg: ' + costPreview.exampleClicks + ' clicks · ' + costPreview.exampleCost + ' per injectie</div>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
+        '<div><div class="field-label">Minimum dosis (mg)</div><input type="text" inputmode="decimal" id="draftMinDose" value="' + esc(d.minDose) + '"></div>' +
+        '<div><div class="field-label">Maximum dosis (mg)</div><input type="text" inputmode="decimal" id="draftMaxDose" value="' + esc(d.maxDose) + '"></div>' +
+        '</div>' +
+        '<div><div class="field-label" style="margin-bottom:8px;">Toegestane doseringen</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">' +
+        ALL_FIXED_DOSES.map(function (v) {
+          var checked = d.allowedDoses.indexOf(v) !== -1;
+          return '<button class="dose-toggle" data-val="' + v + '" style="min-height:36px;border-radius:8px;font-family:\'Inter\';font-weight:700;font-size:11.5px;cursor:pointer;border:' + (checked ? '1.5px solid #C8A96B' : '1px solid #D8CDC0') + ';background:' + (checked ? '#EFE8DE' : '#FFFFFF') + ';color:' + (checked ? '#1F3D33' : '#8C8272') + ';">' + fmtNum(v, 1) + '</button>';
+        }).join('') + '</div></div>' +
+        '<div style="display:flex;gap:20px;flex-wrap:wrap;">' +
+        '<label class="checkbox-row"><input type="checkbox" id="draftVerified" ' + (d.verified ? 'checked' : '') + '> Geverifieerd</label>' +
+        '<label class="checkbox-row"><input type="checkbox" id="draftActive" ' + (d.active ? 'checked' : '') + '> Actief</label>' +
+        '<label class="checkbox-row"><input type="checkbox" id="draftAllowRounding" ' + (d.allowRounding ? 'checked' : '') + '> Afronden toestaan</label>' +
+        '</div>' +
+        '<div><div class="field-label">Bron / verificatienotitie</div><textarea id="draftVerificationNote" rows="2">' + esc(d.verificationNote) + '</textarea></div>' +
+        '<div style="display:flex;gap:10px;margin-top:4px;">' +
+        '<button class="btn-ghost" id="cancelEditBtn" style="flex:1;">Annuleren</button>' +
+        '<button class="btn-primary" id="saveDraftBtn" style="flex:1;">Opslaan</button>' +
+        '</div></div>';
+    }
+
+    html += state.pens.map(function (p) {
+      var mgPerClickLabel = p.totalClicks > 0 ? fmtNum(p.totalMg / p.totalClicks, 3) + ' mg/click' : 'niet ingesteld';
+      var priceLabel = p.price != null ? fmtCurrency(p.price, p.currency) : 'geen prijs';
+      return '<div class="pen-admin-card">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">' +
+        '<div><div style="font-family:\'Inter\';font-weight:700;font-size:14.5px;color:#1F3D33;">' + esc(p.name) + '</div>' +
+        '<div style="font-family:\'Inter\';font-weight:500;font-size:12px;color:#8C8272;margin-top:2px;">' + esc(p.brand || '—') + ' · ' + mgPerClickLabel + ' · ' + priceLabel + '</div></div>' +
+        '<div class="status-chip" style="background:' + (p.active ? '#EFE8DE' : '#F0EAE6') + ';color:' + (p.active ? '#1F3D33' : '#8A6A55') + ';">' + (p.active ? 'Actief' : 'Inactief') + '</div>' +
+        '</div>' +
+        '<div style="display:flex;gap:8px;">' +
+        '<button class="btn-ghost pen-edit" data-pen="' + esc(p.id) + '" style="flex:1;min-height:38px;font-size:12.5px;">Bewerken</button>' +
+        '<button class="btn-ghost pen-toggle" data-pen="' + esc(p.id) + '" style="flex:1;min-height:38px;font-size:12.5px;">' + (p.active ? 'Deactiveren' : 'Activeren') + '</button>' +
+        '</div></div>';
+    }).join('');
+
+    html += '<div class="card-soft">' +
+      '<div style="font-family:\'Playfair Display\';font-weight:600;font-size:16px;color:#1F3D33;margin-bottom:8px;">Firebase-gereedheid</div>' +
+      '<div style="font-family:\'Inter\';font-weight:400;font-size:12.5px;color:#5C6B5E;line-height:1.7;">Deze pengegevens en instellingen zijn opgebouwd volgens de structuur van de collecties <b>pens</b> (naam, merk, totalMg, totalClicks, mgPerClick, prijs, valuta, toegestane doseringen, min/max, verificatie, status) en <b>settings</b> (appnaam, disclaimer, support e-mail, standaardvaluta). Deze pagina kan later achter Firebase Authentication worden geplaatst zodra de koppeling wordt gemaakt.</div>' +
+      '</div>';
+
+    return html;
+  }
+
+  // ---------- render + wire ----------
+  function render() {
+    document.getElementById('tabCalc').className = 'tab-btn' + (state.view === 'calculator' ? ' active' : '');
+    document.getElementById('tabSchema').className = 'tab-btn' + (state.view === 'schema' ? ' active' : '');
+
+    var html = '';
+    if (state.view === 'calculator') html = renderCalculatorView();
+    else if (state.view === 'schema') html = renderSchemaView();
+    else if (state.view === 'admin') html = renderAdminView();
+    else if (state.view === 'privacy' || state.view === 'disclaimer' || state.view === 'terms') html = renderLegalView(state.view);
+    contentEl.innerHTML = html + renderFooter();
+    wireEvents();
+  }
+
+  function wireEvents() {
+    document.querySelectorAll('.footer-link').forEach(function (link) {
+      link.onclick = function (e) {
+        e.preventDefault();
+        setState({ previousView: state.view === 'privacy' || state.view === 'disclaimer' || state.view === 'terms' ? state.previousView : state.view, view: link.getAttribute('data-legal') });
+      };
+    });
+    var backBtn = document.getElementById('legalBackBtn');
+    if (backBtn) backBtn.onclick = function () { setState({ view: state.previousView || 'calculator' }); };
+
+    if (state.view === 'calculator') {
+      var medR = document.getElementById('medRetatrutide');
+      var medM = document.getElementById('medMounjaro');
+      if (medR) medR.onclick = function () {
+        var firstPen = state.pens.filter(function (p) { return p.active && p.medicine === 'retatrutide'; })[0];
+        setState({ medicine: 'retatrutide', selectedPenId: firstPen ? firstPen.id : state.selectedPenId, selectedDose: null });
+      };
+      if (medM) medM.onclick = function () {
+        var firstPen = state.pens.filter(function (p) { return p.active && p.medicine === 'mounjaro'; })[0];
+        setState({ medicine: 'mounjaro', selectedPenId: firstPen ? firstPen.id : state.selectedPenId, selectedDose: null });
+      };
+
+      var penSelect = document.getElementById('penSelect');
+      if (penSelect) penSelect.onchange = function (e) { setState({ selectedPenId: e.target.value, selectedDose: null }); };
+
+      var slider = document.getElementById('doseSlider');
+      if (slider) slider.oninput = function (e) { setState({ selectedDose: toNum(e.target.value) }); };
+
+      var doseBtns = document.querySelectorAll('.dose-btn[data-dose]');
+      doseBtns.forEach(function (btn) {
+        if (btn.disabled) return;
+        btn.onclick = function () { setState({ selectedDose: toNum(btn.getAttribute('data-dose')) }); };
+      });
+
+      var resetBtn = document.getElementById('resetBtn');
+      if (resetBtn) resetBtn.onclick = function () { setState({ selectedDose: null }); };
+
+      var faqBtns = document.querySelectorAll('.faq-q');
+      faqBtns.forEach(function (btn) {
+        btn.onclick = function () {
+          var i = parseInt(btn.getAttribute('data-faq'), 10);
+          setState({ faqOpen: state.faqOpen === i ? null : i });
+        };
+      });
+    } else if (state.view === 'schema') {
+      var addBtn = document.getElementById('addPhaseBtn');
+      if (addBtn) addBtn.onclick = function () {
+        var phases = state.phases.concat([{ id: state.nextPhaseId, weeks: 4, doseMg: 1 }]);
+        setState({ phases: phases, nextPhaseId: state.nextPhaseId + 1 });
+      };
+      document.querySelectorAll('.phase-remove').forEach(function (btn) {
+        btn.onclick = function () {
+          if (state.phases.length <= 1) return;
+          var id = parseInt(btn.getAttribute('data-phase'), 10);
+          setState({ phases: state.phases.filter(function (p) { return p.id !== id; }) });
+        };
+      });
+      document.querySelectorAll('.phase-weeks').forEach(function (input) {
+        input.onchange = function () {
+          var id = parseInt(input.getAttribute('data-phase'), 10);
+          var v = toNum(input.value);
+          setState({ phases: state.phases.map(function (p) { return p.id === id ? Object.assign({}, p, { weeks: v }) : p; }) });
+        };
+      });
+      document.querySelectorAll('.phase-dose').forEach(function (select) {
+        select.onchange = function () {
+          var id = parseInt(select.getAttribute('data-phase'), 10);
+          var v = toNum(select.value);
+          setState({ phases: state.phases.map(function (p) { return p.id === id ? Object.assign({}, p, { doseMg: v }) : p; }) });
+        };
+      });
+    } else if (state.view === 'admin') {
+      var startAddBtn = document.getElementById('startAddBtn');
+      if (startAddBtn) startAddBtn.onclick = function () {
+        setState({
+          editingId: 'new', adminError: '',
+          draft: { id: null, name: '', brand: '', totalMg: '', totalClicks: '', price: '', currency: 'EUR', minDose: '', maxDose: '', allowedDoses: [], verified: false, verificationNote: '', active: true, allowRounding: false }
+        });
+      };
+      document.querySelectorAll('.pen-edit').forEach(function (btn) {
+        btn.onclick = function () {
+          var pen = state.pens.filter(function (p) { return p.id === btn.getAttribute('data-pen'); })[0];
+          if (!pen) return;
+          setState({
+            editingId: pen.id, adminError: '',
+            draft: {
+              id: pen.id, name: pen.name, brand: pen.brand,
+              totalMg: pen.totalMg == null ? '' : String(pen.totalMg),
+              totalClicks: pen.totalClicks == null ? '' : String(pen.totalClicks),
+              price: pen.price == null ? '' : String(pen.price),
+              currency: pen.currency, minDose: pen.minDose == null ? '' : String(pen.minDose),
+              maxDose: pen.maxDose == null ? '' : String(pen.maxDose),
+              allowedDoses: pen.allowedDoses.slice(), verified: pen.verified,
+              verificationNote: pen.verificationNote || '', active: pen.active, allowRounding: !!pen.allowRounding
+            }
+          });
+        };
+      });
+      document.querySelectorAll('.pen-toggle').forEach(function (btn) {
+        btn.onclick = function () {
+          var id = btn.getAttribute('data-pen');
+          var pens = state.pens.map(function (p) { return p.id === id ? Object.assign({}, p, { active: !p.active }) : p; });
+          savePens(pens);
+          setState({ pens: pens });
+        };
+      });
+
+      var cancelBtn = document.getElementById('cancelEditBtn');
+      if (cancelBtn) cancelBtn.onclick = function () { setState({ editingId: null, draft: null, adminError: '' }); };
+
+      function bindDraftField(id, field) {
+        var el = document.getElementById(id);
+        if (el) el.oninput = function () {
+          var d = Object.assign({}, state.draft);
+          d[field] = el.value;
+          setState({ draft: d });
+        };
+      }
+      bindDraftField('draftName', 'name');
+      bindDraftField('draftBrand', 'brand');
+      bindDraftField('draftTotalMg', 'totalMg');
+      bindDraftField('draftTotalClicks', 'totalClicks');
+      bindDraftField('draftPrice', 'price');
+      bindDraftField('draftMinDose', 'minDose');
+      bindDraftField('draftMaxDose', 'maxDose');
+      bindDraftField('draftVerificationNote', 'verificationNote');
+      var currencyEl = document.getElementById('draftCurrency');
+      if (currencyEl) currencyEl.onchange = function () {
+        var d = Object.assign({}, state.draft); d.currency = currencyEl.value; setState({ draft: d });
+      };
+      ['draftVerified', 'draftActive', 'draftAllowRounding'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.onchange = function () {
+          var field = id.replace('draft', '');
+          field = field.charAt(0).toLowerCase() + field.slice(1);
+          var d = Object.assign({}, state.draft); d[field] = el.checked; setState({ draft: d });
+        };
+      });
+      document.querySelectorAll('.dose-toggle').forEach(function (btn) {
+        btn.onclick = function () {
+          var val = toNum(btn.getAttribute('data-val'));
+          var d = Object.assign({}, state.draft);
+          var has = d.allowedDoses.indexOf(val) !== -1;
+          d.allowedDoses = has ? d.allowedDoses.filter(function (v) { return v !== val; }) : d.allowedDoses.concat([val]).sort(function (a, b) { return a - b; });
+          setState({ draft: d });
+        };
+      });
+
+      var saveBtn = document.getElementById('saveDraftBtn');
+      if (saveBtn) saveBtn.onclick = function () {
+        var d = state.draft;
+        var totalMg = toNum(d.totalMg);
+        var totalClicks = toNum(d.totalClicks);
+        var price = d.price === '' ? null : toNum(d.price);
+        if (!d.name.trim()) return setState({ adminError: 'Naam is verplicht.' });
+        if (totalMg == null || totalMg <= 0) return setState({ adminError: 'Totale inhoud (mg) moet groter zijn dan 0.' });
+        if (totalClicks == null || totalClicks <= 0 || Math.round(totalClicks) !== totalClicks) return setState({ adminError: 'Totaal aantal clicks moet een heel getal groter dan 0 zijn.' });
+        if (price != null && price <= 0) return setState({ adminError: 'Vul een geldig bedrag hoger dan 0 in.' });
+        if (price != null && !d.currency) return setState({ adminError: 'Kies een valuta wanneer een prijs is ingevuld.' });
+        var minDose = d.minDose === '' ? null : toNum(d.minDose);
+        var maxDose = d.maxDose === '' ? null : toNum(d.maxDose);
+        if (minDose != null && maxDose != null && minDose > maxDose) return setState({ adminError: 'Minimum dosis mag niet groter zijn dan maximum dosis.' });
+        var existingPen = state.pens.filter(function (p) { return p.id === d.id; })[0];
+        var pen = Object.assign({}, existingPen, {
+          id: d.id || ('p' + Date.now()), name: d.name.trim(), brand: d.brand.trim(),
+          totalMg: totalMg, totalClicks: totalClicks, mgPerClick: totalMg / totalClicks, clicksPerMg: totalClicks / totalMg,
+          price: price, currency: d.currency,
+          allowedDoses: d.allowedDoses, minDose: minDose, maxDose: maxDose,
+          verified: d.verified, verificationNote: d.verificationNote, active: d.active, allowRounding: d.allowRounding,
+          medicine: (existingPen && existingPen.medicine) || 'retatrutide',
+          calculationType: (existingPen && existingPen.calculationType) || 'fixedClicks'
+        });
+        var exists = state.pens.some(function (p) { return p.id === pen.id; });
+        var pens = exists ? state.pens.map(function (p) { return p.id === pen.id ? pen : p; }) : state.pens.concat([pen]);
+        savePens(pens);
+        clearTimeout(savedMsgTimer);
+        setState({ pens: pens, editingId: null, draft: null, adminError: '', savedMessage: 'Pen bijgewerkt' });
+        savedMsgTimer = setTimeout(function () { setState({ savedMessage: '' }); }, 2500);
+      };
+    }
+  }
+
+  document.getElementById('gearBtn').onclick = function () { setState({ view: 'admin' }); };
+  document.getElementById('tabCalc').onclick = function () { setState({ view: 'calculator' }); };
+  document.getElementById('tabSchema').onclick = function () { setState({ view: 'schema' }); };
+
+  render();
+})();
+</script>
+</body>
+</html>

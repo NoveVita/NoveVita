@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .nvw-btn, .nvw-bubble { transition:none !important; animation:none !important; }
+  }
+  .nvw-btn { position:fixed; bottom:32px; right:32px; width:60px; height:60px; border-radius:50%; background:#27423A; border:1px solid rgba(255,255,255,0.08); box-shadow:0 12px 35px rgba(0,0,0,0.18); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform 300ms ease, box-shadow 300ms ease; z-index:1200; backdrop-filter:blur(12px); }
+  .nvw-btn:hover, .nvw-btn:focus-visible { transform:translateY(-4px) scale(1.05); box-shadow:0 16px 44px rgba(0,0,0,0.26), 0 0 24px rgba(212,179,127,0.28); }
+  .nvw-btn:focus-visible { outline:2px solid #D4B37F; outline-offset:3px; }
+  @media (max-width: 900px) { .nvw-btn { bottom:24px; right:24px; } }
+  @media (max-width: 560px) { .nvw-btn { width:54px; height:54px; bottom:18px; right:18px; } }
+  .nvw-bubble { position:fixed; bottom:104px; right:32px; max-width:250px; background:#FFFFFF; border:1px solid rgba(0,0,0,0.06); border-radius:22px; box-shadow:0 18px 40px rgba(0,0,0,0.12); padding:18px 20px; z-index:1199; animation:nvwUp 420ms ease forwards; }
+  @media (max-width: 900px) { .nvw-bubble { bottom:92px; right:24px; } }
+  @media (max-width: 560px) { .nvw-bubble { bottom:80px; right:18px; left:18px; max-width:none; } }
+  @keyframes nvwUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+</style>
+</helmet>
+
+<sc-if value="{{ showBubble }}" hint-placeholder-val="{{ false }}">
+  <div class="nvw-bubble">
+    <button onclick="{{ dismissBubble }}" aria-label="Sluiten" style="position:absolute; top:8px; right:10px; background:none; border:none; font-size:14px; color:#8C8272; cursor:pointer;">&times;</button>
+    <div style="font-family:'Inter',sans-serif; font-weight:500; font-size:14px; color:#1F3D33;">&#128172; Vragen?</div>
+    <div style="font-family:'Inter',sans-serif; font-weight:300; font-size:13.5px; color:#4A4A42; margin-top:4px; line-height:1.6;">We helpen je graag verder.</div>
+    <a href="{{ waUrl }}" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-family:'Inter',sans-serif; font-weight:500; font-size:13px; color:#1F3D33; border-bottom:1px solid #D4B37F; text-decoration:none;">WhatsApp &#8594;</a>
+  </div>
+</sc-if>
+
+<a class="nvw-btn" href="{{ waUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Chat met Nové Vita via WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.27 20.92 6.78 19.06 4.92C17.2 3.06 14.68 2 12.04 2Z" stroke="#D4B37F" stroke-width="1.4"/>
+    <path d="M8.5 8.3C8.7 7.9 8.9 7.9 9.1 7.9C9.3 7.9 9.5 7.9 9.6 8.2C9.8 8.6 10.3 9.8 10.4 9.9C10.5 10 10.5 10.2 10.4 10.4C10.3 10.6 10.2 10.7 10.1 10.8C10 10.9 9.8 11.1 9.9 11.3C10.1 11.6 10.6 12.4 11.3 13C12.2 13.7 12.9 13.9 13.1 14C13.3 14.1 13.5 14.1 13.6 13.9C13.8 13.7 14.2 13.2 14.4 13C14.5 12.8 14.7 12.8 14.9 12.9C15.1 13 16.2 13.5 16.4 13.6C16.6 13.7 16.7 13.8 16.8 13.9C16.9 14 16.9 14.6 16.6 15.2C16.4 15.8 15.4 16.4 15 16.4C14.5 16.5 14.1 16.5 12.9 16C11.4 15.4 10.4 14 10.1 13.6C9.9 13.3 8.4 11.3 8.4 9.2C8.4 8.8 8.3 8.6 8.5 8.3Z" fill="#D4B37F"/>
+  </svg>
+</a>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PAGE_MESSAGES = [
+  { match: /Calculator|Pen Calculator|Retatrutide/i, text: 'Hallo! Ik heb een vraag over de calculator.' },
+  { match: /Vial|Syringe|Mixing/i, text: 'Hallo! Ik heb een vraag over de mixing tool.' },
+  { match: /GLP/i, text: 'Hallo! Ik heb een vraag over GLP-1.' },
+  { match: /Peptide|Copper|BPC|PDRN/i, text: 'Hallo! Ik heb een vraag over peptides.' },
+  { match: /Skin/i, text: 'Hallo! Ik heb een vraag over skincare.' },
+  { match: /Guidance|Contact/i, text: 'Hallo! Ik zou graag in contact komen.' },
+];
+const WHATSAPP_NUMBER = '31649288558';
+
+class Component extends DCLogic {
+  state = { showBubble: false, dismissed: false };
+  componentDidMount() {
+    if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nvw-dismissed') === '1') return;
+    this._timer = setTimeout(() => this.maybeShow(), 8000);
+    this._onScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight > 0 && scrollTop / scrollHeight >= 0.6) this.maybeShow();
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+  }
+  componentWillUnmount() {
+    if (this._timer) clearTimeout(this._timer);
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+  maybeShow() {
+    if (this.state.dismissed) return;
+    this.setState({ showBubble: true });
+  }
+  renderVals() {
+    const title = typeof document !== 'undefined' ? document.title : '';
+    const found = PAGE_MESSAGES.find(p => p.match.test(title));
+    const text = found ? found.text : 'Hallo! Ik heb een vraag over Nové Vita.';
+    const waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
+    return {
+      waUrl,
+      showBubble: this.state.showBubble,
+      dismissBubble: () => {
+        this.setState({ showBubble: false, dismissed: true });
+        if (typeof sessionStorage !== 'undefined') sessionStorage.setItem('nvw-dismissed', '1');
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

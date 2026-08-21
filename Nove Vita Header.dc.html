@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  .nvh-link { font-family:'Inter',sans-serif; font-weight:500; font-size:13px; letter-spacing:1.6px; text-transform:uppercase; color:#1F3D33; text-decoration:none; transition:color 220ms ease; position:relative; padding-bottom:4px; }
+  .nvh-link:hover { color:#9C7A3F; }
+  .nvh-link.active { color:#9C7A3F; }
+  .nvh-dark .nvh-link { color:#F8F4EE; }
+  .nvh-dark .nvh-link:hover, .nvh-dark .nvh-link.active { color:#E3C588; }
+  .nvh-dark .nvh-logo { color:#F8F4EE !important; }
+  .nvh-dark .nvh-hamburger span { background:#F8F4EE; }
+  .nvh-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
+  .nvh-hamburger span { width:20px; height:1.5px; background:#1F3D33; display:block; }
+  .nvh-dark .nvh-hamburger span { background:#F8F4EE; }
+  .nvh-tools { position:relative; }
+  .nvh-tools-menu { position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; background:transparent; display:none; flex-direction:column; z-index:1201; pointer-events:none; }
+  .nvh-tools:hover .nvh-tools-menu, .nvh-tools-menu:hover { pointer-events:auto; }
+  .nvh-tools-menu-inner { background:#F8F4EE; border-radius:6px; box-shadow:0 16px 32px rgba(31,61,51,0.16); padding:10px; display:flex; flex-direction:column; gap:2px; min-width:170px; }
+  .nvh-tools:hover .nvh-tools-menu, .nvh-tools-menu:hover { display:flex; }
+  .nvh-tools-item { font-family:'Inter',sans-serif; font-weight:500; font-size:12.5px; letter-spacing:0.6px; text-transform:none; color:#1F3D33; text-decoration:none; padding:10px 14px; border-radius:4px; transition:background 180ms ease; }
+  .nvh-tools-item:hover { background:rgba(31,61,51,0.06); color:#9C7A3F; }
+  .nvh-tools-item.active { color:#9C7A3F; }
+  @media (max-width: 760px) {
+    .nvh-links { display:none !important; }
+    .nvh-hamburger { display:flex !important; }
+    .nvh-mobile.open { display:flex !important; }
+    .nvh-tools-menu { display:none !important; }
+  }
+</style>
+</helmet>
+<dc-import name="Nove Vita - WhatsApp Button" hint-size="60px,60px"></dc-import>
+<header class="{{ darkCls }}" style="position:sticky; top:0; left:0; right:0; z-index:1000; width:100%; max-height:96px; overflow:visible; box-sizing:border-box; padding:{{ padY }}px 32px; display:flex; align-items:center; justify-content:space-between; background:{{ resolvedBg }}; border-bottom:1px solid rgba(31,61,51,0.16); box-shadow:{{ shadow }}; transition:padding 250ms ease, background 250ms ease, box-shadow 250ms ease;">
+  <a href="./Nove Vita Homepage.dc.html" class="nvh-logo" style="font-family:'Playfair Display'; font-weight:500; font-size:19px; letter-spacing:2.5px; color:#1F3D33; text-decoration:none;">NOVÉ VITA</a>
+  <nav class="nvh-links" style="display:flex; align-items:center; gap:38px;">
+    <a class="{{ homeClass }}" href="./Nove Vita Homepage.dc.html">Home</a>
+    <div class="nvh-tools">
+      <span class="{{ toolsClass }}" style="display:inline-block; padding-bottom:4px; cursor:default;">Tools</span>
+      <div class="nvh-tools-menu">
+        <div class="nvh-tools-menu-inner">
+          <a class="{{ toolsCalcClass }}" href="./Retatrutide Pen Calculator (Standalone).html">Calculator</a>
+          <a class="{{ toolsMixingClass }}" href="./Vial &amp; Syringe Calculator (Standalone).html">Mixing</a>
+        </div>
+      </div>
+    </div>
+    <a class="{{ journalClass }}" href="./Nove Vita - Journal.dc.html">Journal</a>
+    <a class="{{ guidanceClass }}" href="./Nove Vita - Guidance.dc.html">Guidance</a>
+    <a class="{{ faqClass }}" href="./Nove Vita - FAQ.dc.html">FAQ</a>
+    <a class="{{ contactClass }}" href="./Nove Vita - Contact.dc.html">Contact</a>
+  </nav>
+  <label class="nvh-hamburger" onclick="{{ toggleMenu }}">
+    <span></span><span></span><span></span>
+  </label>
+  <sc-if value="{{ menuOpen }}">
+    <div class="nvh-mobile" style="position:absolute; top:100%; left:0; right:0; background:#F8F4EE; padding:22px 24px; display:flex; flex-direction:column; gap:18px; border-bottom:1px solid rgba(31,61,51,0.08); box-shadow:0 12px 24px rgba(31,61,51,0.08);">
+      <a class="{{ homeClass }}" href="./Nove Vita Homepage.dc.html">Home</a>
+      <a class="{{ toolsCalcClass }}" href="./Retatrutide Pen Calculator (Standalone).html">Calculator</a>
+      <a class="{{ toolsMixingClass }}" href="./Vial &amp; Syringe Calculator (Standalone).html">Mixing</a>
+      <a class="{{ journalClass }}" href="./Nove Vita - Journal.dc.html">Journal</a>
+      <a class="{{ guidanceClass }}" href="./Nove Vita - Guidance.dc.html">Guidance</a>
+      <a class="{{ faqClass }}" href="./Nove Vita - FAQ.dc.html">FAQ</a>
+      <a class="{{ contactClass }}" href="./Nove Vita - Contact.dc.html">Contact</a>
+    </div>
+  </sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { scrolled: false, menuOpen: false };
+  componentDidMount() {
+    this._onScroll = () => {
+      const s = window.scrollY > 12;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+  }
+  renderVals() {
+    const active = this.props.active || '';
+    const cls = (name) => 'nvh-link' + (active === name ? ' active' : '');
+    const scrolled = this.state.scrolled;
+    const override = this.props.bg;
+    const defaultBg = scrolled ? 'rgba(248,245,239,0.96)' : 'rgba(248,245,239,0.88)';
+    return {
+      padY: scrolled ? 14 : 22,
+      resolvedBg: override || defaultBg,
+      darkCls: this.props.dark ? 'nvh-dark' : '',
+      shadow: scrolled ? '0 8px 24px rgba(31,61,51,0.14)' : '0 4px 14px rgba(31,61,51,0.07)',
+      homeClass: cls('home'),
+      toolsClass: 'nvh-link' + (active === 'calculator' || active === 'mixing' ? ' active' : ''),
+      toolsCalcClass: 'nvh-tools-item' + (active === 'calculator' ? ' active' : ''),
+      toolsMixingClass: 'nvh-tools-item' + (active === 'mixing' ? ' active' : ''),
+      journalClass: cls('journal'),
+      guidanceClass: cls('guidance'),
+      faqClass: cls('faq'),
+      disclaimerClass: cls('disclaimer'),
+      privacyClass: cls('privacy'),
+      voorwaardenClass: cls('voorwaarden'),
+      contactClass: cls('contact'),
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+    };
+  }
+}
+</script>
+</body>
+</html>
