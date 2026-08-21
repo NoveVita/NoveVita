@@ -495,6 +495,17 @@
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
   state = { newsletterEmail: '', newsletterMsg: '', newsletterMsgColor: '#5A5342' };
+  componentDidMount() {
+    // Mobile browsers restore the previous scroll offset on reload, which drops
+    // visitors mid-page. The homepage should always open at the top.
+    try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+    if (!location.hash) {
+      const prev = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo(0, 0);
+      requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = prev || ''; });
+    }
+  }
   renderVals() {
     return {
       newsletterEmail: this.state.newsletterEmail,
