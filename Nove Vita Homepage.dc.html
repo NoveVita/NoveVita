@@ -30,6 +30,25 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
+  .nv-panel { contain:paint; }
+  .nv-journal-grid, .nv-journal-grid > a { min-width:0; }
+  /* image-slot never receives a class attribute, so mobile sizing must be
+     addressed by id or the photos fall back to their desktop crop. */
+  @media (max-width: 900px) {
+    #article-1, #article-2 { height:auto !important; aspect-ratio:3/2 !important; }
+  }
+  @media (max-width: 760px) {
+    #journal-hero, #article-1, #article-2, #article-3, #mixing-image {
+      height:auto !important; aspect-ratio:3/2 !important; position:static !important;
+    }
+    #journal-hero { border-radius:14px !important; }
+  }
+  @media (hover:none), (prefers-reduced-motion:reduce) {
+    .calculator-phone-link { animation:none !important; }
+  }
+  @media (hover:none) {
+    .nv-panel, .nv-card, .nv-journal-card, .nv-journal-img, .nv-mix-img { transition:none !important; transform:none !important; }
+  }
   html { scroll-behavior:smooth; }
   body { background:#F8F4EE; }
   html, body { width:100%; overflow-x:hidden; }
@@ -55,7 +74,7 @@
   @media (max-width: 760px) {
     .nv-journal-grid { grid-template-columns:1fr !important; row-gap:48px !important; }
     .nv-j-1, .nv-j-2, .nv-j-3 { grid-column:1 / -1 !important; }
-    .nv-j-1 .nv-journal-img, .nv-j-2 .nv-journal-img, .nv-journal-img { height:auto !important; aspect-ratio:4/3 !important; }
+    .nv-j-1 .nv-journal-img, .nv-j-2 .nv-journal-img, .nv-journal-img { height:auto !important; aspect-ratio:3/2 !important; }
     .nv-journal-card, .nv-journal-title, .nv-journal-grid { text-align:left !important; }
   }
   .nv-eyebrow { font-family:'Inter'; font-weight:500; font-size:11.5px; letter-spacing:4px; color:#8C8272; text-transform:uppercase; }
@@ -113,13 +132,13 @@
     #journal h3 { font-size:clamp(28px, 7vw, 36px) !important; }
     .nv-journal-feature { padding:0 24px !important; margin-bottom:40px !important; }
     .nv-journal-feature-frame { position:static !important; height:auto !important; aspect-ratio:auto !important; overflow:visible !important; box-shadow:none !important; display:flex !important; flex-direction:column !important; }
-    .nv-journal-feature-frame .nv-journal-img { position:static !important; aspect-ratio:4/3 !important; height:auto !important; border-radius:14px !important; }
+    .nv-journal-feature-frame .nv-journal-img { position:static !important; aspect-ratio:3/2 !important; height:auto !important; border-radius:14px !important; }
     .nv-journal-feature-frame > div:nth-child(2) { display:none !important; }
     .nv-journal-feature-frame .nv-journal-title { font-size:24px !important; }
     .nv-journal-feature-frame > div:last-child { position:static !important; left:auto !important; right:auto !important; bottom:auto !important; padding:22px 2px 0 !important; }
 
-    .nv-j-1 .nv-journal-img, .nv-j-2 .nv-journal-img, .nv-j-3 .nv-journal-img, .nv-journal-img { height:auto !important; aspect-ratio:4/3 !important; }
-    .nv-mix-img { height:auto !important; aspect-ratio:4/3 !important; }
+    .nv-j-1 .nv-journal-img, .nv-j-2 .nv-journal-img, .nv-j-3 .nv-journal-img, .nv-journal-img { height:auto !important; aspect-ratio:3/2 !important; }
+    .nv-mix-img { height:auto !important; aspect-ratio:3/2 !important; }
 
     #calculator, .nv-calc-split { padding-left:24px !important; padding-right:24px !important; }
 
@@ -219,7 +238,7 @@
       </p>
     </div>
     <div class="nv-values" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:2px; background:#D8CDC0;">
-      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1), box-shadow 0.6s;" style-hover="transform:scale(1.015); box-shadow:inset 0 0 0 9999px rgba(15,30,25,0.14);">
+      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
         <image-slot id="value-balance" shape="rect" src="uploads/slot-value-balance.webp" placeholder="Sunlight reflecting on soft moving Mediterranean water" style="width:100%; height:100%; object-fit:cover;"></image-slot>
         <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.62) 0%, rgba(15,30,25,0.05) 45%, rgba(255,255,255,0.08) 100%); pointer-events:none;"></div>
         <div style="position:absolute; left:28px; bottom:30px; text-align:left; pointer-events:none;">
@@ -227,7 +246,7 @@
           <div style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:400; font-size:15px; letter-spacing:0.3px; color:#C8A96B; margin-top:6px;">In ieder moment.</div>
         </div>
       </div>
-      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1), box-shadow 0.6s;" style-hover="transform:scale(1.015); box-shadow:inset 0 0 0 9999px rgba(15,30,25,0.14);">
+      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
         <image-slot id="value-confidence" shape="rect" src="uploads/slot-value-confidence.webp" placeholder="Natural stone, warm ceramic bowl, olive branch, travertine" style="width:100%; height:100%; object-fit:cover;"></image-slot>
         <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.62) 0%, rgba(15,30,25,0.05) 45%, rgba(255,255,255,0.08) 100%); pointer-events:none;"></div>
         <div style="position:absolute; left:28px; bottom:30px; text-align:left; pointer-events:none;">
@@ -235,7 +254,7 @@
           <div style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:400; font-size:15px; letter-spacing:0.3px; color:#C8A96B; margin-top:6px;">Bij iedere keuze.</div>
         </div>
       </div>
-      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1), box-shadow 0.6s;" style-hover="transform:scale(1.015); box-shadow:inset 0 0 0 9999px rgba(15,30,25,0.14);">
+      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
         <image-slot id="value-glow" shape="rect" src="uploads/slot-value-glow.webp" placeholder="Golden light through olive trees, warm morning Mediterranean landscape" style="width:100%; height:100%; object-fit:cover;"></image-slot>
         <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.62) 0%, rgba(15,30,25,0.05) 45%, rgba(255,255,255,0.08) 100%); pointer-events:none;"></div>
         <div style="position:absolute; left:28px; bottom:30px; text-align:left; pointer-events:none;">
@@ -243,7 +262,7 @@
           <div style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:400; font-size:15px; letter-spacing:0.3px; color:#C8A96B; margin-top:6px;">Bij iedere stap.</div>
         </div>
       </div>
-      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1), box-shadow 0.6s;" style-hover="transform:scale(1.015); box-shadow:inset 0 0 0 9999px rgba(15,30,25,0.14);">
+      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
         <image-slot id="value-ritual" shape="rect" src="uploads/slot-value-ritual.webp" placeholder="Linen fabric, natural skincare textures, warm shadows, soft ceramic" style="width:100%; height:100%; object-fit:cover;"></image-slot>
         <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.62) 0%, rgba(15,30,25,0.05) 45%, rgba(255,255,255,0.08) 100%); pointer-events:none;"></div>
         <div style="position:absolute; left:28px; bottom:30px; text-align:left; pointer-events:none;">
@@ -287,7 +306,7 @@
       </div>
       <div class="nv-phone-cell" style="position:relative; grid-column:2; grid-row:1; min-width:0; align-self:center; justify-self:center; width:100%; max-width:402px; aspect-ratio:402/874;">
         <div style="position:absolute; inset:-70px; z-index:0; pointer-events:none; background:radial-gradient(circle at 50% 40%, rgba(200,169,107,0.16), transparent 62%), radial-gradient(circle at 55% 65%, rgba(31,61,51,0.12), transparent 65%); filter:blur(18px);"></div>
-        <a href="./Retatrutide Pen Calculator (Standalone).html" class="calculator-phone-link" style="position:absolute; left:0; right:0; top:0; bottom:-8%; display:block; margin:0; cursor:pointer; z-index:10; animation:nvPhoneFloat 6s ease-in-out infinite; filter:drop-shadow(0 40px 80px rgba(0,0,0,0.18)) drop-shadow(0 18px 40px rgba(18,65,52,0.14)) drop-shadow(0 0 80px rgba(205,170,90,0.10));">
+        <a href="./Retatrutide Pen Calculator (Standalone).html" class="calculator-phone-link" style="position:absolute; left:0; right:0; top:0; bottom:-8%; display:block; margin:0; cursor:pointer; z-index:10; animation:nvPhoneFloat 6s ease-in-out infinite; box-shadow:0 40px 80px rgba(0,0,0,0.18), 0 18px 40px rgba(18,65,52,0.14), 0 0 80px rgba(205,170,90,0.10); border-radius:44px;">
           <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="100%,100%" width="{{ '100%' }}" height="{{ '100%' }}" dark="{{ true }}" style="width:100%; height:100%; pointer-events:none;">
             <iframe src="./Retatrutide Pen Calculator (Standalone).html" title="Nové Vita calculator preview" loading="lazy" scrolling="no" style="width:100%; height:100%; border:none; pointer-events:none; overflow:hidden;"></iframe>
           </x-import>
@@ -304,7 +323,7 @@
     <div class="nv-grid-3" style="position:relative; width:100%; display:grid; grid-template-columns:repeat(3, 1fr); gap:64px; max-width:1920px; margin:0 auto; padding:0 40px;">
       <a href="./Nove Vita - Metabolic.dc.html" class="nv-card" style="min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; text-decoration:none; cursor:pointer; padding:18px; border-radius:24px; transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;" style-hover="transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,0.28);">
         <div style="min-width:0; width:100%; height:474px; border-radius:20px; overflow:hidden; position:relative; color:#F8F4EE; border:0.75px solid rgba(248,244,238,0.14); background:rgba(255,255,255,0.015);" class="nv-explore-imgwrap">
-          <image-slot id="explore-wellness" shape="rect" src="uploads/slot-explore-wellness.webp" placeholder="Stone, water, quiet ritual" style="width:100%; height:100%; object-fit:cover; filter:contrast(1.06) brightness(0.98); transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
+          <image-slot id="explore-wellness" shape="rect" src="uploads/slot-explore-wellness.webp" placeholder="Stone, water, quiet ritual" style="width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
           <div style="position:absolute; inset:0; box-shadow:inset 0 0 90px rgba(0,0,0,0.35); pointer-events:none;"></div>
         </div>
         <h3 class="nv-card-title" style="font-family:'Playfair Display'; font-weight:500; font-size:26px; color:#F8F4EE; margin-top:42px; transition:color 0.35s ease;" style-hover="color:#C8A96B;">Metabolic</h3>
@@ -312,7 +331,7 @@
       </a>
       <a href="./Nove Vita - Skin.dc.html" class="nv-card" style="min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; text-decoration:none; cursor:pointer; padding:18px; border-radius:24px; transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;" style-hover="transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,0.28);">
         <div style="min-width:0; width:100%; height:474px; border-radius:20px; overflow:hidden; position:relative; color:#F8F4EE; border:0.75px solid rgba(248,244,238,0.14); background:rgba(255,255,255,0.015);" class="nv-explore-imgwrap">
-          <image-slot id="explore-beauty" shape="rect" src="uploads/slot-explore-beauty.webp" placeholder="Warm light, linen, natural skin" style="width:100%; height:100%; object-fit:cover; filter:contrast(1.06) brightness(0.98); transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
+          <image-slot id="explore-beauty" shape="rect" src="uploads/slot-explore-beauty.webp" placeholder="Warm light, linen, natural skin" style="width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
           <div style="position:absolute; inset:0; box-shadow:inset 0 0 90px rgba(0,0,0,0.35); pointer-events:none;"></div>
         </div>
         <h3 class="nv-card-title" style="font-family:'Playfair Display'; font-weight:500; font-size:26px; color:#F8F4EE; margin-top:42px; transition:color 0.35s ease;" style-hover="color:#C8A96B;">Skin</h3>
@@ -320,7 +339,7 @@
       </a>
       <a href="./Nove Vita - Guidance.dc.html" class="nv-card" style="min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; text-decoration:none; cursor:pointer; padding:18px; border-radius:24px; transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;" style-hover="transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,0.28);">
         <div style="min-width:0; width:100%; height:474px; border-radius:20px; overflow:hidden; position:relative; color:#F8F4EE; border:0.75px solid rgba(248,244,238,0.14); background:rgba(255,255,255,0.015);" class="nv-explore-imgwrap">
-          <image-slot id="explore-selfcare" shape="rect" src="uploads/slot-explore-selfcare.webp" placeholder="Olive trees, soft shadow, ease" style="width:100%; height:100%; object-fit:cover; filter:contrast(1.06) brightness(0.98); transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
+          <image-slot id="explore-selfcare" shape="rect" src="uploads/slot-explore-selfcare.webp" placeholder="Olive trees, soft shadow, ease" style="width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
           <div style="position:absolute; inset:0; box-shadow:inset 0 0 90px rgba(0,0,0,0.35); pointer-events:none;"></div>
         </div>
         <h3 class="nv-card-title" style="font-family:'Playfair Display'; font-weight:500; font-size:26px; color:#F8F4EE; margin-top:42px; transition:color 0.35s ease;" style-hover="color:#C8A96B;">Guidance</h3>
