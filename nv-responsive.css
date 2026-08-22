@@ -126,3 +126,35 @@
   .nv-opening-panel { padding:36px 26px 40px !important; }
   .nv-opening-panel p { font-size:18px !important; }
 }
+
+/* ============================== TOUCH ===============================
+   A touch device fires :hover the moment a finger lands, so the desktop
+   zoom-and-lift effects run *while you are dragging the page*: a scaled
+   photograph plus a soft shadow, repainted for half a second, four panels
+   in a row. On touch they are simply off — nothing to see there anyway. */
+@media (hover: none) {
+  .nv-panel,
+  .nv-card,
+  .nv-journal-card,
+  .nv-journal-feature,
+  .nv-moment-card,
+  .nv-related-card,
+  .nv-journal-img,
+  .nv-featured-card,
+  .nv-contact-card,
+  .nv-btn-primary,
+  .nv-btn-outline,
+  .nv-cta-btn,
+  .nv-calc-btn,
+  .nvw-btn,
+  image-slot { transition:none !important; transform:none !important; }
+
+  .nv-card,
+  .nv-journal-card,
+  .nv-moment-card,
+  .nv-related-card,
+  .nv-contact-card,
+  .nv-btn-primary,
+  .nv-btn-outline,
+  .nv-related-img-wrap { box-shadow:none !important; }
+}
