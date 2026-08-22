@@ -89,6 +89,10 @@
     .nv-band-head { padding:0 24px 64px !important; }
     .nv-mobile-nobreak { display:none !important; }
     .nv-panel { height:340px !important; }
+    /* four full-width photographs stacked is not a mobile layout, and each
+       one costs a decode. Only Glow stays; display:none means the other
+       three are never fetched at all. */
+    .nv-panel-balance, .nv-panel-confidence, .nv-panel-ritual { display:none !important; }
 
     #calculator { padding:90px 0 !important; }
     #calculator h2 { margin:56px auto 48px !important; }
@@ -195,7 +199,7 @@
       </p>
     </div>
     <div class="nv-values" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:2px; background:#D8CDC0;">
-      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
+      <div class="nv-panel nv-panel-balance" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
         <image-slot id="value-balance" shape="rect" src="uploads/slot-value-balance.webp" placeholder="Sunlight reflecting on soft moving Mediterranean water" style="width:100%; height:100%; object-fit:cover;"></image-slot>
         <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.62) 0%, rgba(15,30,25,0.05) 45%, rgba(255,255,255,0.08) 100%); pointer-events:none;"></div>
         <div style="position:absolute; left:28px; bottom:30px; text-align:left; pointer-events:none;">
@@ -203,7 +207,7 @@
           <div style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:400; font-size:15px; letter-spacing:0.3px; color:#C8A96B; margin-top:6px;">In ieder moment.</div>
         </div>
       </div>
-      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
+      <div class="nv-panel nv-panel-confidence" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
         <image-slot id="value-confidence" shape="rect" src="uploads/slot-value-confidence.webp" placeholder="Natural stone, warm ceramic bowl, olive branch, travertine" style="width:100%; height:100%; object-fit:cover;"></image-slot>
         <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.62) 0%, rgba(15,30,25,0.05) 45%, rgba(255,255,255,0.08) 100%); pointer-events:none;"></div>
         <div style="position:absolute; left:28px; bottom:30px; text-align:left; pointer-events:none;">
@@ -211,7 +215,7 @@
           <div style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:400; font-size:15px; letter-spacing:0.3px; color:#C8A96B; margin-top:6px;">Bij iedere keuze.</div>
         </div>
       </div>
-      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
+      <div class="nv-panel nv-panel-glow" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
         <image-slot id="value-glow" shape="rect" src="uploads/slot-value-glow.webp" placeholder="Golden light through olive trees, warm morning Mediterranean landscape" style="width:100%; height:100%; object-fit:cover;"></image-slot>
         <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.62) 0%, rgba(15,30,25,0.05) 45%, rgba(255,255,255,0.08) 100%); pointer-events:none;"></div>
         <div style="position:absolute; left:28px; bottom:30px; text-align:left; pointer-events:none;">
@@ -219,7 +223,7 @@
           <div style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:400; font-size:15px; letter-spacing:0.3px; color:#C8A96B; margin-top:6px;">Bij iedere stap.</div>
         </div>
       </div>
-      <div class="nv-panel" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
+      <div class="nv-panel nv-panel-ritual" style="position:relative; height:620px; overflow:hidden; transition:transform 0.6s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.015);">
         <image-slot id="value-ritual" shape="rect" src="uploads/slot-value-ritual.webp" placeholder="Linen fabric, natural skincare textures, warm shadows, soft ceramic" style="width:100%; height:100%; object-fit:cover;"></image-slot>
         <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.62) 0%, rgba(15,30,25,0.05) 45%, rgba(255,255,255,0.08) 100%); pointer-events:none;"></div>
         <div style="position:absolute; left:28px; bottom:30px; text-align:left; pointer-events:none;">
