@@ -73,6 +73,7 @@
     .nv-split, .nv-journal-feature, .nv-journal-grid, .nv-grid-3,
     .nv-footer { padding-left:40px !important; padding-right:40px !important; }
     .nv-calc-split { gap:64px !important; }
+    .nv-sec-news { padding-left:40px !important; padding-right:40px !important; }
     #article-1, #article-2, #article-3, #mixing-image { height:auto !important; aspect-ratio:3/2 !important; }
     .nv-phone-cell { grid-column:1 !important; grid-row:auto !important; }
   }
@@ -133,6 +134,9 @@
     .nv-feature-caption .nv-journal-title { font-size:26px !important; }
     #article-1, #article-2, #article-3 { height:auto !important; aspect-ratio:3/2 !important; }
 
+    .nv-sec-news { padding:80px 24px 90px !important; }
+    .nv-news-heading { font-size:28px !important; }
+    .nv-news-row { grid-template-columns:minmax(0,1fr) !important; gap:18px !important; }
     .nv-sec-newsletter { padding:80px 24px !important; }
     .nv-sec-newsletter h2 { font-size:30px !important; }
 
@@ -412,6 +416,37 @@
     </div>
   </div>
 
+  <!-- WHAT'S NEW -->
+  <div class="nv-sec-news" style="background:#241B12; padding:110px 64px 120px; border-top:1px solid rgba(200,169,107,0.16);">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:56px;">
+        <div class="nv-eyebrow" style="color:#C8A96B;">What's New</div>
+        <h3 class="nv-news-heading" style="font-family:'Playfair Display'; font-weight:500; font-size:36px; color:#F8F4EE; margin-top:16px;">Ontwikkelingen die we volgen.</h3>
+        <p style="font-family:'Inter'; font-weight:300; font-size:15px; line-height:1.8; color:rgba(248,244,238,0.65); margin:18px auto 0; max-width:520px;">Korte updates over onderzoek en regelgeving rond GLP-1 en peptides.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0;">
+        <sc-for list="{{ newsItems }}" as="n" hint-placeholder-count="3">
+          <a href="{{ n.url }}" class="nv-news-row" style="display:grid; grid-template-columns:{{ n.gridCols }}; gap:32px; align-items:center; text-decoration:none; padding:32px 0; border-bottom:1px solid rgba(248,244,238,0.1);">
+            <sc-if value="{{ n.hasImage }}" hint-placeholder-val="{{ true }}">
+              <div class="nv-photo-32" style="border-radius:8px; overflow:hidden; height:110px;">
+                <image-slot id="{{ n.slotId }}" shape="rect" src="{{ n.image }}" placeholder="{{ n.imagePlaceholder }}" style="width:100%; height:100%; object-fit:cover;"></image-slot>
+              </div>
+            </sc-if>
+            <div>
+              <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                <span style="font-family:'Inter'; font-weight:500; font-size:12px; letter-spacing:1.5px; color:rgba(248,244,238,0.5);">{{ n.dateLabel }}</span>
+                <span style="font-family:'Inter'; font-weight:500; font-size:11px; letter-spacing:2px; color:#C8A96B;">{{ n.tag }}</span>
+              </div>
+              <h4 style="font-family:'Playfair Display'; font-weight:500; font-size:21px; color:#F8F4EE; margin-top:10px; line-height:1.35;">{{ n.title }}</h4>
+              <p style="font-family:'Inter'; font-weight:300; font-size:14px; line-height:1.7; color:rgba(248,244,238,0.65); margin-top:8px; max-width:600px;">{{ n.excerpt }}</p>
+              <div style="font-family:'Inter'; font-weight:500; font-size:12.5px; letter-spacing:1px; color:#F8F4EE; margin-top:12px;">Lees verder &#8594;</div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
   <!-- NEWSLETTER -->
   <div class="nv-sec-newsletter" style="background:#D8CDC0; padding:130px 10%; text-align:center;">
     <div class="nv-eyebrow" style="color:#5A5342;">Stay Close</div>
@@ -465,8 +500,14 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { newsletterEmail: '', newsletterMsg: '', newsletterMsgColor: '#5A5342' };
+  state = { newsletterEmail: '', newsletterMsg: '', newsletterMsgColor: '#5A5342', news: [], formatNewsDate: null };
   componentDidMount() {
+    // The What's New items are a separate editorial stream from the Journal
+    // articles, read from the same source as the Journal page so the homepage
+    // never falls behind.
+    import('./news-data.js').then(m => {
+      this.setState({ news: m.sortedNews(), formatNewsDate: m.formatNewsDate });
+    }).catch(() => {});
     // Mobile browsers restore the previous scroll offset on reload, which drops
     // visitors mid-page. The homepage should always open at the top.
     try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
@@ -478,7 +519,16 @@ class Component extends DCLogic {
     }
   }
   renderVals() {
+    const { news, formatNewsDate } = this.state;
+    const newsItems = (news || []).map((n, i) => ({
+      ...n,
+      slotId: 'home-news-' + i,
+      dateLabel: formatNewsDate ? formatNewsDate(n.datePublished) : '',
+      hasImage: !!n.image,
+      gridCols: n.image ? '160px 1fr' : '1fr',
+    }));
     return {
+      newsItems,
       newsletterEmail: this.state.newsletterEmail,
       newsletterMsg: this.state.newsletterMsg,
       newsletterMsgColor: this.state.newsletterMsgColor,
