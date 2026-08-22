@@ -469,6 +469,7 @@
       <button onclick="{{ onNewsletterSubmit }}" style="background:none; border:none; font-family:'Inter'; font-weight:500; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#1F3D33; cursor:pointer; padding:14px 8px;">Subscribe</button>
     </div>
     <div style="font-family:'Inter'; font-weight:300; font-size:13.5px; color:{{ newsletterMsgColor }}; margin-top:14px; min-height:18px;">{{ newsletterMsg }}</div>
+    <p style="font-family:'Inter'; font-weight:300; font-size:12px; line-height:1.7; color:#5A5342; margin:18px auto 0; max-width:420px;">Je e-mailadres gebruiken we alleen voor deze nieuwsbrief. Afmelden kan altijd. Lees ons <a href="./Nove Vita - Privacy.dc.html" style="border-bottom:1px solid rgba(31,61,51,0.35);">privacybeleid</a>.</p>
   </div>
 
   <!-- FOOTER -->
@@ -518,6 +519,7 @@ class Component extends DCLogic {
     import('./news-data.js').then(m => {
       this.setState({ news: m.sortedNews(), formatNewsDate: m.formatNewsDate });
     }).catch(() => {});
+    import('./nv-forms.js').then(m => { this.forms = m; }).catch(() => {});
     // Mobile browsers restore the previous scroll offset on reload, which drops
     // visitors mid-page. The homepage should always open at the top.
     try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
@@ -543,14 +545,26 @@ class Component extends DCLogic {
       newsletterMsg: this.state.newsletterMsg,
       newsletterMsgColor: this.state.newsletterMsgColor,
       onNewsletterInput: (e) => this.setState({ newsletterEmail: e.target.value }),
-      onNewsletterSubmit: () => {
+      onNewsletterSubmit: async () => {
         const email = (this.state.newsletterEmail || '').trim();
         const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         if (!valid) {
           this.setState({ newsletterMsg: 'Vul een geldig e-mailadres in.', newsletterMsgColor: '#8A5A45' });
           return;
         }
-        this.setState({ newsletterEmail: '', newsletterMsg: 'Bedankt! Je bent aangemeld.', newsletterMsgColor: '#5A5342' });
+        const forms = this.forms;
+        if (!forms || !forms.isConfigured.newsletter()) {
+          // Never claim a signup that did not happen.
+          this.setState({ newsletterMsg: 'Aanmelden is nog niet actief. Mail ons op hello@novevita.nl.', newsletterMsgColor: '#8A5A45' });
+          return;
+        }
+        this.setState({ newsletterMsg: 'Bezig met aanmelden…', newsletterMsgColor: '#5A5342' });
+        const res = await forms.subscribe(email);
+        if (res.ok) {
+          this.setState({ newsletterEmail: '', newsletterMsg: 'Bijna klaar — check je mail om je aanmelding te bevestigen.', newsletterMsgColor: '#5A5342' });
+        } else {
+          this.setState({ newsletterMsg: 'Er ging iets mis. Probeer het later opnieuw.', newsletterMsgColor: '#8A5A45' });
+        }
       },
     };
   }

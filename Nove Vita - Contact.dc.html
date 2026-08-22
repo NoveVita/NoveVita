@@ -40,6 +40,17 @@
   .nv-cta-btn:hover { background:#D9BE85; transform:translateY(-2px); }
   .nv-contact-card { background:#FFFFFF; border:1px solid rgba(31,61,51,0.08); border-radius:4px; padding:36px; transition:box-shadow 220ms ease, transform 220ms ease; }
   .nv-contact-card:hover { box-shadow:0 16px 34px rgba(31,61,51,0.10); transform:translateY(-2px); }
+  .nv-label { font-family:'Inter'; font-weight:500; font-size:12px; letter-spacing:1.2px; text-transform:uppercase; color:#1F3D33; }
+  .nv-input { font-family:'Inter'; font-weight:300; font-size:15px; color:#2D2D2D; background:#F8F4EE; border:1px solid rgba(31,61,51,0.14); border-radius:3px; padding:14px 16px; width:100%; outline:none; transition:border-color 200ms ease, background 200ms ease; }
+  .nv-input:focus { border-color:#C8A96B; background:#FFFFFF; }
+  .nv-input::placeholder { color:#9A9384; }
+  /* 44px is the smallest comfortable tap target, and 16px stops iOS zooming
+     the page when a field gets focus. */
+  @media (max-width: 720px) {
+    .nv-form-row { grid-template-columns:minmax(0,1fr) !important; gap:18px !important; }
+    .nv-form-wrap > div:last-child { padding:28px 22px !important; }
+    .nv-input { font-size:16px !important; min-height:48px !important; }
+  }
 </style>
 </helmet>
 
@@ -73,9 +84,61 @@
       </div>
     </div>
 
-    <div style="max-width:900px; margin:40px auto 0; text-align:center;">
-      <div class="nv-eyebrow" style="font-size:11.5px;">E-mail</div>
-      <p style="font-family:'Inter'; font-weight:300; font-size:14.5px; color:#4A4A42; margin-top:12px;">Liever mailen? <a href="mailto:info@novevita.nl" style="border-bottom:1px solid #C8A96B;">info@novevita.nl</a></p>
+    <div class="nv-form-wrap" style="max-width:640px; margin:64px auto 0;">
+      <div style="text-align:center;">
+        <div class="nv-eyebrow" style="font-size:11.5px;">E-mail</div>
+        <h2 style="font-family:'Playfair Display'; font-weight:500; font-size:26px; color:#1F3D33; margin-top:12px;">Of stuur ons een bericht.</h2>
+        <p style="font-family:'Inter'; font-weight:300; font-size:14.5px; line-height:1.85; color:#4A4A42; margin-top:12px;">We antwoorden meestal binnen één werkdag. Liever direct mailen? <a href="mailto:support@novevita.nl" style="border-bottom:1px solid #C8A96B;">support@novevita.nl</a></p>
+      </div>
+
+      <div style="background:#FFFFFF; border:1px solid rgba(31,61,51,0.08); border-radius:4px; padding:40px; margin-top:32px;">
+        <div class="nv-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span class="nv-label">Naam</span>
+            <input class="nv-input" type="text" autocomplete="name" value="{{ naam }}" oninput="{{ onNaam }}" placeholder="Je naam">
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span class="nv-label">E-mailadres</span>
+            <input class="nv-input" type="email" autocomplete="email" value="{{ email }}" oninput="{{ onEmail }}" placeholder="jij@voorbeeld.nl">
+          </label>
+        </div>
+        <div class="nv-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:22px;">
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span class="nv-label">Telefoonnummer <span style="color:#8C8272; font-weight:300;">— optioneel</span></span>
+            <input class="nv-input" type="tel" autocomplete="tel" value="{{ telefoon }}" oninput="{{ onTelefoon }}" placeholder="06 12345678">
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span class="nv-label">Onderwerp</span>
+            <select class="nv-input" value="{{ onderwerp }}" onchange="{{ onOnderwerp }}">
+              <option value="Vraag over een product">Vraag over een product</option>
+              <option value="Vraag over begeleiding">Vraag over begeleiding</option>
+              <option value="Vraag over de calculator">Vraag over de calculator</option>
+              <option value="Vraag over mijn bestelling">Vraag over mijn bestelling</option>
+              <option value="Iets anders">Iets anders</option>
+            </select>
+          </label>
+        </div>
+        <label style="display:flex; flex-direction:column; gap:8px; margin-top:22px;">
+          <span class="nv-label">Bericht</span>
+          <textarea class="nv-input" rows="6" value="{{ bericht }}" oninput="{{ onBericht }}" placeholder="Waar kunnen we je mee helpen?" style="resize:vertical; min-height:130px;"></textarea>
+        </label>
+        <label style="display:flex; flex-direction:column; gap:8px; margin-top:22px;">
+          <span class="nv-label">Waar heb je ons gevonden? <span style="color:#8C8272; font-weight:300;">— optioneel</span></span>
+          <select class="nv-input" value="{{ gevonden }}" onchange="{{ onGevonden }}">
+            <option value="">Kies of laat leeg</option>
+            <option value="Google">Google</option>
+            <option value="Instagram">Instagram</option>
+            <option value="TikTok">TikTok</option>
+            <option value="Via iemand anders">Via iemand anders</option>
+            <option value="Anders">Anders</option>
+          </select>
+        </label>
+
+        <button onclick="{{ onSubmit }}" class="nv-cta-btn" style="margin-top:30px; border:none; cursor:pointer; width:100%; font-size:14px;">{{ submitLabel }}</button>
+
+        <div style="font-family:'Inter'; font-weight:300; font-size:13.5px; line-height:1.7; color:{{ msgColor }}; margin-top:16px; min-height:20px;">{{ msg }}</div>
+        <p style="font-family:'Inter'; font-weight:300; font-size:12px; line-height:1.7; color:#6B6455; margin-top:14px;">We gebruiken je gegevens alleen om je vraag te beantwoorden. Lees ons <a href="./Nove Vita - Privacy.dc.html" style="border-bottom:1px solid rgba(31,61,51,0.35);">privacybeleid</a>.</p>
+      </div>
     </div>
 
     <div style="max-width:900px; margin:44px auto 0; text-align:center;">
@@ -103,9 +166,58 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  state = {
+    naam: '', email: '', telefoon: '', onderwerp: 'Vraag over een product',
+    bericht: '', gevonden: '', sending: false, msg: '', msgColor: '#4A4A42',
+  };
+  componentDidMount() {
+    import('./nv-forms.js').then(m => { this.forms = m; }).catch(() => {});
+  }
   renderVals() {
+    const s = this.state;
+    const set = (k) => (e) => this.setState({ [k]: e.target.value });
     const text = 'Hallo! Ik zou graag in contact komen.';
-    return { waUrl: 'https://wa.me/31649288558?text=' + encodeURIComponent(text) };
+    return {
+      waUrl: 'https://wa.me/31649288558?text=' + encodeURIComponent(text),
+      naam: s.naam, email: s.email, telefoon: s.telefoon,
+      onderwerp: s.onderwerp, bericht: s.bericht, gevonden: s.gevonden,
+      onNaam: set('naam'), onEmail: set('email'), onTelefoon: set('telefoon'),
+      onOnderwerp: set('onderwerp'), onBericht: set('bericht'), onGevonden: set('gevonden'),
+      submitLabel: s.sending ? 'Versturen…' : 'Verstuur bericht',
+      msg: s.msg, msgColor: s.msgColor,
+      onSubmit: async () => {
+        if (this.state.sending) return;
+        const f = this.state;
+        if (!f.naam.trim()) return this.setState({ msg: 'Vul je naam in.', msgColor: '#8A5A45' });
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.trim())) return this.setState({ msg: 'Vul een geldig e-mailadres in.', msgColor: '#8A5A45' });
+        if (f.bericht.trim().length < 10) return this.setState({ msg: 'Schrijf kort waar we je mee kunnen helpen.', msgColor: '#8A5A45' });
+
+        const fields = {
+          naam: f.naam.trim(), email: f.email.trim(), telefoon: f.telefoon.trim(),
+          onderwerp: f.onderwerp, bericht: f.bericht.trim(), gevonden: f.gevonden,
+        };
+        const forms = this.forms;
+        // Until the mail service is connected, hand the message to the
+        // visitor's own mail client rather than pretending it was sent.
+        if (!forms || !forms.isConfigured.contact()) {
+          window.location.href = forms ? forms.mailtoFallback(fields)
+            : 'mailto:support@novevita.nl';
+          this.setState({ msg: 'We openen je mailprogramma met je bericht erin.', msgColor: '#4A4A42' });
+          return;
+        }
+        this.setState({ sending: true, msg: '' });
+        const res = await forms.sendContact(fields);
+        if (res.ok) {
+          this.setState({
+            sending: false, naam: '', email: '', telefoon: '', bericht: '', gevonden: '',
+            msg: 'Bedankt, je bericht is verstuurd. We antwoorden meestal binnen één werkdag.',
+            msgColor: '#2F5A45',
+          });
+        } else {
+          this.setState({ sending: false, msg: 'Versturen lukte niet. Mail ons op support@novevita.nl of stuur een WhatsApp.', msgColor: '#8A5A45' });
+        }
+      },
+    };
   }
 }
 </script>
