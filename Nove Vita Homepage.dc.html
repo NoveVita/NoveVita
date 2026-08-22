@@ -88,7 +88,7 @@
     .nv-hero-masthead { padding:70px 24px !important; }
     .nv-hero-copy { padding:70px 24px !important; }
     .nv-hero-center { height:auto !important; aspect-ratio:2/3 !important; max-height:80svh !important; }
-    .hero-wordmark { font-size:clamp(64px, 22cqw, 132px) !important; }
+    .hero-wordmark { font-size:clamp(64px, 22cqw, 132px) !important; line-height:1.02 !important; }
     .nv-hero-quote { top:20% !important; }
     .nv-hero-quote > div { font-size:18px !important; line-height:1.5 !important; }
     /* a continuously animating, blurred layer is the most expensive thing a
@@ -141,7 +141,12 @@
 
     .nv-sec-news { padding:80px 24px 90px !important; }
     .nv-news-heading { font-size:28px !important; }
-    .nv-news-row { grid-template-columns:minmax(0,1fr) !important; gap:18px !important; }
+    /* the news stream is secondary to the journal cards, so on mobile it
+       reads as a compact list: thumbnail beside the headline, not above it */
+    .nv-news-row { grid-template-columns:104px minmax(0,1fr) !important; gap:16px !important; align-items:start !important; padding:22px 0 !important; }
+    .nv-news-row .nv-photo-32 { height:auto !important; aspect-ratio:3/2 !important; }
+    .nv-news-row h4 { font-size:17px !important; margin-top:6px !important; }
+    .nv-news-row p { display:none !important; }
     .nv-sec-newsletter { padding:80px 24px !important; }
     .nv-sec-newsletter h2 { font-size:30px !important; }
 
@@ -297,13 +302,14 @@
   <!-- EXPLORE NOVÉ VITA -->
   <div id="explore" style="padding:190px 0 90px; min-height:900px; background-color:#142922; position:relative;">
     <div class="nv-grid-3" style="position:relative; width:100%; display:grid; grid-template-columns:repeat(3, 1fr); gap:64px; max-width:1920px; margin:0 auto; padding:0 40px;">
-      <a href="./Nove Vita - Metabolic.dc.html" class="nv-card" style="min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; text-decoration:none; cursor:pointer; padding:18px; border-radius:24px; transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;" style-hover="transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,0.28);">
+      <a href="./Nove Vita - Guidance.dc.html" class="nv-card" style="min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; text-decoration:none; cursor:pointer; padding:18px; border-radius:24px; transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;" style-hover="transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,0.28);">
         <div style="min-width:0; width:100%; height:474px; border-radius:20px; overflow:hidden; position:relative; color:#F8F4EE; border:0.75px solid rgba(248,244,238,0.14); background:rgba(255,255,255,0.015);" class="nv-explore-imgwrap">
-          <image-slot id="explore-wellness" shape="rect" src="uploads/slot-explore-wellness.webp" placeholder="Stone, water, quiet ritual" style="width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
+          <image-slot id="explore-selfcare" shape="rect" src="uploads/slot-explore-selfcare.webp" placeholder="Olive trees, soft shadow, ease" style="width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
           <div style="position:absolute; inset:0; box-shadow:inset 0 0 90px rgba(0,0,0,0.35); pointer-events:none;"></div>
         </div>
-        <h3 class="nv-card-title" style="font-family:'Playfair Display'; font-weight:500; font-size:26px; color:#F8F4EE; margin-top:42px; transition:color 0.35s ease;" style-hover="color:#C8A96B;">Metabolic</h3>
-        <p style="font-family:'Inter'; font-weight:300; font-size:14.5px; line-height:2; color:rgba(248,244,238,0.74); margin-top:20px; max-width:260px; transition:color 0.35s ease;" style-hover="color:rgba(248,244,238,0.92);">Optimaliseer je metabolisme op celniveau.</p>
+        <h3 class="nv-card-title" style="font-family:'Playfair Display'; font-weight:500; font-size:26px; color:#F8F4EE; margin-top:42px; transition:color 0.35s ease;" style-hover="color:#C8A96B;">Guidance</h3>
+        <p style="font-family:'Inter'; font-weight:300; font-size:14.5px; line-height:2; color:rgba(248,244,238,0.74); margin-top:20px; max-width:260px; transition:color 0.35s ease;" style-hover="color:rgba(248,244,238,0.92);">Persoonlijke begeleiding, afgestemd op jouw reis.</p>
+        <div style="font-family:'Inter'; font-weight:500; font-size:13px; letter-spacing:0.5px; color:#C8A96B; margin-top:16px;">Ontdek Guidance &#8594;</div>
       </a>
       <a href="./Nove Vita - Skin.dc.html" class="nv-card" style="min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; text-decoration:none; cursor:pointer; padding:18px; border-radius:24px; transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;" style-hover="transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,0.28);">
         <div style="min-width:0; width:100%; height:474px; border-radius:20px; overflow:hidden; position:relative; color:#F8F4EE; border:0.75px solid rgba(248,244,238,0.14); background:rgba(255,255,255,0.015);" class="nv-explore-imgwrap">
@@ -313,14 +319,13 @@
         <h3 class="nv-card-title" style="font-family:'Playfair Display'; font-weight:500; font-size:26px; color:#F8F4EE; margin-top:42px; transition:color 0.35s ease;" style-hover="color:#C8A96B;">Skin</h3>
         <p style="font-family:'Inter'; font-weight:300; font-size:14.5px; line-height:2; color:rgba(248,244,238,0.74); margin-top:20px; max-width:260px; transition:color 0.35s ease;" style-hover="color:rgba(248,244,238,0.92);">Geavanceerde peptide-skincare voor volume, stevigheid en een natuurlijke glow.</p>
       </a>
-      <a href="./Nove Vita - Guidance.dc.html" class="nv-card" style="min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; text-decoration:none; cursor:pointer; padding:18px; border-radius:24px; transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;" style-hover="transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,0.28);">
+      <a href="./Nove Vita - Metabolic.dc.html" class="nv-card" style="min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; text-decoration:none; cursor:pointer; padding:18px; border-radius:24px; transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;" style-hover="transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,0.28);">
         <div style="min-width:0; width:100%; height:474px; border-radius:20px; overflow:hidden; position:relative; color:#F8F4EE; border:0.75px solid rgba(248,244,238,0.14); background:rgba(255,255,255,0.015);" class="nv-explore-imgwrap">
-          <image-slot id="explore-selfcare" shape="rect" src="uploads/slot-explore-selfcare.webp" placeholder="Olive trees, soft shadow, ease" style="width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
+          <image-slot id="explore-wellness" shape="rect" src="uploads/slot-explore-wellness.webp" placeholder="Stone, water, quiet ritual" style="width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease;" style-hover="transform:scale(1.045);"></image-slot>
           <div style="position:absolute; inset:0; box-shadow:inset 0 0 90px rgba(0,0,0,0.35); pointer-events:none;"></div>
         </div>
-        <h3 class="nv-card-title" style="font-family:'Playfair Display'; font-weight:500; font-size:26px; color:#F8F4EE; margin-top:42px; transition:color 0.35s ease;" style-hover="color:#C8A96B;">Guidance</h3>
-        <p style="font-family:'Inter'; font-weight:300; font-size:14.5px; line-height:2; color:rgba(248,244,238,0.74); margin-top:20px; max-width:260px; transition:color 0.35s ease;" style-hover="color:rgba(248,244,238,0.92);">Persoonlijke begeleiding, afgestemd op jouw reis.</p>
-        <div style="font-family:'Inter'; font-weight:500; font-size:13px; letter-spacing:0.5px; color:#C8A96B; margin-top:16px;">Ontdek Guidance &#8594;</div>
+        <h3 class="nv-card-title" style="font-family:'Playfair Display'; font-weight:500; font-size:26px; color:#F8F4EE; margin-top:42px; transition:color 0.35s ease;" style-hover="color:#C8A96B;">Metabolic</h3>
+        <p style="font-family:'Inter'; font-weight:300; font-size:14.5px; line-height:2; color:rgba(248,244,238,0.74); margin-top:20px; max-width:260px; transition:color 0.35s ease;" style-hover="color:rgba(248,244,238,0.92);">Optimaliseer je metabolisme op celniveau.</p>
       </a>
     </div>
   </div>
