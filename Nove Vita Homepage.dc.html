@@ -46,6 +46,15 @@
     .calculator-phone-link { animation:none !important; }
   }
   html { scroll-behavior:smooth; }
+  html, body { overflow-anchor:none; }
+  /* vh tracks the largest viewport, so it re-resolves when the mobile
+     toolbar hides or shows (opening the menu does exactly that): the hero
+     resizes mid-scroll and the page jumps. svh is the stable small-viewport
+     unit; the inline vh values stay as the fallback. */
+  @supports (height: 100svh) {
+    .nv-hero { min-height:100svh !important; }
+    .nv-lifestyle-banner { height:78svh !important; }
+  }
   body { background:#F8F4EE; }
   html, body { width:100%; overflow-x:clip; height:auto !important; min-height:100%; }
   a { color:#1F3D33; text-decoration:none; }
