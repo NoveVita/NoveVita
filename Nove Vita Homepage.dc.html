@@ -79,6 +79,10 @@
     .nv-hero-copy { padding:70px 24px !important; }
     .nv-hero-center { height:auto !important; aspect-ratio:2/3 !important; max-height:80svh !important; }
     .hero-wordmark { font-size:clamp(64px, 22cqw, 132px) !important; }
+    /* a continuously animating, blurred layer is the most expensive thing a
+       phone can be asked to repaint while scrolling — both go away here. */
+    .calculator-phone-link { animation:none !important; }
+    .nv-phone-glow { display:none !important; }
   }
   @media (max-width: 720px) {
     .nv-sec-philosophy { padding-top:90px !important; }
@@ -256,10 +260,10 @@
         </div>
       </div>
       <div class="nv-phone-cell" style="position:relative; grid-column:2; grid-row:1; min-width:0; align-self:center; justify-self:center; width:100%; max-width:402px; aspect-ratio:402/874;">
-        <div style="position:absolute; inset:-70px; z-index:0; pointer-events:none; background:radial-gradient(circle at 50% 40%, rgba(200,169,107,0.16), transparent 62%), radial-gradient(circle at 55% 65%, rgba(31,61,51,0.12), transparent 65%); filter:blur(18px);"></div>
+        <div class="nv-phone-glow" style="position:absolute; inset:-70px; z-index:0; pointer-events:none; background:radial-gradient(circle at 50% 40%, rgba(200,169,107,0.16), transparent 62%), radial-gradient(circle at 55% 65%, rgba(31,61,51,0.12), transparent 65%); filter:blur(18px);"></div>
         <a href="./Retatrutide Pen Calculator (Standalone).html" class="calculator-phone-link" style="position:absolute; left:0; right:0; top:0; bottom:-8%; display:block; margin:0; cursor:pointer; z-index:10; animation:nvPhoneFloat 6s ease-in-out infinite; box-shadow:0 40px 80px rgba(0,0,0,0.18), 0 18px 40px rgba(18,65,52,0.14), 0 0 80px rgba(205,170,90,0.10); border-radius:44px;">
           <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="100%,100%" width="{{ '100%' }}" height="{{ '100%' }}" dark="{{ true }}" style="width:100%; height:100%; pointer-events:none;">
-            <iframe src="./Retatrutide Pen Calculator (Standalone).html" title="Nové Vita calculator preview" loading="lazy" scrolling="no" style="width:100%; height:100%; border:none; pointer-events:none; overflow:hidden;"></iframe>
+            <img src="uploads/calc-phone-shot.png" alt="De Nové Vita calculator op een telefoon" width="402" height="874" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;">
           </x-import>
         </a>
       </div>
