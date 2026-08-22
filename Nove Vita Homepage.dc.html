@@ -35,7 +35,11 @@
   html { scroll-behavior:smooth; }
   html, body { overflow-anchor:none; }
   body { background:#F8F4EE; }
-  html, body { width:100%; overflow-x:clip; height:auto !important; min-height:100%; }
+  /* No overflow property on html or body: any value other than visible turns
+     them into a clip container, and a sticky header inside a clip container
+     stops sticking — the menu scrolled away on every page. Every page is
+     measured to fit its viewport instead. */
+  html, body { width:100%; height:auto !important; min-height:100%; }
   a { color:#1F3D33; text-decoration:none; }
   a:hover { color:#6B7F6E; }
   .nv-nav-link { color:#B7AAA0; font-family:'Inter',sans-serif; font-weight:400; font-size:13px; letter-spacing:2px; text-transform:uppercase; opacity:1; transition:color 0.2s; }
@@ -79,6 +83,7 @@
     .nv-hero-copy { padding:70px 24px !important; }
     .nv-hero-center { height:auto !important; aspect-ratio:2/3 !important; max-height:80svh !important; }
     .hero-wordmark { font-size:clamp(64px, 22cqw, 132px) !important; }
+    .nv-hero-quote { top:20% !important; }
     /* a continuously animating, blurred layer is the most expensive thing a
        phone can be asked to repaint while scrolling — both go away here. */
     .calculator-phone-link { animation:none !important; }
@@ -99,6 +104,7 @@
     .nv-calc-split { padding-left:24px !important; padding-right:24px !important; gap:48px !important; }
     .nv-phone-cell { max-width:290px !important; margin:0 auto !important; }
     .nv-calc-cta-mobile { display:block !important; }
+    .nv-calc-cta-desktop { display:none !important; }
 
     #explore { padding:90px 0 70px !important; }
     .nv-grid-3 { padding:0 24px !important; gap:48px !important; }
@@ -166,7 +172,7 @@
       <image-slot id="hero-photo" data-eager shape="rect" src="uploads/slot-hero-photo.webp" placeholder="Editorial portrait — woman in warm Mediterranean sunlight, coastline behind" style="width:100%; height:100%; object-fit:cover;"></image-slot>
       <div style="position:absolute; inset:0; background:linear-gradient(120deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 22%); pointer-events:none;"></div>
       <div style="position:absolute; inset:0; box-shadow:inset 0 0 140px rgba(0,0,0,0.22); pointer-events:none;"></div>
-      <div style="position:absolute; top:38%; right:8%; text-align:right; pointer-events:none;">
+      <div class="nv-hero-quote" style="position:absolute; top:38%; right:8%; text-align:right; pointer-events:none;">
         <div style="font-family:'Playfair Display'; font-style:italic; font-weight:400; font-size:24px; line-height:1.6; color:#1F3D33;">Feel your best.<br>Live beautifully.<br>Be you.</div>
       </div>
     </div>
@@ -260,7 +266,7 @@
             <span style="color:#C8A96B; font-size:15px; flex-shrink:0;">&#10003;</span> Nauwkeurige berekeningen
           </div>
         </div>
-        <div style="margin-top:28px;">
+        <div class="nv-calc-cta-desktop" style="margin-top:28px;">
           <a class="nv-btn-primary" href="./Retatrutide Pen Calculator (Standalone).html" style="display:inline-block;">Naar de calculator</a>
         </div>
       </div>

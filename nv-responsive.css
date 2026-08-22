@@ -1,3 +1,10 @@
+/* The header is imported as a component, and the runtime wraps it in a
+   .sc-host div that is only as tall as the header itself. A sticky element
+   cannot travel outside its containing block, so the menu scrolled away on
+   every page. display:contents removes that wrapper box and hands the header
+   back to the page. Applies at every width. */
+.sc-host[data-sc-name="Nove Vita Header"] { display:contents; }
+
 /* Nové Vita — responsive layer
    The desktop layout is the source of truth. Every rule below sits behind a
    max-width query, so desktop rendering is untouched; narrow screens get the

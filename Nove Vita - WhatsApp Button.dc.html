@@ -55,6 +55,13 @@ const WHATSAPP_NUMBER = '31649288558';
 class Component extends DCLogic {
   state = { showBubble: false, dismissed: false };
   componentDidMount() {
+    // On a phone the bubble is a fixed white card with a 40px shadow that has
+    // to be repainted on every scroll frame, and the scroll handler that
+    // triggers it measures the page height each time. Both are skipped on
+    // touch: the button alone is enough there.
+    const touch = typeof window !== 'undefined' &&
+      (window.matchMedia('(hover: none)').matches || window.innerWidth <= 900);
+    if (touch) return;
     if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nvw-dismissed') === '1') return;
     this._timer = setTimeout(() => this.maybeShow(), 8000);
     this._ticking = false;

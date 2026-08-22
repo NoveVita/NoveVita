@@ -25,7 +25,11 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
-  html, body { width:100%; overflow-x:clip; height:auto !important; min-height:100%; }
+  /* No overflow property on html or body: any value other than visible turns
+     them into a clip container, and a sticky header inside a clip container
+     stops sticking — the menu scrolled away on every page. Every page is
+     measured to fit its viewport instead. */
+  html, body { width:100%; height:auto !important; min-height:100%; }
   a { color:#1F3D33; text-decoration:none; }
   a:hover { color:#6B7F6E; }
   .nv-tag-chip { font-family:'Inter'; font-weight:600; font-size:11px; letter-spacing:2px; color:#142922; text-transform:uppercase; background:#C8A96B; padding:6px 14px; border-radius:3px; }
