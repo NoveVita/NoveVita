@@ -109,6 +109,17 @@
   [id*="-related-"],
   [id^="journal-grid-"] { height:auto !important; aspect-ratio:3/2 !important; }
   .nv-contact-split > div:first-child { min-height:0 !important; }
+
+  /* The Guidance hero caption is anchored to the bottom of the photo and grows
+     upward, so on a phone its long intro paragraph pushed the eyebrow and
+     headline off the top of the image. Below 720px the photo keeps its own
+     height and the caption sits underneath it, on the dark band. */
+  .nv-guidance-hero { height:auto !important; min-height:0 !important; background:#142922 !important; }
+  .nv-guidance-hero > image-slot { height:auto !important; aspect-ratio:3/2 !important; }
+  .nv-guidance-hero > div[style*="inset:0"] { display:none !important; }
+  .nv-guidance-hero-caption { position:static !important; padding:32px 24px 56px !important; }
+  .nv-guidance-hero-caption h1 { font-size:28px !important; }
+  .nv-guidance-hero-caption p { font-size:17px !important; }
   #guidance-contact { height:auto !important; min-height:0 !important; aspect-ratio:3/2 !important; }
 
   /* journal overview: the featured photo keeps its 3:2 frame and the caption
