@@ -16,6 +16,7 @@ Static site (plain HTML + JS, no build step). Every page is a self-contained
 - `Retatrutide Pen Calculator (Standalone).html` / `Vial & Syringe Calculator (Standalone).html` — the two calculator tools
 - `journal-data.js` / `news-data.js` — shared content data for Journal and What's New
 - `image-slot.js` / `insulin-syringe.js` / `support.js` — shared runtime scripts, required by the pages
+- `nv-responsive.css` — the shared responsive layer (tablet 1024px, phone 720px); every page links it
 - `uploads/` — all images used across the site (every image-slot now has an explicit `src`)
 - `.image-slots.state.json` — kept as a fallback only; no longer required since every slot has a direct src
 - `sitemap.xml` / `robots.txt` — SEO files (domain: novevita.nl)

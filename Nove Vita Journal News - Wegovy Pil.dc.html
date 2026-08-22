@@ -25,6 +25,7 @@
 <meta id="nvTwDesc" name="twitter:description" content="">
 <meta id="nvTwImage" name="twitter:image" content="">
 <script src="./image-slot.js"></script>
+<link rel="stylesheet" href="./nv-responsive.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
@@ -34,11 +35,6 @@
   .nv-eyebrow { font-family:'Inter'; font-weight:500; font-size:13.5px; letter-spacing:4px; color:#8C8272; text-transform:uppercase; }
   .nv-news-body p { font-family:'Inter'; font-weight:300; font-size:17px; line-height:1.9; color:#31433A; margin-top:22px; }
   .nv-tag-chip { font-family:'Inter'; font-weight:600; font-size:11px; letter-spacing:2px; color:#142922; text-transform:uppercase; background:#C8A96B; padding:6px 14px; border-radius:3px; }
-  @media (max-width: 760px) {
-    .nv-news-foot { padding-left:24px !important; padding-right:24px !important; }
-    .nv-footer { padding:70px 24px 32px !important; }
-    .nv-news-masthead { padding-left:24px !important; padding-right:24px !important; }
-  }
 </style>
 </helmet>
 
@@ -57,7 +53,7 @@
   </div>
 
   <div style="max-width:900px; margin:36px auto 0; padding:0 24px;">
-    <div style="border-radius:6px; overflow:hidden; height:340px; box-shadow:0 20px 44px rgba(31,61,51,0.14);">
+    <div class="nv-photo-32" style="border-radius:6px; overflow:hidden; height:340px; box-shadow:0 20px 44px rgba(31,61,51,0.14);">
       <image-slot id="news-hero-img" shape="rect" src="{{ image }}" placeholder="{{ imagePlaceholder }}" aria-label="{{ heroImageAlt }}" style="width:100%; height:100%; object-fit:cover; object-position:center 35%;"></image-slot>
     </div>
   </div>

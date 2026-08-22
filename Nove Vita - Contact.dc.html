@@ -20,6 +20,7 @@
 <meta property="og:url" content="https://www.novevita.nl/contact">
 <meta property="og:site_name" content="Nové Vita">
 <script src="./image-slot.js"></script>
+<link rel="stylesheet" href="./nv-responsive.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
@@ -30,12 +31,6 @@
   .nv-cta-btn:hover { background:#D9BE85; transform:translateY(-2px); }
   .nv-contact-card { background:#FFFFFF; border:1px solid rgba(31,61,51,0.08); border-radius:4px; padding:36px; transition:box-shadow 220ms ease, transform 220ms ease; }
   .nv-contact-card:hover { box-shadow:0 16px 34px rgba(31,61,51,0.10); transform:translateY(-2px); }
-  @media (max-width: 900px) {
-    .nv-contact-grid { grid-template-columns:1fr !important; }
-  }
-  @media (max-width: 760px) {
-    .nv-section-pad { padding-left:24px !important; padding-right:24px !important; }
-  }
 </style>
 </helmet>
 
@@ -81,7 +76,7 @@
   </div>
 
   <!-- FOOTER -->
-  <div style="background:#142922; padding:40px 64px 40px;">
+  <div class="nv-pad" style="background:#142922; padding:40px 64px 40px;">
     <div style="display:flex; justify-content:space-between; align-items:center; max-width:1300px; margin:0 auto; flex-wrap:wrap; gap:20px;">
       <div style="font-family:'Playfair Display'; font-weight:500; font-size:20px; letter-spacing:3px; color:#F8F4EE;">NOVÉ VITA</div>
       <a href="./Nove Vita Homepage.dc.html" style="font-family:'Inter'; font-weight:300; font-size:13px; color:#8CA593;">&#8592; Terug naar Home</a>

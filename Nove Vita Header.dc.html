@@ -18,29 +18,25 @@
   .nvh-dark .nvh-link { color:#F8F4EE; }
   .nvh-dark .nvh-link:hover, .nvh-dark .nvh-link.active { color:#E3C588; }
   .nvh-dark .nvh-logo { color:#F8F4EE !important; }
-  .nvh-dark .nvh-hamburger span { background:#F8F4EE; }
-  .nvh-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
-  .nvh-hamburger span { width:20px; height:1.5px; background:#1F3D33; display:block; }
-  .nvh-dark .nvh-hamburger span { background:#F8F4EE; }
   .nvh-tools { position:relative; }
   .nvh-tools-menu { position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; background:transparent; display:none; flex-direction:column; z-index:1201; pointer-events:none; }
-  .nvh-tools:hover .nvh-tools-menu, .nvh-tools-menu:hover { pointer-events:auto; }
+  .nvh-tools:hover .nvh-tools-menu, .nvh-tools-menu:hover { display:flex; pointer-events:auto; }
   .nvh-tools-menu-inner { background:#F8F4EE; border-radius:6px; box-shadow:0 16px 32px rgba(31,61,51,0.16); padding:10px; display:flex; flex-direction:column; gap:2px; min-width:170px; }
-  .nvh-tools:hover .nvh-tools-menu, .nvh-tools-menu:hover { display:flex; }
   .nvh-tools-item { font-family:'Inter',sans-serif; font-weight:500; font-size:12.5px; letter-spacing:0.6px; text-transform:none; color:#1F3D33; text-decoration:none; padding:10px 14px; border-radius:4px; transition:background 180ms ease; }
   .nvh-tools-item:hover { background:rgba(31,61,51,0.06); color:#9C7A3F; }
   .nvh-tools-item.active { color:#9C7A3F; }
-  .nvh-mobile-group { font-family:'Inter',sans-serif; font-weight:500; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#8C8272; }
-  @media (max-width: 760px) {
+
+  /* ---------- mobile navigation (tap driven, built for touch) ---------- */
+  .nvh-burger { display:none; }
+  .nvh-m-link.active { color:#9C7A3F !important; }
+  @media (max-width: 900px) {
     .nvh-links { display:none !important; }
-    .nvh-hamburger { display:flex !important; }
-    .nvh-mobile.open { display:flex !important; }
-    .nvh-tools-menu { display:none !important; }
+    .nvh-burger { display:flex !important; }
   }
 </style>
 </helmet>
 <dc-import name="Nove Vita - WhatsApp Button" hint-size="60px,60px"></dc-import>
-<header class="{{ darkCls }}" style="position:sticky; top:0; left:0; right:0; z-index:1000; width:100%; max-height:96px; overflow:visible; box-sizing:border-box; padding:{{ padY }}px 32px; display:flex; align-items:center; justify-content:space-between; background:{{ resolvedBg }}; border-bottom:1px solid rgba(31,61,51,0.16); box-shadow:{{ shadow }}; transition:padding 250ms ease, background 250ms ease, box-shadow 250ms ease;">
+<header class="{{ darkCls }}" style="position:sticky; top:0; left:0; right:0; z-index:1000; width:100%; box-sizing:border-box; padding:{{ padY }}px 32px; display:flex; align-items:center; justify-content:space-between; background:{{ resolvedBg }}; border-bottom:1px solid rgba(31,61,51,0.16); box-shadow:{{ shadow }}; transition:padding 250ms ease, background 250ms ease, box-shadow 250ms ease;">
   <a href="./Nove Vita Homepage.dc.html" class="nvh-logo" style="font-family:'Playfair Display'; font-weight:500; font-size:19px; letter-spacing:2.5px; color:#1F3D33; text-decoration:none;">NOVÉ VITA</a>
   <nav class="nvh-links" style="display:flex; align-items:center; gap:38px;">
     <a class="{{ homeClass }}" href="./Nove Vita Homepage.dc.html">Home</a>
@@ -58,26 +54,41 @@
     <a class="{{ faqClass }}" href="./Nove Vita - FAQ.dc.html">FAQ</a>
     <a class="{{ contactClass }}" href="./Nove Vita - Contact.dc.html">Contact</a>
   </nav>
-  <label class="nvh-hamburger" onclick="{{ toggleMenu }}">
-    <span></span><span></span><span></span>
-  </label>
-  <sc-if value="{{ menuOpen }}">
-    <div class="nvh-mobile" style="position:absolute; top:100%; left:0; right:0; background:#F8F4EE; padding:22px 24px; display:flex; flex-direction:column; gap:18px; border-bottom:1px solid rgba(31,61,51,0.08); box-shadow:0 12px 24px rgba(31,61,51,0.08);">
-      <a class="{{ homeClass }}" href="./Nove Vita Homepage.dc.html">Home</a>
-      <div class="nvh-mobile-group">Tools</div>
-      <a class="{{ toolsCalcClass }}" href="./Retatrutide Pen Calculator (Standalone).html" style="padding-left:14px;">Calculator</a>
-      <a class="{{ toolsMixingClass }}" href="./Vial &amp; Syringe Calculator (Standalone).html" style="padding-left:14px;">Mixing</a>
-      <a class="{{ journalClass }}" href="./Nove Vita - Journal.dc.html">Journal</a>
-      <a class="{{ guidanceClass }}" href="./Nove Vita - Guidance.dc.html">Guidance</a>
-      <a class="{{ faqClass }}" href="./Nove Vita - FAQ.dc.html">FAQ</a>
-      <a class="{{ contactClass }}" href="./Nove Vita - Contact.dc.html">Contact</a>
-    </div>
+
+  <button class="nvh-burger" type="button" onclick="{{ toggleMenu }}" aria-label="{{ menuLabel }}" aria-expanded="{{ menuExpanded }}" style="width:44px; height:44px; margin-right:-8px; align-items:center; justify-content:center; background:none; border:none; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent;">
+    <span style="position:relative; display:block; width:22px; height:16px;">
+      <span style="position:absolute; left:0; right:0; top:{{ barTop }}; height:1.5px; background:{{ barColor }}; transform:{{ barTopTf }}; transition:transform 260ms ease, top 260ms ease;"></span>
+      <span style="position:absolute; left:0; right:0; top:7px; height:1.5px; background:{{ barColor }}; opacity:{{ barMidOpacity }}; transition:opacity 180ms ease;"></span>
+      <span style="position:absolute; left:0; right:0; top:{{ barBottom }}; height:1.5px; background:{{ barColor }}; transform:{{ barBottomTf }}; transition:transform 260ms ease, top 260ms ease;"></span>
+    </span>
+  </button>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="position:absolute; top:100%; left:0; right:0; background:#F8F4EE; border-bottom:1px solid rgba(31,61,51,0.10); box-shadow:0 18px 40px rgba(31,61,51,0.16); padding:8px 0 14px; display:flex; flex-direction:column;">
+      <a class="{{ mHomeClass }}" href="./Nove Vita Homepage.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">Home</a>
+
+      <button type="button" onclick="{{ toggleTools }}" aria-expanded="{{ toolsExpanded }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; background:none; border:none; border-bottom:1px solid rgba(31,61,51,0.07); font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:{{ mToolsColor }}; text-align:left; padding:17px 28px; cursor:pointer; -webkit-tap-highlight-color:transparent;">
+        <span>Tools</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:400; font-size:17px; line-height:1; color:#9C7A3F; transform:{{ chevronTf }}; transition:transform 240ms ease;">&#8250;</span>
+      </button>
+      <sc-if value="{{ toolsOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; background:#EFE8DE; border-bottom:1px solid rgba(31,61,51,0.07);">
+          <a class="{{ mCalcClass }}" href="./Retatrutide Pen Calculator (Standalone).html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:14.5px; letter-spacing:0.4px; color:#1F3D33; text-decoration:none; padding:15px 28px 15px 40px;">Calculator</a>
+          <a class="{{ mMixingClass }}" href="./Vial &amp; Syringe Calculator (Standalone).html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:14.5px; letter-spacing:0.4px; color:#1F3D33; text-decoration:none; padding:15px 28px 15px 40px;">Mixing</a>
+        </div>
+      </sc-if>
+
+      <a class="{{ mJournalClass }}" href="./Nove Vita - Journal.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">Journal</a>
+      <a class="{{ mGuidanceClass }}" href="./Nove Vita - Guidance.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">Guidance</a>
+      <a class="{{ mFaqClass }}" href="./Nove Vita - FAQ.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">FAQ</a>
+      <a class="{{ mContactClass }}" href="./Nove Vita - Contact.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px;">Contact</a>
+    </nav>
   </sc-if>
 </header>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { scrolled: false, menuOpen: false };
+  state = { scrolled: false, menuOpen: false, toolsOpen: false };
   componentDidMount() {
     this._onScroll = () => {
       const s = window.scrollY > 12;
@@ -91,27 +102,50 @@ class Component extends DCLogic {
   renderVals() {
     const active = this.props.active || '';
     const cls = (name) => 'nvh-link' + (active === name ? ' active' : '');
+    const mcls = (name) => 'nvh-m-link' + (active === name ? ' active' : '');
     const scrolled = this.state.scrolled;
+    const open = this.state.menuOpen;
+    const toolsOpen = this.state.toolsOpen;
     const override = this.props.bg;
     const defaultBg = scrolled ? 'rgba(248,245,239,0.96)' : 'rgba(248,245,239,0.88)';
+    const toolsActive = active === 'calculator' || active === 'mixing';
     return {
       padY: scrolled ? 14 : 22,
       resolvedBg: override || defaultBg,
       darkCls: this.props.dark ? 'nvh-dark' : '',
       shadow: scrolled ? '0 8px 24px rgba(31,61,51,0.14)' : '0 4px 14px rgba(31,61,51,0.07)',
       homeClass: cls('home'),
-      toolsClass: 'nvh-link' + (active === 'calculator' || active === 'mixing' ? ' active' : ''),
+      toolsClass: 'nvh-link' + (toolsActive ? ' active' : ''),
       toolsCalcClass: 'nvh-tools-item' + (active === 'calculator' ? ' active' : ''),
       toolsMixingClass: 'nvh-tools-item' + (active === 'mixing' ? ' active' : ''),
       journalClass: cls('journal'),
       guidanceClass: cls('guidance'),
       faqClass: cls('faq'),
-      disclaimerClass: cls('disclaimer'),
-      privacyClass: cls('privacy'),
-      voorwaardenClass: cls('voorwaarden'),
       contactClass: cls('contact'),
-      menuOpen: this.state.menuOpen,
-      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      // mobile panel
+      mHomeClass: mcls('home'),
+      mJournalClass: mcls('journal'),
+      mGuidanceClass: mcls('guidance'),
+      mFaqClass: mcls('faq'),
+      mContactClass: mcls('contact'),
+      mCalcClass: mcls('calculator'),
+      mMixingClass: mcls('mixing'),
+      mToolsColor: toolsActive ? '#9C7A3F' : '#1F3D33',
+      menuOpen: open,
+      menuExpanded: open ? 'true' : 'false',
+      menuLabel: open ? 'Menu sluiten' : 'Menu openen',
+      toolsOpen,
+      toolsExpanded: toolsOpen ? 'true' : 'false',
+      chevronTf: toolsOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+      barColor: this.props.dark ? '#F8F4EE' : '#1F3D33',
+      barTop: open ? '7px' : '0px',
+      barBottom: open ? '7px' : '14px',
+      barTopTf: open ? 'rotate(45deg)' : 'none',
+      barBottomTf: open ? 'rotate(-45deg)' : 'none',
+      barMidOpacity: open ? 0 : 1,
+      // Tap driven: no hover, no scroll locking, no scrolling of the page.
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen, toolsOpen: false })),
+      toggleTools: () => this.setState(s => ({ toolsOpen: !s.toolsOpen })),
     };
   }
 }

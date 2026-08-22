@@ -20,6 +20,7 @@
 <meta property="og:url" content="https://www.novevita.nl/faq">
 <meta property="og:site_name" content="Nové Vita">
 <script src="./image-slot.js"></script>
+<link rel="stylesheet" href="./nv-responsive.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
@@ -34,9 +35,6 @@
   .nv-faq-q:hover .nv-faq-q-text { color:#9C7A3F; }
   .nv-faq-icon { font-family:'Inter'; font-weight:500; font-size:19px; color:#C8A96B; flex-shrink:0; transition:transform 220ms ease; }
   .nv-faq-a { font-family:'Inter'; font-weight:300; font-size:15px; line-height:1.9; color:#4A4A42; padding:0 0 24px; max-width:640px; }
-  @media (max-width: 760px) {
-    .nv-section-pad { padding-left:24px !important; padding-right:24px !important; }
-  }
 </style>
 </helmet>
 
@@ -78,7 +76,7 @@
   </div>
 
   <!-- CTA -->
-  <div style="background:#142922; padding:110px 64px; text-align:center;">
+  <div class="nv-pad" style="background:#142922; padding:110px 64px; text-align:center;">
     <div style="max-width:560px; margin:0 auto;">
       <div class="nv-eyebrow">Nog een vraag?</div>
       <h2 style="font-family:'Playfair Display'; font-weight:500; font-size:clamp(24px,2.8vw,32px); color:#F8F4EE; margin-top:18px; line-height:1.4;">Staat je vraag er niet bij?</h2>
@@ -88,7 +86,7 @@
   </div>
 
   <!-- FOOTER -->
-  <div style="background:#142922; padding:80px 64px 40px;">
+  <div class="nv-pad" style="background:#142922; padding:80px 64px 40px;">
     <div style="display:flex; justify-content:space-between; align-items:center; max-width:1300px; margin:0 auto; flex-wrap:wrap; gap:20px;">
       <div style="font-family:'Playfair Display'; font-weight:500; font-size:20px; letter-spacing:3px; color:#F8F4EE;">NOVÉ VITA</div>
       <a href="./Nove Vita Homepage.dc.html" style="font-family:'Inter'; font-weight:300; font-size:13px; color:#8CA593;">&#8592; Terug naar Home</a>

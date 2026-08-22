@@ -20,6 +20,7 @@
 <meta property="og:url" content="https://www.novevita.nl/guidance">
 <meta property="og:site_name" content="Nové Vita">
 <script src="./image-slot.js"></script>
+<link rel="stylesheet" href="./nv-responsive.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
@@ -32,13 +33,6 @@
   .nv-cta-btn-light:hover { background:rgba(248,244,238,0.08); }
   .nv-moment-card { transition:transform 260ms ease; }
   .nv-moment-card:hover { transform:translateY(-4px); }
-  @media (max-width: 900px) {
-    .nv-moments-grid, .nv-testi-grid { grid-template-columns:1fr !important; }
-    .nv-contact-split { grid-template-columns:1fr !important; }
-  }
-  @media (max-width: 760px) {
-    .nv-section-pad { padding-left:24px !important; padding-right:24px !important; }
-  }
 </style>
 </helmet>
 
@@ -47,7 +41,7 @@
   <dc-import name="Nove Vita Header" active="guidance" hint-size="100%,72px"></dc-import>
 
   <!-- HERO -->
-  <div style="position:relative; width:100%; height:78vh; min-height:520px;">
+  <div style="position:relative; width:100%; height:78svh; min-height:520px;">
     <image-slot id="guidance-hero" shape="rect" src="uploads/slot-guidance-hero.webp" placeholder="Two women talking warmly, Mediterranean terrace, natural light" style="width:100%; height:100%; object-fit:cover;"></image-slot>
     <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.7) 0%, rgba(15,30,25,0.1) 55%, rgba(0,0,0,0.15) 100%); pointer-events:none;"></div>
     <div style="position:absolute; left:0; right:0; bottom:70px; text-align:center; padding:0 24px;">
@@ -70,7 +64,7 @@
   </div>
 
   <!-- THREE MOMENTS -->
-  <div style="background:#142922; padding:110px 0;">
+  <div class="nv-pad" style="background:#142922; padding:110px 0;">
     <div class="nv-moments-grid" style="max-width:1200px; margin:0 auto; padding:0 64px; display:grid; grid-template-columns:repeat(3,1fr); gap:56px;">
       <div class="nv-moment-card">
         <div style="font-family:'Playfair Display'; font-weight:500; font-size:15px; color:#C8A96B;">01</div>
@@ -141,7 +135,7 @@
   </div>
 
   <!-- FOOTER -->
-  <div style="background:#142922; padding:80px 64px 40px;">
+  <div class="nv-pad" style="background:#142922; padding:80px 64px 40px;">
     <div style="display:flex; justify-content:space-between; align-items:center; max-width:1300px; margin:0 auto; flex-wrap:wrap; gap:20px;">
       <div style="font-family:'Playfair Display'; font-weight:500; font-size:20px; letter-spacing:3px; color:#F8F4EE;">NOVÉ VITA</div>
       <a href="./Nove Vita Homepage.dc.html" style="font-family:'Inter'; font-weight:300; font-size:13px; color:#8CA593;">&#8592; Terug naar Home</a>

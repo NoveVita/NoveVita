@@ -20,6 +20,7 @@
 <meta property="og:url" content="https://www.novevita.nl/skin">
 <meta property="og:site_name" content="Nové Vita">
 <script src="./image-slot.js"></script>
+<link rel="stylesheet" href="./nv-responsive.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   image-slot[src] { color:transparent; }
@@ -35,11 +36,6 @@
   .nv-hero-title { font-family:'Playfair Display'; font-weight:500; font-size:clamp(40px,6vw,72px); color:#F8F4EE; }
   .nv-content-split { min-width:0; }
   .nv-content-split > * { min-width:0; }
-  @media (max-width: 760px) {
-    .nv-content-split { grid-template-columns:1fr !important; gap:40px !important; padding-left:24px !important; padding-right:24px !important; }
-    .nv-content-split > * { padding:0 !important; }
-    footer, .nv-footer { padding:70px 24px 32px !important; }
-  }
 </style>
 </helmet>
 
@@ -48,7 +44,7 @@
   <dc-import name="Nove Vita Header" active="skin" hint-size="100%,72px"></dc-import>
 
   <!-- HERO -->
-  <div style="position:relative; width:100%; height:82vh; min-height:520px;">
+  <div style="position:relative; width:100%; height:82svh; min-height:520px;">
     <image-slot id="skin-hero" shape="rect" src="uploads/img-19-01-40.jpg" placeholder="Editorial — warm light on linen, natural skin, soft shadows" style="width:100%; height:100%; object-fit:cover;"></image-slot>
     <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.55) 0%, rgba(15,30,25,0.05) 50%, rgba(0,0,0,0.25) 100%); pointer-events:none;"></div>
     <div style="position:absolute; left:0; right:0; bottom:64px; text-align:center; padding:0 24px;">
@@ -90,7 +86,7 @@
   </div>
 
   <!-- CTA -->
-  <div style="background:#142922; padding:140px 24px; text-align:center;">
+  <div class="nv-pad" style="background:#142922; padding:140px 24px; text-align:center;">
     <div class="nv-eyebrow" style="color:#C8A96B;">Free Tool</div>
     <h2 style="font-family:'Playfair Display'; font-weight:500; font-size:36px; color:#F8F4EE; margin-top:20px; max-width:560px; margin-left:auto; margin-right:auto;">Bereken jouw dosering met vertrouwen.</h2>
     <a class="nv-btn-primary" href="./Retatrutide Pen Calculator (Standalone).html" style="margin-top:40px;">Bereken je dosering</a>

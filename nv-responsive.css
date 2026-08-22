@@ -1,0 +1,128 @@
+/* Nové Vita — responsive layer
+   The desktop layout is the source of truth. Every rule below sits behind a
+   max-width query, so desktop rendering is untouched; narrow screens get the
+   same structure, reflowed. Two steps: 1024px (tablet) and 720px (phone).
+   Photos never stretch: fixed desktop pixel heights become real aspect
+   ratios (journal photography is 3:2). image-slot elements never receive a
+   class attribute, so those are targeted by id. */
+
+/* ============================== TABLET ============================== */
+@media (max-width: 1024px) {
+  .nv-content-split,
+  .nv-contact-split,
+  .nv-contact-grid,
+  .nv-split,
+  .nv-calc-split { grid-template-columns:minmax(0,1fr) !important; gap:56px !important; }
+
+  .nv-moments-grid,
+  .nv-testi-grid,
+  .nv-related-grid,
+  .nv-grid-3,
+  .nv-values,
+  .nv-journal-grid { grid-template-columns:repeat(2, minmax(0,1fr)) !important; }
+
+  .nv-grid-3 { gap:40px !important; }
+  .nv-journal-grid { column-gap:32px !important; }
+  .nv-journal-grid > a { grid-column:span 1 !important; }
+  .nv-j-3 { grid-column:1 / -1 !important; }
+
+  .nv-contact-split > div:last-child { padding:56px 40px !important; }
+
+  /* 64px desktop gutters step down */
+  .nv-section-pad,
+  .nv-content-split,
+  .nv-split,
+  .nv-calc-split,
+  .nv-cat-row,
+  .nv-journal-grid,
+  .nv-journal-feature,
+  .nv-featured-card,
+  .nv-article-head,
+  .nv-article-body,
+  .nv-article-foot,
+  .nv-news-masthead,
+  .nv-news-body,
+  .nv-news-foot,
+  .nv-pad,
+  .nv-footer { padding-left:40px !important; padding-right:40px !important; }
+
+  #metabolic-split-1, #metabolic-split-2,
+  #skin-split-1, #skin-split-2,
+  .nv-photo-32,
+  [id*="-related-"],
+  [id^="journal-grid-"] { height:auto !important; aspect-ratio:3/2 !important; }
+}
+
+/* =============================== PHONE ============================== */
+@media (max-width: 720px) {
+  .nv-content-split,
+  .nv-contact-split,
+  .nv-contact-grid,
+  .nv-split,
+  .nv-calc-split,
+  .nv-moments-grid,
+  .nv-testi-grid,
+  .nv-related-grid,
+  .nv-grid-3,
+  .nv-values,
+  .nv-journal-grid { grid-template-columns:minmax(0,1fr) !important; }
+
+  .nv-journal-grid { row-gap:44px !important; }
+  .nv-journal-grid > a,
+  .nv-j-1, .nv-j-2, .nv-j-3 { grid-column:1 / -1 !important; }
+
+  .nv-content-split { gap:36px !important; }
+  .nv-moments-grid, .nv-testi-grid, .nv-related-grid { gap:36px !important; }
+  .nv-contact-split > div:last-child { padding:48px 24px !important; }
+
+  /* one gutter for the whole site */
+  .nv-section-pad,
+  .nv-content-split,
+  .nv-split,
+  .nv-calc-split,
+  .nv-cat-row,
+  .nv-journal-grid,
+  .nv-journal-feature,
+  .nv-featured-card,
+  .nv-article-head,
+  .nv-article-body,
+  .nv-article-foot,
+  .nv-news-masthead,
+  .nv-news-body,
+  .nv-news-foot,
+  .nv-pad,
+  .nv-footer { padding-left:24px !important; padding-right:24px !important; }
+
+  .nv-footer, .nv-pad { padding-top:64px !important; }
+
+  /* photos: real proportions instead of desktop crops */
+  .nv-photo-32 { height:auto !important; aspect-ratio:3/2 !important; }
+  #metabolic-split-1, #metabolic-split-2,
+  #skin-split-1, #skin-split-2,
+  [id*="-related-"],
+  [id^="journal-grid-"] { height:auto !important; aspect-ratio:3/2 !important; }
+  .nv-contact-split > div:first-child { min-height:0 !important; }
+  #guidance-contact { height:auto !important; min-height:0 !important; aspect-ratio:3/2 !important; }
+
+  /* journal overview: the featured photo keeps its 3:2 frame and the caption
+     that sits on top of it on desktop moves underneath it */
+  .nv-featured-inner { height:auto !important; overflow:visible !important; box-shadow:none !important; }
+  #journal-overview-featured { height:auto !important; aspect-ratio:3/2 !important; border-radius:12px !important; }
+  .nv-featured-inner > div:nth-child(2) { display:none !important; }
+  .nv-featured-overlay { position:static !important; padding-top:22px !important; }
+  .nv-featured-overlay h3 { font-size:26px !important; }
+  .nv-featured-overlay p { font-size:14px !important; }
+
+  /* what's new rows stack, image keeps 3:2 */
+  .nv-news-row { grid-template-columns:minmax(0,1fr) !important; gap:18px !important; }
+
+  /* legal + faq reading measure */
+  .nv-legal-body { padding-left:24px !important; padding-right:24px !important; }
+  .nv-faq-q-text { font-size:16px !important; }
+
+  /* article shells */
+  .nv-hero-title { font-size:clamp(26px, 8vw, 34px) !important; }
+  .nv-opening-wrap { padding-left:16px !important; padding-right:16px !important; }
+  .nv-opening-panel { padding:36px 26px 40px !important; }
+  .nv-opening-panel p { font-size:18px !important; }
+}
