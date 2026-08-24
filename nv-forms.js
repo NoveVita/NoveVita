@@ -20,7 +20,7 @@
 // nieuwsbrief, support@ is de inbox waar contactvragen binnenkomen.
 // ---------------------------------------------------------------------------
 
-export const MAILERLITE_ENDPOINT = 'VUL_IN';
+export const MAILERLITE_ENDPOINT = 'https://assets.mailerlite.com/jsonp/2590265/forms/196692824337418096/subscribe';
 export const WEB3FORMS_KEY = 'VUL_IN';
 export const CONTACT_EMAIL = 'support@novevita.nl'; // waar berichten binnenkomen
 export const SENDER_EMAIL = 'hello@novevita.nl';   // afzender van nieuwsbrief en bevestiging
