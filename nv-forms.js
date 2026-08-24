@@ -22,11 +22,15 @@
 
 export const MAILERLITE_ENDPOINT = 'https://assets.mailerlite.com/jsonp/2590265/forms/196692824337418096/subscribe';
 export const WEB3FORMS_KEY = '1bcf91e7-167e-4763-9dc1-0aee6d641fb2';
+// Aparte groep "Contact": stuurt alleen de ontvangstbevestiging. Nooit
+// nieuwsbrieven naar deze groep, daar is geen toestemming voor gegeven.
+export const MAILERLITE_CONTACT_ENDPOINT = 'https://assets.mailerlite.com/jsonp/2590265/forms/196696980329596462/subscribe';
 export const CONTACT_EMAIL = 'support@novevita.nl'; // waar berichten binnenkomen
 export const SENDER_EMAIL = 'hello@novevita.nl';   // afzender van nieuwsbrief en bevestiging
 
 export const isConfigured = {
   newsletter: () => MAILERLITE_ENDPOINT !== 'VUL_IN' && MAILERLITE_ENDPOINT.startsWith('http'),
+  contactConfirmation: () => MAILERLITE_CONTACT_ENDPOINT.startsWith('http'),
   contact: () => WEB3FORMS_KEY !== 'VUL_IN' && WEB3FORMS_KEY.length > 10,
 };
 
@@ -79,10 +83,28 @@ export async function sendContact(fields) {
       }),
     });
     const data = await res.json();
-    return data.success ? { ok: true } : { ok: false, reason: 'rejected' };
+    if (data.success) {
+      // Bevestigingsmail loopt via MailerLite, niet via Web3Forms.
+      addToContactGroup(fields.email);
+      return { ok: true };
+    }
+    return { ok: false, reason: 'rejected' };
   } catch (e) {
     return { ok: false, reason: 'network' };
   }
+}
+
+// Adds the sender to the Contact group so MailerLite can send the
+// "we received your message" confirmation. Fire-and-forget: the message
+// itself already went out via Web3Forms, so a failure here must never
+// turn a delivered message into an error for the visitor.
+function addToContactGroup(email) {
+  if (!email || !isConfigured.contactConfirmation()) return;
+  const body = new FormData();
+  body.append('fields[email]', email);
+  body.append('ml-submit', '1');
+  body.append('anticsrf', 'true');
+  fetch(MAILERLITE_CONTACT_ENDPOINT, { method: 'POST', body, mode: 'no-cors' }).catch(() => {});
 }
 
 // Fallback while nothing is configured yet: open the visitor's mail client
