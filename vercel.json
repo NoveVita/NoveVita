@@ -10,8 +10,6 @@
     { "source": "/faq", "destination": "/Nove%20Vita%20-%20FAQ.dc.html" },
     { "source": "/metabolic", "destination": "/Nove%20Vita%20-%20Metabolic.dc.html" },
     { "source": "/skin", "destination": "/Nove%20Vita%20-%20Skin.dc.html" },
-    { "source": "/calculator", "destination": "/Retatrutide%20Pen%20Calculator%20(Standalone).html" },
-    { "source": "/mixing", "destination": "/Vial%20%26%20Syringe%20Calculator%20(Standalone).html" },
     { "source": "/journal", "destination": "/Nove%20Vita%20-%20Journal.dc.html" },
 
     { "source": "/journal/hoe-glp-1-het-lichaam-beinvloedt", "destination": "/Nove%20Vita%20-%20Journal%20-%20GLP-1%20Lichaam.dc.html" },
