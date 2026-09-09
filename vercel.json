@@ -12,6 +12,20 @@
     { "source": "/skin", "destination": "/Nove%20Vita%20-%20Skin.dc.html" },
     { "source": "/calculator", "destination": "/Retatrutide%20Pen%20Calculator%20%28Standalone%29.html" },
     { "source": "/mixing", "destination": "/Vial%20%26%20Syringe%20Calculator%20%28Standalone%29.html" },
+
+    { "source": "/journal/:file.js", "destination": "/:file.js" },
+    { "source": "/journal/:file.css", "destination": "/:file.css" },
+    { "source": "/journal/:file.jsx", "destination": "/:file.jsx" },
+    { "source": "/journal/:page.dc.html", "destination": "/:page.dc.html" },
+    { "source": "/journal/uploads/:file", "destination": "/uploads/:file" },
+    { "source": "/journal/assets/:file", "destination": "/assets/:file" },
+    { "source": "/journal/whats-new/:file.js", "destination": "/:file.js" },
+    { "source": "/journal/whats-new/:file.css", "destination": "/:file.css" },
+    { "source": "/journal/whats-new/:file.jsx", "destination": "/:file.jsx" },
+    { "source": "/journal/whats-new/:page.dc.html", "destination": "/:page.dc.html" },
+    { "source": "/journal/whats-new/uploads/:file", "destination": "/uploads/:file" },
+    { "source": "/journal/whats-new/assets/:file", "destination": "/assets/:file" },
+
     { "source": "/journal", "destination": "/Nove%20Vita%20-%20Journal.dc.html" },
 
     { "source": "/journal/hoe-glp-1-het-lichaam-beinvloedt", "destination": "/Nove%20Vita%20-%20Journal%20-%20GLP-1%20Lichaam.dc.html" },
