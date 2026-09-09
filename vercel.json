@@ -1,5 +1,5 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
     { "source": "/guidance", "destination": "/Nove%20Vita%20-%20Guidance.dc.html" },
