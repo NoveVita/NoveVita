@@ -1,4 +1,39 @@
 {
-  "cleanUrls": false,
-  "trailingSlash": false
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/guidance", "destination": "/Nove%20Vita%20-%20Guidance.dc.html" },
+    { "source": "/contact", "destination": "/Nove%20Vita%20-%20Contact.dc.html" },
+    { "source": "/disclaimer", "destination": "/Nove%20Vita%20-%20Disclaimer.dc.html" },
+    { "source": "/privacy", "destination": "/Nove%20Vita%20-%20Privacy.dc.html" },
+    { "source": "/algemene-voorwaarden", "destination": "/Nove%20Vita%20-%20Algemene%20Voorwaarden.dc.html" },
+    { "source": "/faq", "destination": "/Nove%20Vita%20-%20FAQ.dc.html" },
+    { "source": "/metabolic", "destination": "/Nove%20Vita%20-%20Metabolic.dc.html" },
+    { "source": "/skin", "destination": "/Nove%20Vita%20-%20Skin.dc.html" },
+    { "source": "/calculator", "destination": "/Retatrutide%20Pen%20Calculator%20(Standalone).html" },
+    { "source": "/mixing", "destination": "/Vial%20%26%20Syringe%20Calculator%20(Standalone).html" },
+    { "source": "/journal", "destination": "/Nove%20Vita%20-%20Journal.dc.html" },
+
+    { "source": "/journal/hoe-glp-1-het-lichaam-beinvloedt", "destination": "/Nove%20Vita%20-%20Journal%20-%20GLP-1%20Lichaam.dc.html" },
+    { "source": "/journal/de-wetenschap-achter-copper-peptides", "destination": "/Nove%20Vita%20-%20Journal%20-%20Copper%20Peptides.dc.html" },
+    { "source": "/journal/waarom-spiermassa-belangrijker-is-dan-gewicht", "destination": "/Nove%20Vita%20-%20Journal%20-%20Spiermassa.dc.html" },
+    { "source": "/journal/glp-1-food-noise-zelfbeeld", "destination": "/Nove%20Vita%20-%20Journal%20-%20Mindset%20Zelfbeeld.dc.html" },
+    { "source": "/journal/lipoedeem-en-tirzepatide", "destination": "/Nove%20Vita%20-%20Journal%20-%20Lipoedeem%20Tirzepatide.dc.html" },
+    { "source": "/journal/als-de-ene-craving-verdwijnt-waar-gaat-verlangen-naartoe", "destination": "/Nove%20Vita%20-%20Journal%20-%20Cravings%20Verlangen.dc.html" },
+    { "source": "/journal/stoppen-met-glp-1-food-noise-gewicht", "destination": "/Nove%20Vita%20-%20Journal%20-%20Stoppen%20GLP-1.dc.html" },
+    { "source": "/journal/bpc-157-healing-peptide-onderzoek", "destination": "/Nove%20Vita%20-%20Journal%20-%20BPC-157.dc.html" },
+    { "source": "/journal/pcos-glp-1-insulineresistentie-hormonen", "destination": "/Nove%20Vita%20-%20Journal%20-%20PCOS%20GLP-1.dc.html" },
+    { "source": "/journal/pdrn-zonder-zalm-bacterieel-plantaardig-dna", "destination": "/Nove%20Vita%20-%20Journal%20-%20PDRN.dc.html" },
+    { "source": "/journal/hetzelfde-lichaamssysteem-andere-hormonale-werkelijkheid", "destination": "/Nove%20Vita%20-%20Journal%20-%20Hormonen.dc.html" },
+    { "source": "/journal/rust-en-rituelen", "destination": "/Nove%20Vita%20-%20Journal%20-%20Rust%20en%20Rituelen.dc.html" },
+
+    { "source": "/journal/whats-new/glp-1-gewrichtspijn-artrose-onderzoek", "destination": "/Nove%20Vita%20Journal%20News%20-%20GLP-1%20Gewrichtspijn.dc.html" },
+    { "source": "/journal/whats-new/fda-bpc-157-kpv-tb-500-mots-c-2026", "destination": "/Nove%20Vita%20Journal%20News%20-%20FDA%20Peptides.dc.html" },
+    { "source": "/journal/whats-new/lipoedeem-tirzepatide-nieuw-onderzoek-2026", "destination": "/Nove%20Vita%20Journal%20News%20-%20Lipoedeem%20Onderzoek.dc.html" },
+    { "source": "/journal/whats-new/glp-1-haarverlies-onderzoek", "destination": "/Nove%20Vita%20Journal%20News%20-%20GLP-1%20Haarverlies.dc.html" },
+    { "source": "/journal/whats-new/ghk-cu-fda-evaluatie", "destination": "/Nove%20Vita%20Journal%20News%20-%20GHK-Cu%20FDA.dc.html" },
+    { "source": "/journal/whats-new/wegovy-pil-lancering-2026", "destination": "/Nove%20Vita%20Journal%20News%20-%20Wegovy%20Pil.dc.html" },
+    { "source": "/journal/whats-new/glp-1-tablet-vk", "destination": "/Nove%20Vita%20Journal%20News%20-%20GLP-1%20Tablet%20VK.dc.html" },
+    { "source": "/journal/whats-new/glp-1-tablet-wegovy-vk", "destination": "/Nove%20Vita%20Journal%20News%20-%20GLP-1%20Tablet%20VK.dc.html" }
+  ]
 }
