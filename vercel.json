@@ -3,6 +3,7 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/", "destination": "/Nove%20Vita%20Homepage.dc.html" },
+    { "source": "/Homepage", "destination": "/Nove%20Vita%20Homepage.dc.html" },
     { "source": "/homepage", "destination": "/Nove%20Vita%20Homepage.dc.html" },
     { "source": "/home", "destination": "/Nove%20Vita%20Homepage.dc.html" },
     { "source": "/guidance", "destination": "/Nove%20Vita%20-%20Guidance.dc.html" },
