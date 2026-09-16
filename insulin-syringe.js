@@ -25,8 +25,9 @@
   var numbersYPct = 420 / IMG_H * 100;
   var numbersHPct = 62 / IMG_H * 100;
 
-  function renderInsulinSyringe(units, maxUnits, fmtNum) {
+  function renderInsulinSyringe(units, maxUnits, fmtNum, opts) {
     fmtNum = fmtNum || function (n) { return String(Math.round(n)); };
+    opts = opts || {};
     var pct = maxUnits > 0 ? Math.max(0, Math.min(units || 0, maxUnits)) / maxUnits : 0;
     var fillWidthPct = pct * barrelWPct;
     var fillEndPct = barrelXPct + fillWidthPct;
@@ -57,6 +58,17 @@
       var lLeftPct = (lu / maxUnits) * 100;
       labelDivs += '<div style="position:absolute; left:' + lLeftPct.toFixed(2) + '%; top:0; transform:translateX(-50%); font-family:\'Inter\'; font-weight:700; font-size:12px; color:#EFE6D3; white-space:nowrap;">' + lu + '</div>';
     }
+    // Optional half-way labels (5, 15, 25 ...) in gold, drawn in their own row UNDER the
+    // barrel so they never collide with the white decade labels above it.
+    var midLayer = '';
+    if (opts.midLabels) {
+      var midDivs = '';
+      for (var mu = 5; mu <= maxUnits; mu += 10) {
+        var mLeftPct = (mu / maxUnits) * 100;
+        midDivs += '<div style="position:absolute; left:' + mLeftPct.toFixed(2) + '%; top:0; transform:translateX(-50%); font-family:\'Inter\'; font-weight:600; font-size:10px; color:#C8A96B; white-space:nowrap;">' + mu + '</div>';
+      }
+      midLayer = '<div style="position:absolute; left:' + barrelXPct.toFixed(2) + '%; width:' + barrelWPct.toFixed(2) + '%; top:' + (barrelYPct + barrelHPct * 1.18).toFixed(2) + '%; height:' + numbersHPct.toFixed(2) + '%;">' + midDivs + '</div>';
+    }
     var labelsLayer = '<div style="position:absolute; left:' + barrelXPct.toFixed(2) + '%; width:' + barrelWPct.toFixed(2) + '%; top:' + numbersYPct.toFixed(2) + '%; height:' + numbersHPct.toFixed(2) + '%;">' + labelDivs + '</div>';
 
     var fillLayer = pct > 0 ? '<div style="position:absolute; left:' + barrelXPct.toFixed(2) + '%; top:' + fillYPct.toFixed(2) + '%; width:' + fillWidthPct.toFixed(2) + '%; height:' + fillHPct.toFixed(2) + '%; background:linear-gradient(to bottom, #F0CE6E, #E4B84A 50%, #D6A83C); border-radius:2px; transition:width 0.35s ease;"></div>' : '';
@@ -65,7 +77,7 @@
     return '<div class="syringe-scale-group">' +
       '<div class="syringe-photo-wrap">' +
       '<img src="assets/syringe-reference.png" alt="Insulinespuit" draggable="false">' +
-      lowerRowMask + numbersMask + ticksLayer + labelsLayer + fillLayer + stopperLayer +
+      lowerRowMask + numbersMask + ticksLayer + labelsLayer + midLayer + fillLayer + stopperLayer +
       '</div>' +
       '</div>';
   }

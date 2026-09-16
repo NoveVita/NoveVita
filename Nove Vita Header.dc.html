@@ -37,22 +37,24 @@
 </helmet>
 <dc-import name="Nove Vita - WhatsApp Button" hint-size="60px,60px"></dc-import>
 <header class="{{ darkCls }}" style="position:sticky; top:0; left:0; right:0; z-index:1000; width:100%; box-sizing:border-box; padding:{{ padY }}px 32px; display:flex; align-items:center; justify-content:space-between; background:{{ resolvedBg }}; border-bottom:1px solid rgba(31,61,51,0.16); box-shadow:{{ shadow }}; transition:padding 250ms ease, background 250ms ease, box-shadow 250ms ease;">
-  <a href="./Nove Vita Homepage.dc.html" class="nvh-logo" style="font-family:'Playfair Display'; font-weight:500; font-size:19px; letter-spacing:2.5px; color:#1F3D33; text-decoration:none;">NOVÉ VITA</a>
+  <a href="/" class="nvh-logo" style="font-family:'Playfair Display'; font-weight:500; font-size:19px; letter-spacing:2.5px; color:#1F3D33; text-decoration:none;">NOVÉ VITA</a>
   <nav class="nvh-links" style="display:flex; align-items:center; gap:38px;">
-    <a class="{{ homeClass }}" href="./Nove Vita Homepage.dc.html">Home</a>
+    <a class="{{ homeClass }}" href="/">Home</a>
+    <a class="{{ ghkClass }}" href="/ghk-cu">GHK-Cu</a>
     <div class="nvh-tools">
       <span class="{{ toolsClass }}" style="display:inline-block; padding-bottom:4px; cursor:default;">Tools</span>
       <div class="nvh-tools-menu">
         <div class="nvh-tools-menu-inner">
-          <a class="{{ toolsCalcClass }}" href="./Retatrutide Pen Calculator (Standalone).html">Calculator</a>
-          <a class="{{ toolsMixingClass }}" href="./Vial &amp; Syringe Calculator (Standalone).html">Mixing</a>
+          <a class="{{ toolsCalcClass }}" href="/calculator">Calculator</a>
+          <a class="{{ toolsMixingClass }}" href="/mixing">Mixing</a>
+          <a class="{{ toolsGhkClass }}" href="/ghk-cu-calculator">GHK-Cu doseren</a>
         </div>
       </div>
     </div>
-    <a class="{{ journalClass }}" href="./Nove Vita - Journal.dc.html">Journal</a>
-    <a class="{{ guidanceClass }}" href="./Nove Vita - Guidance.dc.html">Guidance</a>
-    <a class="{{ faqClass }}" href="./Nove Vita - FAQ.dc.html">FAQ</a>
-    <a class="{{ contactClass }}" href="./Nove Vita - Contact.dc.html">Contact</a>
+    <a class="{{ journalClass }}" href="/journal">Journal</a>
+    <a class="{{ guidanceClass }}" href="/guidance">Guidance</a>
+    <a class="{{ faqClass }}" href="/faq">FAQ</a>
+    <a class="{{ contactClass }}" href="/contact">Contact</a>
   </nav>
 
   <button class="nvh-burger" type="button" onclick="{{ toggleMenu }}" aria-label="{{ menuLabel }}" aria-expanded="{{ menuExpanded }}" style="width:44px; height:44px; margin-right:-8px; align-items:center; justify-content:center; background:none; border:none; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent;">
@@ -65,7 +67,8 @@
 
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav style="position:absolute; top:100%; left:0; right:0; background:#F8F4EE; border-bottom:1px solid rgba(31,61,51,0.10); box-shadow:0 18px 40px rgba(31,61,51,0.16); padding:8px 0 14px; display:flex; flex-direction:column;">
-      <a class="{{ mHomeClass }}" href="./Nove Vita Homepage.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">Home</a>
+      <a class="{{ mHomeClass }}" href="/" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">Home</a>
+      <a class="{{ mGhkClass }}" href="/ghk-cu" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">GHK-Cu</a>
 
       <button type="button" onclick="{{ toggleTools }}" aria-expanded="{{ toolsExpanded }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; background:none; border:none; border-bottom:1px solid rgba(31,61,51,0.07); font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:{{ mToolsColor }}; text-align:left; padding:17px 28px; cursor:pointer; -webkit-tap-highlight-color:transparent;">
         <span>Tools</span>
@@ -73,15 +76,16 @@
       </button>
       <sc-if value="{{ toolsOpen }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex; flex-direction:column; background:#EFE8DE; border-bottom:1px solid rgba(31,61,51,0.07);">
-          <a class="{{ mCalcClass }}" href="./Retatrutide Pen Calculator (Standalone).html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:14.5px; letter-spacing:0.4px; color:#1F3D33; text-decoration:none; padding:15px 28px 15px 40px;">Calculator</a>
-          <a class="{{ mMixingClass }}" href="./Vial &amp; Syringe Calculator (Standalone).html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:14.5px; letter-spacing:0.4px; color:#1F3D33; text-decoration:none; padding:15px 28px 15px 40px;">Mixing</a>
+          <a class="{{ mCalcClass }}" href="/calculator" style="font-family:'Inter',sans-serif; font-weight:500; font-size:14.5px; letter-spacing:0.4px; color:#1F3D33; text-decoration:none; padding:15px 28px 15px 40px;">Calculator</a>
+          <a class="{{ mMixingClass }}" href="/mixing" style="font-family:'Inter',sans-serif; font-weight:500; font-size:14.5px; letter-spacing:0.4px; color:#1F3D33; text-decoration:none; padding:15px 28px 15px 40px;">Mixing</a>
+          <a class="{{ mGhkCalcClass }}" href="/ghk-cu-calculator" style="font-family:'Inter',sans-serif; font-weight:500; font-size:14.5px; letter-spacing:0.4px; color:#1F3D33; text-decoration:none; padding:15px 28px 15px 40px;">GHK-Cu doseren</a>
         </div>
       </sc-if>
 
-      <a class="{{ mJournalClass }}" href="./Nove Vita - Journal.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">Journal</a>
-      <a class="{{ mGuidanceClass }}" href="./Nove Vita - Guidance.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">Guidance</a>
-      <a class="{{ mFaqClass }}" href="./Nove Vita - FAQ.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">FAQ</a>
-      <a class="{{ mContactClass }}" href="./Nove Vita - Contact.dc.html" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px;">Contact</a>
+      <a class="{{ mJournalClass }}" href="/journal" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">Journal</a>
+      <a class="{{ mGuidanceClass }}" href="/guidance" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">Guidance</a>
+      <a class="{{ mFaqClass }}" href="/faq" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px; border-bottom:1px solid rgba(31,61,51,0.07);">FAQ</a>
+      <a class="{{ mContactClass }}" href="/contact" style="font-family:'Inter',sans-serif; font-weight:500; font-size:15px; letter-spacing:1.4px; text-transform:uppercase; color:#1F3D33; text-decoration:none; padding:17px 28px;">Contact</a>
     </nav>
   </sc-if>
 </header>
@@ -108,22 +112,26 @@ class Component extends DCLogic {
     const toolsOpen = this.state.toolsOpen;
     const override = this.props.bg;
     const defaultBg = scrolled ? 'rgba(248,245,239,0.96)' : 'rgba(248,245,239,0.88)';
-    const toolsActive = active === 'calculator' || active === 'mixing';
+    const toolsActive = active === 'calculator' || active === 'mixing' || active === 'ghk-calc';
     return {
       padY: scrolled ? 14 : 22,
       resolvedBg: override || defaultBg,
       darkCls: this.props.dark ? 'nvh-dark' : '',
       shadow: scrolled ? '0 8px 24px rgba(31,61,51,0.14)' : '0 4px 14px rgba(31,61,51,0.07)',
       homeClass: cls('home'),
+      ghkClass: cls('ghk'),
       toolsClass: 'nvh-link' + (toolsActive ? ' active' : ''),
       toolsCalcClass: 'nvh-tools-item' + (active === 'calculator' ? ' active' : ''),
       toolsMixingClass: 'nvh-tools-item' + (active === 'mixing' ? ' active' : ''),
+      toolsGhkClass: 'nvh-tools-item' + (active === 'ghk-calc' ? ' active' : ''),
       journalClass: cls('journal'),
       guidanceClass: cls('guidance'),
       faqClass: cls('faq'),
       contactClass: cls('contact'),
       // mobile panel
       mHomeClass: mcls('home'),
+      mGhkClass: mcls('ghk'),
+      mGhkCalcClass: mcls('ghk-calc'),
       mJournalClass: mcls('journal'),
       mGuidanceClass: mcls('guidance'),
       mFaqClass: mcls('faq'),

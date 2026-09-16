@@ -2,6 +2,7 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/home", "destination": "/Nove%20Vita%20Homepage.dc.html" },
     { "source": "/guidance", "destination": "/Nove%20Vita%20-%20Guidance.dc.html" },
     { "source": "/contact", "destination": "/Nove%20Vita%20-%20Contact.dc.html" },
     { "source": "/disclaimer", "destination": "/Nove%20Vita%20-%20Disclaimer.dc.html" },
@@ -10,9 +11,10 @@
     { "source": "/faq", "destination": "/Nove%20Vita%20-%20FAQ.dc.html" },
     { "source": "/metabolic", "destination": "/Nove%20Vita%20-%20Metabolic.dc.html" },
     { "source": "/skin", "destination": "/Nove%20Vita%20-%20Skin.dc.html" },
+    { "source": "/ghk-cu", "destination": "/Nove%20Vita%20-%20GHK-Cu.dc.html" },
+    { "source": "/ghk-cu-calculator", "destination": "/Nove%20Vita%20-%20GHK-Cu%20Calculator.dc.html" },
     { "source": "/calculator", "destination": "/Retatrutide%20Pen%20Calculator%20%28Standalone%29.html" },
     { "source": "/mixing", "destination": "/Vial%20%26%20Syringe%20Calculator%20%28Standalone%29.html" },
-
     { "source": "/journal/:file.js", "destination": "/:file.js" },
     { "source": "/journal/:file.css", "destination": "/:file.css" },
     { "source": "/journal/:file.jsx", "destination": "/:file.jsx" },

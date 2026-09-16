@@ -9,7 +9,7 @@ export const TAGS = ['GLP-1', 'PEPTIDES', 'RESEARCH', 'REGULATION', 'SAFETY', 'L
 export const NEWS_ITEMS = [
   {
     slug: 'fda-bpc-157-kpv-tb-500-mots-c-2026',
-    url: './Nove Vita Journal News - FDA Peptides.dc.html',
+    url: '/journal/whats-new/fda-bpc-157-kpv-tb-500-mots-c-2026',
     published: true,
     tag: 'PEPTIDES · REGULATION',
     title: 'Vier bekende peptides op tafel bij de FDA',
@@ -39,7 +39,7 @@ export const NEWS_ITEMS = [
   },
   {
     slug: 'glp-1-gewrichtspijn-artrose-onderzoek',
-    url: './Nove Vita Journal News - GLP-1 Gewrichtspijn.dc.html',
+    url: '/journal/whats-new/glp-1-gewrichtspijn-artrose-onderzoek',
     published: true,
     tag: 'GLP-1 · RESEARCH',
     title: 'Minder gewrichtspijn door GLP-1: is het alleen het gewichtsverlies?',
@@ -69,7 +69,7 @@ export const NEWS_ITEMS = [
   },
   {
     slug: 'lipoedeem-tirzepatide-nieuw-onderzoek-2026',
-    url: './Nove Vita Journal News - Lipoedeem Onderzoek.dc.html',
+    url: '/journal/whats-new/lipoedeem-tirzepatide-nieuw-onderzoek-2026',
     published: true,
     tag: 'LIPOEDEEM · RESEARCH',
     title: 'Nieuwe kijk op lipoedeem zet ook tirzepatide in beeld',
@@ -97,7 +97,7 @@ export const NEWS_ITEMS = [
   },
   {
     slug: 'glp-1-haarverlies-onderzoek',
-    url: './Nove Vita Journal News - GLP-1 Haarverlies.dc.html',
+    url: '/journal/whats-new/glp-1-haarverlies-onderzoek',
     published: true,
     tag: 'GLP-1',
     title: 'GLP-1 en haarverlies: het signaal wordt sterker',
@@ -124,7 +124,7 @@ export const NEWS_ITEMS = [
   },
   {
     slug: 'ghk-cu-fda-evaluatie',
-    url: './Nove Vita Journal News - GHK-Cu FDA.dc.html',
+    url: '/journal/whats-new/ghk-cu-fda-evaluatie',
     published: true,
     tag: 'PEPTIDES',
     title: 'GHK-Cu krijgt officiële aandacht van de FDA',
@@ -152,7 +152,7 @@ export const NEWS_ITEMS = [
   },
   {
     slug: 'glp-1-tablet-wegovy-vk',
-    url: './Nove Vita Journal News - GLP-1 Tablet VK.dc.html',
+    url: '/journal/whats-new/glp-1-tablet-vk',
     published: false,
     tag: 'GLP-1',
     title: 'De GLP-1 pil is er. Gaat de prik straks terrein verliezen?',
@@ -175,7 +175,7 @@ export const NEWS_ITEMS = [
   },
   {
     slug: 'wegovy-pil-lancering-2026',
-    url: './Nove Vita Journal News - Wegovy Pil.dc.html',
+    url: '/journal/whats-new/wegovy-pil-lancering-2026',
     published: true,
     tag: 'REGULATION',
     title: 'De Wegovy-pil is gelanceerd',
