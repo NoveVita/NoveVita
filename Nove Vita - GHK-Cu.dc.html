@@ -24,6 +24,7 @@
 <meta property="og:description" content="Wat GHK-Cu is, wat het doet voor huid en haar, en hoe je het oplost en doseert.">
 <meta property="og:url" content="https://www.novevita.nl/ghk-cu">
 <meta property="og:site_name" content="Nové Vita">
+<meta property="og:image" content="https://www.novevita.nl/uploads/ghk-hero.png">
 <meta property="og:locale" content="nl_NL">
 <meta name="robots" content="index, follow">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,11 +37,9 @@
 {"@type":"Question","name":"Moet ik zink bijslikken bij GHK-Cu?","acceptedAnswer":{"@type":"Answer","text":"Bij een normale kuur is dat geen must. Koper en zink concurreren om dezelfde transportroutes, dus bij langdurig gebruik is het zinvol om je balans te laten meten in plaats van blind bij te slikken. Neem je zink, houd dat dan gescheiden in de tijd en overleg met je arts."}}
 ]}
 </script>
-<script src="./image-slot.js"></script>
 <link rel="stylesheet" href="./nv-responsive.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  image-slot[src] { color:transparent; }
   html { scroll-behavior:smooth; }
   html, body { width:100%; height:auto !important; min-height:100%; }
   a { color:#1F3D33; text-decoration:none; }
@@ -58,6 +57,13 @@
   .nv-cols3 > * { min-width:0; overflow:hidden; }
   .nv-cols2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:36px; }
   .nv-cols2 > * { min-width:0; }
+  .nv-li { display:flex; gap:16px; align-items:flex-start; border-bottom:1px solid #E7DFD3; padding:16px 0; }
+  .nv-li-mark { font-family:'Cormorant Garamond'; font-weight:600; font-size:17px; line-height:1.6; }
+  .nv-faq { border-bottom:1px solid #DED4C6; }
+  .nv-faq summary { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:24px 0; cursor:pointer; list-style:none; font-family:'Playfair Display'; font-weight:500; font-size:19px; line-height:1.4; color:#1F3D33; }
+  .nv-faq summary::-webkit-details-marker { display:none; }
+  .nv-faq summary::after { content:'+'; font-family:'Cormorant Garamond'; font-weight:500; font-size:26px; line-height:1; color:#C8A96B; flex-shrink:0; }
+  .nv-faq[open] summary::after { content:'\2212'; }
   @media (max-width: 900px) {
     .nv-split { grid-template-columns:1fr; gap:40px; padding:0 24px; }
     .nv-wrap { padding:0 24px; }
@@ -71,7 +77,7 @@
   <dc-import name="Nove Vita Header" active="ghk" hint-size="100%,72px"></dc-import>
 
   <div data-screen-label="Hero" style="position:relative; width:100%; height:86svh; min-height:540px;">
-    <image-slot id="ghk-hero" shape="rect" src="uploads/ghk-hero.png" placeholder="Editorial — blauwgroene vial in warm daglicht, linnen, zachte schaduw" style="width:100%; height:100%; object-fit:cover;"></image-slot>
+    <img src="uploads/ghk-hero.png" alt="GHK-Cu koperpeptide, artistieke weergave van huid en moleculaire structuren" style="width:100%; height:100%; object-fit:cover; display:block;">
     <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,30,25,0.62) 0%, rgba(15,30,25,0.08) 55%, rgba(0,0,0,0.28) 100%); pointer-events:none;"></div>
     <div style="position:absolute; left:0; right:0; bottom:64px; text-align:center; padding:0 24px;">
       <div class="nv-eyebrow" style="color:#C8A96B;">Het koperpeptide</div>
@@ -86,7 +92,7 @@
   </div>
 
   <div data-screen-label="Wat is het" class="nv-split" style="padding-bottom:140px;">
-    <image-slot id="ghk-what" shape="rect" src="uploads/ghk-what.png" placeholder="Close-up blauw poeder in vial, travertijn ondergrond" style="width:100%; height:540px; object-fit:cover; border-radius:2px;"></image-slot>
+    <img src="uploads/ghk-what.png" alt="Moleculair model van het GHK-Cu tripeptide met koperion in het midden" style="width:100%; height:540px; object-fit:cover; border-radius:2px; display:block;">
     <div>
       <div class="nv-eyebrow">Wat is GHK-Cu</div>
       <h3 class="nv-h2" style="font-size:30px; margin-top:18px;">Drie aminozuren met een kopertje eraan.</h3>
@@ -97,7 +103,7 @@
   </div>
 
   <div data-screen-label="Huid beeld" style="position:relative; width:100%; height:78svh; min-height:460px;">
-    <image-slot id="ghk-skin-bleed" shape="rect" src="uploads/ghk-skin.png" placeholder="Full-bleed editorial — huid in zijlicht, natuurlijke textuur" style="width:100%; height:100%; object-fit:cover;"></image-slot>
+    <img src="uploads/ghk-skin.png" alt="Vrouw in profiel in zacht zijlicht, natuurlijke huidtextuur" style="width:100%; height:100%; object-fit:cover; display:block;">
     <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(15,30,25,0.66) 0%, rgba(15,30,25,0.15) 70%); pointer-events:none;"></div>
     <div style="position:absolute; left:0; top:50%; transform:translateY(-50%); max-width:560px; padding:0 64px;">
       <div class="nv-eyebrow" style="color:#C8A96B;">Huid</div>
@@ -131,7 +137,7 @@
       <p class="nv-body" style="margin-top:18px;">Wat je realistisch mag verwachten: bestaande follikels die beter presteren, niet nieuwe haren waar er geen zijn. Sommige gebruikers melden fijner gezichtshaar dat iets zichtbaarder wordt. Van donshaar maakt het zelden dik terminaal haar.</p>
       <p class="nv-body" style="margin-top:18px;">Bij haarverlies na GLP-1 gebruik is het verstandig eerst naar de onderliggende oorzaak te kijken. Daarover schreven we apart in het <a href="/journal/whats-new/glp-1-haarverlies-onderzoek" style="border-bottom:1px solid #C8A96B;">Journal</a>.</p>
     </div>
-    <image-slot id="ghk-hair" shape="rect" src="uploads/ghk-hair.png" placeholder="Editorial — haar in warm licht, kaptafel, rustig beeld" style="width:100%; height:540px; object-fit:cover; border-radius:2px;"></image-slot>
+    <img src="uploads/ghk-hair.png" alt="Close-up van hoofdhuid en haarlijn in warm licht" style="width:100%; height:540px; object-fit:cover; border-radius:2px; display:block;">
   </div>
 
   <div data-screen-label="Herstel" style="background:#EFE8DE; padding:130px 0;">
@@ -150,7 +156,7 @@
   <div data-screen-label="Injectie vs topisch" class="nv-wrap" style="padding-top:130px; padding-bottom:120px;">
     <div style="max-width:720px;">
       <div class="nv-eyebrow">De route</div>
-      <h2 class="nv-h2" style="margin-top:18px;">Injecteren of smeren — wat kies je wanneer?</h2>
+      <h2 class="nv-h2" style="margin-top:18px;">Injecteren of smeren, wat kies je wanneer?</h2>
     </div>
     <div class="nv-cols2" style="margin-top:52px; gap:0;">
       <div style="border:1px solid #DED4C6; background:#FFFDFA; padding:40px 38px;">
@@ -175,14 +181,7 @@
       <div class="nv-eyebrow" style="color:#C8A96B;">Free tool</div>
       <h2 style="font-family:'Playfair Display'; font-weight:500; font-size:clamp(28px,3.6vw,40px); color:#F8F4EE; margin-top:18px;">Oplossen en doseren, uitgerekend.</h2>
       <p style="font-family:'Cormorant Garamond'; font-style:italic; font-size:19px; line-height:1.8; color:#B7C6BC; margin-top:20px;">Kies je vial en hoeveel bacteriostatisch water je toevoegt. Je ziet meteen tot hoeveel eenheden je optrekt op je spuit, hoeveel doses er in de vial zitten en hoe lang die meegaat.</p>
-    </div>
-    <div style="max-width:540px; margin:44px auto 0; padding:0 16px;">
-      <div style="background:#F8F4EE; border-radius:18px; overflow:hidden;">
-        <dc-import name="Nove Vita - GHK-Cu Calculator" embedded="true" hint-size="100%,1100px"></dc-import>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top:34px;">
-      <a href="/ghk-cu-calculator" style="font-family:'Inter'; font-weight:400; font-size:13px; letter-spacing:1.6px; text-transform:uppercase; color:#C8A96B; border-bottom:1px solid rgba(200,169,107,0.4); padding-bottom:3px;">Open de calculator apart</a>
+      <a class="nv-btn-primary" href="/ghk-cu-calculator" style="margin-top:38px;">Open de calculator</a>
     </div>
   </div>
 
@@ -194,21 +193,23 @@
     <div class="nv-cols2" style="margin-top:48px; gap:70px;">
       <div>
         <div class="nv-eyebrow" style="color:#6B7F6E;">Wel doen</div>
-        <sc-for list="{{ dos }}" as="item" hint-placeholder-count="6">
-          <div style="display:flex; gap:16px; align-items:flex-start; border-bottom:1px solid #E7DFD3; padding:16px 0;">
-            <span style="font-family:'Cormorant Garamond'; font-weight:600; font-size:17px; color:#6B7F6E; line-height:1.6;">&#43;</span>
-            <span class="nv-body" style="font-size:15px; line-height:1.7;">{{ item.text }}</span>
-          </div>
-        </sc-for>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#6B7F6E;">&#43;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Los op met bacteriostatisch water, niet met zoutoplossing. GHK-Cu verdraagt saline slecht.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#6B7F6E;">&#43;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Spuit het water langs de binnenwand van de vial, niet direct op het poeder.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#6B7F6E;">&#43;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Rol de vial zachtjes tussen je handen tot alles opgelost is. Reken op één tot drie minuten.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#6B7F6E;">&#43;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Een lichte blauwgroene tint hoort erbij. Dat is het koper dat aan het peptide gebonden zit.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#6B7F6E;">&#43;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Zet de opgeloste vial direct in de koelkast, tussen 2 en 8 graden, uit het licht.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#6B7F6E;">&#43;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Reken op ongeveer 28 dagen houdbaarheid na oplossen. Zet de datum op de vial.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#6B7F6E;">&#43;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Wissel bij subcutane toediening steeds van plek op de buik.</span></div>
       </div>
       <div>
         <div class="nv-eyebrow" style="color:#B08155;">Niet doen</div>
-        <sc-for list="{{ donts }}" as="item" hint-placeholder-count="6">
-          <div style="display:flex; gap:16px; align-items:flex-start; border-bottom:1px solid #E7DFD3; padding:16px 0;">
-            <span style="font-family:'Cormorant Garamond'; font-weight:600; font-size:17px; color:#B08155; line-height:1.6;">&#8722;</span>
-            <span class="nv-body" style="font-size:15px; line-height:1.7;">{{ item.text }}</span>
-          </div>
-        </sc-for>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#B08155;">&#8722;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Niet schudden. Dat beschadigt het peptide.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#B08155;">&#8722;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Niet invriezen na oplossen. IJskristallen breken het peptide af.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#B08155;">&#8722;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Gebruik het niet als de oplossing troebel blijft of deeltjes bevat na vijf minuten rustig rollen.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#B08155;">&#8722;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Combineer topische GHK-Cu niet in dezelfde routine met pure vitamine C of sterke zuren; die kunnen het complex uit elkaar trekken.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#B08155;">&#8722;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Niet gebruiken bij aandoeningen van de koperstofwisseling, zoals de ziekte van Wilson.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#B08155;">&#8722;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Niet gebruiken tijdens zwangerschap of borstvoeding.</span></div>
+        <div class="nv-li"><span class="nv-li-mark" style="color:#B08155;">&#8722;</span><span class="nv-body" style="font-size:15px; line-height:1.7;">Ga niet door zonder pauze. Kuren met een rustperiode is de gangbare aanpak.</span></div>
       </div>
     </div>
   </div>
@@ -223,7 +224,7 @@
         <p class="nv-body" style="margin-top:18px;">De hoeveelheid koper in een GHK-Cu kuur is klein. De zorg om koperstapeling gaat vooral over chronisch hooggedoseerd gebruik, en de claim dat koperpeptiden versnelde veroudering geven is anekdotisch, niet onderbouwd door grote studies. Wie langdurig kuurt of al zinksuppletie gebruikt, kan de balans laten meten in plaats van blind bij te slikken.</p>
         <p class="nv-body" style="margin-top:18px;">Neem je toch zink, houd het dan gescheiden in de tijd van je koperinname, en overleg met je arts. Wilson en andere aandoeningen van de koperstofwisseling zijn een reden om GHK-Cu helemaal niet te gebruiken.</p>
       </div>
-      <image-slot id="ghk-zinc" shape="rect" src="uploads/ghk-zinc.png" placeholder="Stilleven — supplementen, glas water, linnen, rustig daglicht" style="width:100%; height:520px; object-fit:cover; border-radius:2px;"></image-slot>
+      <img src="uploads/ghk-zinc.png" alt="Koperen en zinken bol in balans op een messing weegschaal" style="width:100%; height:520px; object-fit:cover; border-radius:2px; display:block;">
     </div>
   </div>
 
@@ -253,16 +254,30 @@
       <div class="nv-eyebrow">Uit het Journal</div>
       <h2 class="nv-h2" style="margin-top:18px; max-width:620px;">Wat er speelt rond koperpeptiden</h2>
       <div class="nv-cols3" style="margin-top:48px;">
-        <sc-for list="{{ articles }}" as="a" hint-placeholder-count="3">
-          <a href="{{ a.url }}" style="display:block; background:#FFFDFA; border:1px solid #DED4C6; padding:0;">
-            <image-slot id="{{ a.id }}" shape="rect" src="{{ a.image }}" placeholder="Journal beeld" style="width:100%; height:200px; object-fit:cover; display:block;"></image-slot>
-            <div style="padding:26px 26px 30px;">
-              <div class="nv-eyebrow" style="font-size:10px; letter-spacing:2.6px;">{{ a.tag }}</div>
-              <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:20px; line-height:1.35; color:#1F3D33; margin-top:12px;">{{ a.title }}</h3>
-              <p class="nv-body" style="font-size:14.5px; line-height:1.75; margin-top:12px;">{{ a.excerpt }}</p>
-            </div>
-          </a>
-        </sc-for>
+        <a href="/journal/whats-new/ghk-cu-fda-evaluatie" style="display:block; background:#FFFDFA; border:1px solid #DED4C6;">
+          <img src="uploads/img-01-44-18.jpg" alt="GHK-Cu serum met pipet boven een glazen schaaltje" style="width:100%; height:200px; object-fit:cover; display:block;">
+          <div style="padding:26px 26px 30px;">
+            <div class="nv-eyebrow" style="font-size:10px; letter-spacing:2.6px;">Peptides</div>
+            <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:20px; line-height:1.35; color:#1F3D33; margin-top:12px;">GHK-Cu krijgt officiële aandacht van de FDA</h3>
+            <p class="nv-body" style="font-size:14.5px; line-height:1.75; margin-top:12px;">De FDA evalueert GHK-Cu voor niet-injecteerbare toepassingen binnen het Amerikaanse compounding-kader.</p>
+          </div>
+        </a>
+        <a href="/journal/de-wetenschap-achter-copper-peptides" style="display:block; background:#FFFDFA; border:1px solid #DED4C6;">
+          <img src="uploads/img-copper-peptides.jpg" alt="Koperpeptide vials op een travertijnen oppervlak" style="width:100%; height:200px; object-fit:cover; display:block;">
+          <div style="padding:26px 26px 30px;">
+            <div class="nv-eyebrow" style="font-size:10px; letter-spacing:2.6px;">Journal</div>
+            <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:20px; line-height:1.35; color:#1F3D33; margin-top:12px;">Copper peptides in het kort</h3>
+            <p class="nv-body" style="font-size:14.5px; line-height:1.75; margin-top:12px;">Wat koperpeptiden doen voor de huid, en waar de aandacht vandaan komt.</p>
+          </div>
+        </a>
+        <a href="/journal/whats-new/glp-1-haarverlies-onderzoek" style="display:block; background:#FFFDFA; border:1px solid #DED4C6;">
+          <img src="uploads/img-02-01-15.jpg" alt="Vrouw aan een kaptafel met haarverzorgingsproducten" style="width:100%; height:200px; object-fit:cover; display:block;">
+          <div style="padding:26px 26px 30px;">
+            <div class="nv-eyebrow" style="font-size:10px; letter-spacing:2.6px;">GLP-1</div>
+            <h3 style="font-family:'Playfair Display'; font-weight:500; font-size:20px; line-height:1.35; color:#1F3D33; margin-top:12px;">GLP-1 en haarverlies: het signaal wordt sterker</h3>
+            <p class="nv-body" style="font-size:14.5px; line-height:1.75; margin-top:12px;">Nieuw onderzoek vindt een verband tussen GLP-1 medicatie en haarverlies.</p>
+          </div>
+        </a>
       </div>
     </div>
   </div>
@@ -271,22 +286,39 @@
     <div class="nv-eyebrow">Veelgestelde vragen</div>
     <h2 class="nv-h2" style="margin-top:18px;">Kort en concreet</h2>
     <div style="margin-top:44px; border-top:1px solid #DED4C6;">
-      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
-        <div style="border-bottom:1px solid #DED4C6;">
-          <button type="button" onClick="{{ f.toggle }}" aria-expanded="{{ f.expanded }}" style="display:flex; align-items:center; justify-content:space-between; gap:24px; width:100%; background:none; border:none; text-align:left; padding:24px 0; cursor:pointer;">
-            <span style="font-family:'Playfair Display'; font-weight:500; font-size:19px; line-height:1.4; color:#1F3D33;">{{ f.q }}</span>
-            <span style="font-family:'Cormorant Garamond'; font-weight:500; font-size:26px; line-height:1; color:#C8A96B; flex-shrink:0;">{{ f.sign }}</span>
-          </button>
-          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
-            <p class="nv-body" style="font-size:15.5px; padding:0 0 26px; max-width:720px;">{{ f.a }}</p>
-          </sc-if>
-        </div>
-      </sc-for>
+      <details class="nv-faq">
+        <summary>Hoeveel bacteriostatisch water gebruik ik?</summary>
+        <p class="nv-body" style="font-size:15.5px; padding:0 0 26px; max-width:720px;">Er is geen verplichte hoeveelheid. Meer water betekent een lagere concentratie en dus meer eenheden op de spuit, wat prettiger afleest. Minder water betekent een kleiner injectievolume. GHK-Cu heeft soms wat meer water nodig om goed op te lossen. Reken je combinatie na in de <a href="/ghk-cu-calculator" style="border-bottom:1px solid #C8A96B;">calculator</a>.</p>
+      </details>
+      <details class="nv-faq">
+        <summary>Waarom is de oplossing blauw?</summary>
+        <p class="nv-body" style="font-size:15.5px; padding:0 0 26px; max-width:720px;">Het koperion in het complex geeft die blauwgroene kleur. Een heldere, licht getinte oplossing wijst erop dat het oplossen goed is gegaan.</p>
+      </details>
+      <details class="nv-faq">
+        <summary>Hoe lang blijft een opgeloste vial goed?</summary>
+        <p class="nv-body" style="font-size:15.5px; padding:0 0 26px; max-width:720px;">Ongeveer 28 dagen in de koelkast, mits opgelost met bacteriostatisch water en beschermd tegen licht. Gaat je vial op papier langer mee dan dat, dan is een kleinere vial vaak logischer.</p>
+      </details>
+      <details class="nv-faq">
+        <summary>Kan ik dezelfde fles bacteriostatisch water voor meerdere peptides gebruiken?</summary>
+        <p class="nv-body" style="font-size:15.5px; padding:0 0 26px; max-width:720px;">Ja, dezelfde fles water kan voor verschillende peptides. Let er wel op dat je GHK-Cu niet met zoutoplossing mengt, terwijl sommige andere peptides dat wel verdragen.</p>
+      </details>
+      <details class="nv-faq">
+        <summary>Mijn dosis is maar een paar eenheden. Kan dat nauwkeuriger?</summary>
+        <p class="nv-body" style="font-size:15.5px; padding:0 0 26px; max-width:720px;">Onder ongeveer vier eenheden wordt aflezen lastig. Los dan op in meer water, of gebruik een spuit van 0,3 ml met halve streepjes. Voor subcutane injectie worden naalden van 29 tot 31 gauge gebruikt.</p>
+      </details>
+      <details class="nv-faq">
+        <summary>Werkt smeren of spuiten beter?</summary>
+        <p class="nv-body" style="font-size:15.5px; padding:0 0 26px; max-width:720px;">Voor de huid zelf is topisch het best onderbouwd, met humane studies achter zich. Injecteerbaar gebruik richt zich op systemische effecten en steunt vooral op preklinisch onderzoek en ervaringen uit de gebruikersgemeenschap.</p>
+      </details>
+      <details class="nv-faq">
+        <summary>Moet ik zink bijslikken?</summary>
+        <p class="nv-body" style="font-size:15.5px; padding:0 0 26px; max-width:720px;">Bij een normale kuur is dat geen must. Koper en zink concurreren om dezelfde transportroutes, dus bij langdurig gebruik is het zinvol om je balans te laten meten in plaats van blind bij te slikken. Neem je zink, houd dat dan gescheiden in de tijd en overleg met je arts.</p>
+      </details>
     </div>
   </div>
 
   <div data-screen-label="CTA" style="position:relative; width:100%; height:70svh; min-height:420px;">
-    <image-slot id="ghk-cta" shape="rect" src="uploads/ghk-cta.png" placeholder="Full-bleed — rustig editorial beeld, warm licht" style="width:100%; height:100%; object-fit:cover;"></image-slot>
+    <img src="uploads/ghk-cta.png" alt="Donker abstract beeld met gouden en blauwe lichtlijnen" style="width:100%; height:100%; object-fit:cover; display:block;">
     <div style="position:absolute; inset:0; background:rgba(15,30,25,0.28);"></div>
     <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px;">
       <div class="nv-eyebrow" style="color:#C8A96B;">Vragen?</div>
@@ -308,60 +340,5 @@
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script>
-const DOS = [
-  'Los op met bacteriostatisch water, niet met zoutoplossing. GHK-Cu verdraagt saline slecht.',
-  'Spuit het water langs de binnenwand van de vial, niet direct op het poeder.',
-  'Rol de vial zachtjes tussen je handen tot alles opgelost is. Reken op één tot drie minuten.',
-  'Een lichte blauwgroene tint hoort erbij. Dat is het koper dat aan het peptide gebonden zit.',
-  'Zet de opgeloste vial direct in de koelkast, tussen 2 en 8 graden, uit het licht.',
-  'Reken op ongeveer 28 dagen houdbaarheid na oplossen. Zet de datum op de vial.',
-  'Wissel bij subcutane toediening steeds van plek op de buik.',
-];
-const DONTS = [
-  'Niet schudden. Dat beschadigt het peptide.',
-  'Niet invriezen na oplossen. IJskristallen breken het peptide af.',
-  'Gebruik het niet als de oplossing troebel blijft of deeltjes bevat na vijf minuten rustig rollen.',
-  'Combineer topische GHK-Cu niet in dezelfde routine met pure vitamine C of sterke zuren; die kunnen het complex uit elkaar trekken.',
-  'Niet gebruiken bij aandoeningen van de koperstofwisseling, zoals de ziekte van Wilson.',
-  'Niet gebruiken tijdens zwangerschap of borstvoeding.',
-  'Ga niet door zonder pauze. Kuren met een rustperiode is de gangbare aanpak.',
-];
-const FAQS = [
-  { q: 'Hoeveel bacteriostatisch water gebruik ik?', a: 'Er is geen verplichte hoeveelheid. Meer water betekent een lagere concentratie en dus meer eenheden op de spuit, wat prettiger afleest. Minder water betekent een kleiner injectievolume. GHK-Cu heeft soms wat meer water nodig om goed op te lossen. Reken je combinatie na in de calculator hierboven.' },
-  { q: 'Waarom is de oplossing blauw?', a: 'Het koperion in het complex geeft die blauwgroene kleur. Een heldere, licht getinte oplossing wijst erop dat het oplossen goed is gegaan.' },
-  { q: 'Hoe lang blijft een opgeloste vial goed?', a: 'Ongeveer 28 dagen in de koelkast, mits opgelost met bacteriostatisch water en beschermd tegen licht. Gaat je vial op papier langer mee dan dat, dan is een kleinere vial vaak logischer.' },
-  { q: 'Kan ik dezelfde fles bacteriostatisch water voor meerdere peptides gebruiken?', a: 'Ja, dezelfde fles water kan voor verschillende peptides. Let er wel op dat je GHK-Cu niet met zoutoplossing mengt, terwijl sommige andere peptides dat wel verdragen.' },
-  { q: 'Mijn dosis is maar een paar eenheden. Kan dat nauwkeuriger?', a: 'Onder ongeveer vier eenheden wordt aflezen lastig. Los dan op in meer water, of gebruik een spuit van 0,3 ml met halve streepjes. Voor subcutane injectie worden naalden van 29 tot 31 gauge gebruikt.' },
-  { q: 'Werkt smeren of spuiten beter?', a: 'Voor de huid zelf is topisch het best onderbouwd, met humane studies achter zich. Injecteerbaar gebruik richt zich op systemische effecten en steunt vooral op preklinisch onderzoek en ervaringen uit de gebruikersgemeenschap.' },
-  { q: 'Moet ik zink bijslikken?', a: 'Bij een normale kuur is dat geen must. Koper en zink concurreren om dezelfde transportroutes, dus bij langdurig gebruik is het zinvol om je balans te laten meten in plaats van blind bij te slikken. Neem je zink, houd dat dan gescheiden in de tijd en overleg met je arts.' },
-];
-const ARTICLES = [
-  { id: 'ghk-news-1', url: '/journal/whats-new/ghk-cu-fda-evaluatie', image: 'uploads/img-01-44-18.jpg', tag: 'Peptides', title: 'GHK-Cu krijgt officiële aandacht van de FDA', excerpt: 'De FDA evalueert GHK-Cu voor niet-injecteerbare toepassingen binnen het Amerikaanse compounding-kader.' },
-  { id: 'ghk-news-2', url: '/journal/de-wetenschap-achter-copper-peptides', image: 'uploads/img-copper-peptides.jpg', tag: 'Journal', title: 'Copper peptides in het kort', excerpt: 'Wat koperpeptiden doen voor de huid, en waar de aandacht vandaan komt.' },
-  { id: 'ghk-news-3', url: '/journal/whats-new/glp-1-haarverlies-onderzoek', image: 'uploads/img-02-01-15.jpg', tag: 'GLP-1', title: 'GLP-1 en haarverlies: het signaal wordt sterker', excerpt: 'Nieuw onderzoek vindt een verband tussen GLP-1 medicatie en haarverlies.' },
-];
-
-class Component extends DCLogic {
-  state = { openFaq: -1 };
-  renderVals() {
-    return {
-      dos: DOS.map(t => ({ text: t })),
-      donts: DONTS.map(t => ({ text: t })),
-      articles: ARTICLES,
-      faqs: FAQS.map((f, i) => {
-        const open = this.state.openFaq === i;
-        return {
-          q: f.q, a: f.a, open,
-          sign: open ? '\u2212' : '+',
-          expanded: open ? 'true' : 'false',
-          toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i })),
-        };
-      }),
-    };
-  }
-}
-
-</script>
 </body>
 </html>
